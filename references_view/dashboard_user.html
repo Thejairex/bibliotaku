@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Archive | Digital Curator Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-surface": "#ffffff",
+                        "primary": "#ba9eff",
+                        "error": "#ff6e84",
+                        "tertiary": "#ff97b5",
+                        "inverse-surface": "#fcf9f8",
+                        "surface-container-high": "#201f1f",
+                        "secondary-fixed-dim": "#bdbeff",
+                        "on-error": "#490013",
+                        "primary-fixed-dim": "#a27cff",
+                        "surface-container-low": "#131313",
+                        "primary-dim": "#8455ef",
+                        "on-secondary-container": "#ccccff",
+                        "primary-fixed": "#ae8dff",
+                        "on-surface-variant": "#adaaaa",
+                        "secondary": "#9093ff",
+                        "surface-variant": "#262626",
+                        "tertiary-fixed-dim": "#f67ca3",
+                        "outline-variant": "#484847",
+                        "surface-dim": "#0e0e0e",
+                        "on-background": "#ffffff",
+                        "surface-tint": "#ba9eff",
+                        "surface-container-highest": "#262626",
+                        "background": "#0e0e0e",
+                        "inverse-on-surface": "#565555",
+                        "secondary-container": "#2f2ebe",
+                        "on-primary-fixed-variant": "#370086",
+                        "on-tertiary-fixed-variant": "#701039",
+                        "on-secondary-fixed-variant": "#3a3ac8",
+                        "on-primary-container": "#2b006e",
+                        "surface": "#0e0e0e",
+                        "on-secondary-fixed": "#160bae",
+                        "primary-container": "#ae8dff",
+                        "on-primary-fixed": "#000000",
+                        "inverse-primary": "#6e3bd7",
+                        "secondary-fixed": "#cdcdff",
+                        "on-secondary": "#080079",
+                        "error-dim": "#d73357",
+                        "surface-bright": "#2c2c2c",
+                        "on-primary": "#39008c",
+                        "secondary-dim": "#6063ee",
+                        "error-container": "#a70138",
+                        "on-tertiary-container": "#59002a",
+                        "surface-container": "#1a1919",
+                        "on-tertiary": "#6a0934",
+                        "tertiary-fixed": "#ff8eb0",
+                        "surface-container-lowest": "#000000",
+                        "tertiary-dim": "#f0779d",
+                        "tertiary-container": "#fd81a8",
+                        "outline": "#767575",
+                        "on-tertiary-fixed": "#380018",
+                        "on-error-container": "#ffb2b9"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0e0e0e;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-header {
+            background: rgba(14, 14, 14, 0.7);
+            backdrop-filter: blur(24px);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- SideNavBar (Desktop Only) -->
+<aside class="hidden md:flex flex-col h-full w-64 fixed left-0 top-0 rounded-r-[3rem] bg-neutral-950/70 backdrop-blur-xl shadow-2xl shadow-black/40 z-50 py-8 px-4 font-['Manrope'] font-bold text-sm tracking-wide">
+<div class="mb-10 px-4">
+<h1 class="text-2xl font-black tracking-tighter text-violet-500">The Archive</h1>
+<p class="text-xs text-on-surface-variant font-medium mt-1">Digital Curator</p>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-4 px-4 py-3 text-violet-400 font-bold border-r-4 border-violet-500 bg-neutral-900/80 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+                Home
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800/50 transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined">library_books</span>
+                My List
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800/50 transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined">search</span>
+                Search
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800/50 transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined">person</span>
+                Profile
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800/50 transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</nav>
+<div class="mt-auto px-4 pb-4">
+<div class="flex items-center gap-3 p-3 bg-surface-container rounded-xl">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Close-up portrait of a young man with a slight smile in soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMeoFE7v8W1qUsg6Kp99UisqHhPP2ieydZw_VxW8hFU3NRre4Zv0cs3FN1eHmtHD5sj38q5Tg5DMYrmr_02tz2a8_S6h_80k54eBt-w383uBRqgIVOa-y9bL4pIxFSqVkTYctdL7R7NsiX-hJzYd5ZEYsHjNMONn07Gmi_O2amRPg25RMBbQNEEIhj_I9fVG74G-Bb2AhxTF0lZff8fnZ7O9EwtiMlZmTA2OVMARsUL0G4op5r5KurTDtlN7-129YaT4quxuVkGiE"/>
+<div class="overflow-hidden">
+<p class="text-xs font-bold truncate">Alex Chen</p>
+<p class="text-[10px] text-on-surface-variant font-medium uppercase tracking-tighter">Pro Curator</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-40 flex justify-between items-center px-8 h-20 bg-neutral-950/70 backdrop-blur-2xl md:pl-72 transition-all">
+<div class="flex items-center gap-6 flex-1">
+<div class="relative w-full max-w-md group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full py-2.5 pl-12 pr-4 text-sm focus:ring-2 focus:ring-violet-500/50 transition-all" placeholder="Search your archive..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4 ml-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined">grid_view</span>
+</button>
+<img class="md:hidden w-10 h-10 rounded-full object-cover" data-alt="User profile avatar of a smiling young man in a minimalist studio setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtdBh8JJsYSUwPmJytzf-frEJ1RTp333SwkyvbuCUjjq1N3o9Z_YeZKCwSNyP6eRczJ23yWv2AyO64cgYoe8bVpqcmNC9K4qpGFCgdip9Siy_LQPEkkTUQtlyqhUQc2tLfF3sAb0EINAryAbd4_ekoW6zypM49STwNCdWfw9K0pSytrdFMfU8f8bRInzAP_2p4C1OVydkNKByPCCRwfj8Tm-EYp9XFuws0qvjQc0pO8kjD1VU1Y1FrmwzzC-K9Sxc_38M8-MOemsI"/>
+</div>
+</header>
+<!-- Main Content -->
+<main class="pt-24 pb-28 md:pl-72 min-h-screen px-4 md:px-8 max-w-[1600px] mx-auto">
+<!-- Welcome Section -->
+<section class="mb-10 mt-4">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="max-w-xl">
+<span class="text-primary font-label text-sm font-bold tracking-widest uppercase mb-2 block">DASHBOARD OVERVIEW</span>
+<h2 class="text-4xl md:text-5xl font-headline font-black tracking-tight leading-tight">Your Digital <br/><span class="text-primary">Curator Studio.</span></h2>
+</div>
+<div class="flex gap-4">
+<div class="bg-surface-container-low p-6 rounded-xl min-w-[140px] text-center">
+<p class="text-3xl font-headline font-black text-primary">8.5</p>
+<p class="text-[10px] font-label text-on-surface-variant uppercase tracking-widest mt-1">Avg Rating</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Stats Grid (Bento Style) -->
+<section class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-12">
+<div class="bg-surface-container p-6 rounded-xl hover:bg-surface-container-high transition-all duration-300 group">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">visibility</span>
+<span class="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded-full">+4 this wk</span>
+</div>
+<h3 class="text-2xl font-headline font-extrabold">24</h3>
+<p class="text-sm font-label text-on-surface-variant">Watching</p>
+</div>
+<div class="bg-surface-container p-6 rounded-xl hover:bg-surface-container-high transition-all duration-300 group">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-tertiary group-hover:scale-110 transition-transform">auto_stories</span>
+</div>
+<h3 class="text-2xl font-headline font-extrabold">12</h3>
+<p class="text-sm font-label text-on-surface-variant">Reading</p>
+</div>
+<div class="bg-surface-container p-6 rounded-xl hover:bg-surface-container-high transition-all duration-300 group">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-secondary group-hover:scale-110 transition-transform">check_circle</span>
+</div>
+<h3 class="text-2xl font-headline font-extrabold">482</h3>
+<p class="text-sm font-label text-on-surface-variant">Completed</p>
+</div>
+<div class="bg-surface-container p-6 rounded-xl hover:bg-surface-container-high transition-all duration-300 group">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-outline group-hover:scale-110 transition-transform">pause_circle</span>
+</div>
+<h3 class="text-2xl font-headline font-extrabold">37</h3>
+<p class="text-sm font-label text-on-surface-variant">On Hold</p>
+</div>
+</section>
+<!-- Main Content Area: Latest Updates & Seasonal Progress -->
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-10">
+<!-- Latest Updates Column -->
+<div class="xl:col-span-2">
+<div class="flex items-center justify-between mb-8 px-2">
+<h3 class="text-2xl font-headline font-bold">Latest Updates</h3>
+<button class="text-sm font-bold text-primary hover:underline">View All</button>
+</div>
+<div class="flex flex-col gap-6">
+<!-- Update Entry 1 -->
+<div class="group bg-surface-container rounded-xl overflow-hidden flex flex-col sm:flex-row items-center gap-6 p-4 hover:bg-surface-container-highest transition-all duration-300">
+<div class="relative w-full sm:w-32 h-44 sm:h-32 shrink-0 overflow-hidden rounded-lg">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Dynamic anime illustration of a character with glowing blue eyes in a rain-slicked futuristic city street" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsZgbxD3khJq93cKdHCZOhWlKa4vAmzhZaZrIPcOq7JSaGgqvZp9iyN9Cs7sOGijTLpjhuY4hq7TjlCTI1qeZDnNRzi00wYJdk-KLyEDy11aRDVVH0_vWRUri3QxmS5mPkCs4zpzvRvTNvKjfzhdeEVyYEOl9OM3sJPhuVRarXppL99m7-HkZdyTxJ3CnR24UP-470kOi7LBbGkcixm76UC6pB8TnS1Zn9-75L_DxoPO1pIJbV1MWNraBWbCJ2dUG0KohXQQQUXAM"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-2 sm:hidden">
+<span class="text-[10px] font-bold text-white uppercase bg-primary/80 px-2 py-0.5 rounded">Episode 12</span>
+</div>
+</div>
+<div class="flex-1 w-full">
+<div class="flex items-center justify-between mb-1">
+<h4 class="text-lg font-headline font-extrabold leading-tight">Chainsaw Resonance</h4>
+<span class="hidden sm:block text-[10px] font-bold text-primary border border-primary/30 px-2 py-0.5 rounded-full">ANIME</span>
+</div>
+<p class="text-xs text-on-surface-variant font-medium mb-4">Watched 12 mins ago</p>
+<div class="space-y-2">
+<div class="flex justify-between items-center text-[10px] font-bold uppercase tracking-widest">
+<span>Progress</span>
+<span class="text-primary">24 / 24 eps</span>
+</div>
+<div class="w-full h-1.5 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 100%"></div>
+</div>
+</div>
+</div>
+<div class="flex shrink-0">
+<button class="w-12 h-12 bg-surface-container-highest rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary transition-all duration-300">
+<span class="material-symbols-outlined">play_arrow</span>
+</button>
+</div>
+</div>
+<!-- Update Entry 2 -->
+<div class="group bg-surface-container rounded-xl overflow-hidden flex flex-col sm:flex-row items-center gap-6 p-4 hover:bg-surface-container-highest transition-all duration-300">
+<div class="relative w-full sm:w-32 h-44 sm:h-32 shrink-0 overflow-hidden rounded-lg">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Abstract vibrant paint swirls in deep purple and magenta mimicking a nebula or mystical energy burst" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-zlE1U8lvFhiHdCQcLs57xGFZxRbSECm5tvTWEOOSILfJlUfL0_aQXLY34SfMbqIdwRogUkKKFTdgw9kChg9NtarNQB67YD18wvmlSvCiZLxjRJzRyvW6La88f_qd-bL17PnJWPHzQvAilobHk30-jFPzfCF3fYg-405E1er1S0n8us-5tQTSMDmfxNTTQ_svKRVYjLVwsi2wqvv1wEbqDmdQ7V3uXLD4ETX8K-URHg4O1HKYs8Xqh_NSURzUKXPa8kxwFdpNr-Q"/>
+</div>
+<div class="flex-1 w-full">
+<div class="flex items-center justify-between mb-1">
+<h4 class="text-lg font-headline font-extrabold leading-tight">Neon Shadows: Volume 04</h4>
+<span class="hidden sm:block text-[10px] font-bold text-tertiary border border-tertiary/30 px-2 py-0.5 rounded-full">MANGA</span>
+</div>
+<p class="text-xs text-on-surface-variant font-medium mb-4">Read 2 hours ago</p>
+<div class="space-y-2">
+<div class="flex justify-between items-center text-[10px] font-bold uppercase tracking-widest">
+<span>Progress</span>
+<span class="text-tertiary">142 / 210 ch</span>
+</div>
+<div class="w-full h-1.5 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-tertiary rounded-full" style="width: 65%"></div>
+</div>
+</div>
+</div>
+<div class="flex shrink-0">
+<button class="w-12 h-12 bg-surface-container-highest rounded-full flex items-center justify-center text-tertiary hover:bg-tertiary hover:text-on-tertiary transition-all duration-300">
+<span class="material-symbols-outlined">menu_book</span>
+</button>
+</div>
+</div>
+<!-- Update Entry 3 -->
+<div class="group bg-surface-container rounded-xl overflow-hidden flex flex-col sm:flex-row items-center gap-6 p-4 hover:bg-surface-container-highest transition-all duration-300">
+<div class="relative w-full sm:w-32 h-44 sm:h-32 shrink-0 overflow-hidden rounded-lg">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Artistic manga style illustration of a high-school girl standing on a train platform during sunset with orange light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAv-RQafFQe1SiUF-PkCy7rmTu316SGwARcuUYC5oplKaQzGAUXfxoVgu4-hL26gvMCm55_EhxnPpifzOdKtEO0xKRMvwNlVqeuz1rQ9rcnr7uQLfDY2XfnTeFZoBBGyK6M1gKVzEIKB-ZkC46wd7X2lHJH2Pb0KWm1OAHpBf2uolfXEfwORhOoO8eK6f-gp-iXCZV1ppDDmhT22AZ5du-fA6NDr9C1zwZZwYtJtvPG8-85pO5tda_HEna4MpT4dN-Lvn7y10f2FQU"/>
+</div>
+<div class="flex-1 w-full">
+<div class="flex items-center justify-between mb-1">
+<h4 class="text-lg font-headline font-extrabold leading-tight">Subway Melancholy</h4>
+<span class="hidden sm:block text-[10px] font-bold text-primary border border-primary/30 px-2 py-0.5 rounded-full">ANIME</span>
+</div>
+<p class="text-xs text-on-surface-variant font-medium mb-4">Watched yesterday</p>
+<div class="space-y-2">
+<div class="flex justify-between items-center text-[10px] font-bold uppercase tracking-widest">
+<span>Progress</span>
+<span class="text-primary">8 / 12 eps</span>
+</div>
+<div class="w-full h-1.5 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 72%"></div>
+</div>
+</div>
+</div>
+<div class="flex shrink-0">
+<button class="w-12 h-12 bg-surface-container-highest rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary transition-all duration-300">
+<span class="material-symbols-outlined">play_arrow</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Seasonal Progress Sidebar -->
+<div class="space-y-10">
+<div class="bg-surface-container-low p-8 rounded-xl border border-outline-variant/10">
+<h3 class="text-xl font-headline font-bold mb-8">Winter Season '24</h3>
+<div class="space-y-8">
+<!-- Seasonal Progress 1 -->
+<div class="flex items-center gap-6">
+<div class="relative shrink-0 flex items-center justify-center w-16 h-16">
+<svg class="w-16 h-16 -rotate-90">
+<circle class="text-surface-variant" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-primary transition-all duration-1000" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-dasharray="175" stroke-dashoffset="35" stroke-width="4"></circle>
+</svg>
+<span class="absolute text-xs font-black">80%</span>
+</div>
+<div>
+<h4 class="text-sm font-bold leading-tight">Solo Leveling II</h4>
+<p class="text-[10px] text-on-surface-variant font-bold uppercase tracking-tighter">Current Target</p>
+</div>
+</div>
+<!-- Seasonal Progress 2 -->
+<div class="flex items-center gap-6">
+<div class="relative shrink-0 flex items-center justify-center w-16 h-16">
+<svg class="w-16 h-16 -rotate-90">
+<circle class="text-surface-variant" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-secondary transition-all duration-1000" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-dasharray="175" stroke-dashoffset="120" stroke-width="4"></circle>
+</svg>
+<span class="absolute text-xs font-black">32%</span>
+</div>
+<div>
+<h4 class="text-sm font-bold leading-tight">Dandadan</h4>
+<p class="text-[10px] text-on-surface-variant font-bold uppercase tracking-tighter">On Hold</p>
+</div>
+</div>
+<!-- Seasonal Progress 3 -->
+<div class="flex items-center gap-6">
+<div class="relative shrink-0 flex items-center justify-center w-16 h-16">
+<svg class="w-16 h-16 -rotate-90">
+<circle class="text-surface-variant" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-tertiary transition-all duration-1000" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-dasharray="175" stroke-dashoffset="15" stroke-width="4"></circle>
+</svg>
+<span class="absolute text-xs font-black">92%</span>
+</div>
+<div>
+<h4 class="text-sm font-bold leading-tight">Frieren Arc</h4>
+<p class="text-[10px] text-on-surface-variant font-bold uppercase tracking-tighter">Binge Phase</p>
+</div>
+</div>
+</div>
+<button class="w-full mt-10 py-4 bg-gradient-to-br from-primary to-primary-dim text-on-primary rounded-full font-label font-bold text-sm hover:scale-[1.02] active:scale-95 transition-all">
+                        Edit Schedule
+                    </button>
+</div>
+<!-- Genre Bento -->
+<div class="grid grid-cols-2 gap-3">
+<div class="bg-surface-container rounded-xl p-4 flex flex-col items-center justify-center gap-2 aspect-square">
+<span class="text-2xl font-black text-primary">42%</span>
+<span class="text-[9px] font-bold text-on-surface-variant uppercase tracking-widest text-center">Action</span>
+</div>
+<div class="bg-surface-container rounded-xl p-4 flex flex-col items-center justify-center gap-2 aspect-square">
+<span class="text-2xl font-black text-secondary">18%</span>
+<span class="text-[9px] font-bold text-on-surface-variant uppercase tracking-widest text-center">Sci-Fi</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-6 pb-8 pt-4 bg-neutral-950/80 backdrop-blur-xl rounded-t-[3rem] z-50 shadow-[0_-10px_40px_rgba(0,0,0,0.6)] font-['Inter'] text-[10px] uppercase tracking-widest">
+<a class="flex flex-col items-center justify-center bg-violet-600/20 text-violet-400 rounded-full px-6 py-2 transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-neutral-500 transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined">format_list_bulleted</span>
+<span class="mt-1">List</span>
+</a>
+<a class="flex flex-col items-center justify-center text-neutral-500 transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined text-3xl">add_circle</span>
+</a>
+<a class="flex flex-col items-center justify-center text-neutral-500 transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Archive | Add to Collection</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface": "#ffffff",
+              "primary": "#ba9eff",
+              "error": "#ff6e84",
+              "tertiary": "#ff97b5",
+              "inverse-surface": "#fcf9f8",
+              "surface-container-high": "#201f1f",
+              "secondary-fixed-dim": "#bdbeff",
+              "on-error": "#490013",
+              "primary-fixed-dim": "#a27cff",
+              "surface-container-low": "#131313",
+              "primary-dim": "#8455ef",
+              "on-secondary-container": "#ccccff",
+              "primary-fixed": "#ae8dff",
+              "on-surface-variant": "#adaaaa",
+              "secondary": "#9093ff",
+              "surface-variant": "#262626",
+              "tertiary-fixed-dim": "#f67ca3",
+              "outline-variant": "#484847",
+              "surface-dim": "#0e0e0e",
+              "on-background": "#ffffff",
+              "surface-tint": "#ba9eff",
+              "surface-container-highest": "#262626",
+              "background": "#0e0e0e",
+              "inverse-on-surface": "#565555",
+              "secondary-container": "#2f2ebe",
+              "on-primary-fixed-variant": "#370086",
+              "on-tertiary-fixed-variant": "#701039",
+              "on-secondary-fixed-variant": "#3a3ac8",
+              "on-primary-container": "#2b006e",
+              "surface": "#0e0e0e",
+              "on-secondary-fixed": "#160bae",
+              "primary-container": "#ae8dff",
+              "on-primary-fixed": "#000000",
+              "inverse-primary": "#6e3bd7",
+              "secondary-fixed": "#cdcdff",
+              "on-secondary": "#080079",
+              "error-dim": "#d73357",
+              "surface-bright": "#2c2c2c",
+              "on-primary": "#39008c",
+              "secondary-dim": "#6063ee",
+              "error-container": "#a70138",
+              "on-tertiary-container": "#59002a",
+              "surface-container": "#1a1919",
+              "on-tertiary": "#6a0934",
+              "tertiary-fixed": "#ff8eb0",
+              "surface-container-lowest": "#000000",
+              "tertiary-dim": "#f0779d",
+              "tertiary-container": "#fd81a8",
+              "outline": "#767575",
+              "on-tertiary-fixed": "#380018",
+              "on-error-container": "#ffb2b9"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .tonal-shift { background-color: rgba(26, 25, 25, 0.4); }
+      .glass-blur { backdrop-filter: blur(24px); }
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/30 min-h-screen overflow-hidden">
+<!-- Top Navigation (Shell) -->
+<nav class="fixed top-0 w-full z-40 flex justify-between items-center px-8 h-20 bg-neutral-950/70 backdrop-blur-2xl tonal-shift">
+<div class="flex items-center gap-8">
+<span class="text-xl font-black text-violet-400 font-headline">The Archive</span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-neutral-400 hover:text-violet-300 transition-colors font-medium" href="#">Home</a>
+<a class="text-violet-400 font-medium" href="#">My List</a>
+<a class="text-neutral-400 hover:text-violet-300 transition-colors font-medium" href="#">Search</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-neutral-400 cursor-pointer hover:text-white transition-colors">notifications</span>
+<span class="material-symbols-outlined text-neutral-400 cursor-pointer hover:text-white transition-colors">grid_view</span>
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container">
+<img alt="User avatar" class="w-full h-full object-cover" data-alt="Close up portrait of a young man with artistic lighting, clean minimal aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAp97p4LQPMuh6j1Rrw7zTO0IGKfb37CS16ap4mTNDnKY3irP6XAd9AQ-FWx8DDtRZlIkJmg-i_pvDnHwM1i_8cqFZS-uvI2SwypT1EVCRTSKden6Cr-bRD54qYgKHZCbc4NqNl8z0RmswyoKsO-b6haACG_xa2gMdf5LKAlejyivaHqBxPSKGQVh7sv78kdIMSZ2C1H6Nf0VSn-xryjiEEQ2_9IIhOIm3B2ExgVSH8GaKhiUDhEHWfukZxHFTUWCSlvcFAA0w_x8k"/>
+</div>
+</div>
+</nav>
+<!-- Background Content (Simulated Dashboard) -->
+<main class="pt-24 px-8 max-w-7xl mx-auto opacity-40 pointer-events-none">
+<header class="mb-12">
+<h1 class="font-headline text-5xl font-extrabold tracking-tighter mb-2">My Archive</h1>
+<p class="text-on-surface-variant">Curating 124 titles across your digital history.</p>
+</header>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+<div class="md:col-span-3 grid grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Decorative Cards -->
+<div class="aspect-[2/3] bg-surface-container rounded-xl"></div>
+<div class="aspect-[2/3] bg-surface-container rounded-xl"></div>
+<div class="aspect-[2/3] bg-surface-container rounded-xl"></div>
+</div>
+<div class="space-y-6">
+<div class="h-48 bg-surface-container rounded-xl"></div>
+<div class="h-96 bg-surface-container rounded-xl"></div>
+</div>
+</div>
+</main>
+<!-- Modal Backdrop -->
+<div class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 md:p-8">
+<!-- Add Entry Modal Container -->
+<div class="bg-surface-container-low w-full max-w-5xl h-[870px] md:h-[819px] rounded-xl overflow-hidden flex flex-col md:flex-row shadow-2xl shadow-black/60 relative">
+<!-- Close Button (Mobile Floating) -->
+<button class="absolute top-4 right-4 z-[60] w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-highest text-on-surface-variant hover:text-white transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+<!-- Left Panel: Search & Results -->
+<div class="w-full md:w-2/5 border-r border-outline-variant/10 flex flex-col h-full bg-surface-container-low">
+<div class="p-6 pb-4">
+<h2 class="font-headline text-2xl font-bold mb-6">Find Media</h2>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full bg-surface-container-highest border-none rounded-full py-3.5 pl-12 pr-4 text-sm focus:ring-2 focus:ring-primary/50 transition-all font-body text-on-surface placeholder:text-on-surface-variant" placeholder="Search anime, manga..." type="text" value="Cyberp"/>
+</div>
+</div>
+<!-- Results List -->
+<div class="flex-1 overflow-y-auto px-4 pb-6 space-y-2 no-scrollbar">
+<!-- Result Item Active -->
+<div class="flex items-center gap-4 p-3 rounded-xl bg-violet-600/10 border-l-4 border-primary group cursor-pointer transition-all">
+<div class="w-14 h-20 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Futuristic neon city skyline at night with cybernetic aesthetic and high contrast colors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB62ebXlIIJv-9cGQcdPd1B0X5UwvFQXYYCuLX9CB7_phamBnGSeKL0VEO87DQA71X7vowPA4UqQxX91lKRsIHMD_bLs46stVjw4qNhyCapmesqp5ntIbl9vbPbosIJEIKnJtfzPlHO__-oAPJbrspkJQ18lZpPooubYvVPqtI6tIuO0p2aGUKGLGG58XeiRdrhy5hetdJfp9_Khlqqliyxc-cqmDgw3atTK0QgE7GcaxDmMqDvsVTyL2xprukT08lXmOd9lVyZ81g"/>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-headline font-bold text-sm text-primary truncate">Cyberpunk: Edgerunners</h4>
+<p class="text-xs text-on-surface-variant mt-1 uppercase tracking-wider">TV • 10 Episodes</p>
+</div>
+<span class="material-symbols-outlined text-primary text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<!-- Result Items -->
+<div class="flex items-center gap-4 p-3 rounded-xl hover:bg-surface-container-highest transition-all group cursor-pointer">
+<div class="w-14 h-20 rounded-lg overflow-hidden flex-shrink-0 opacity-60 group-hover:opacity-100 transition-opacity">
+<img class="w-full h-full object-cover" data-alt="Digital art of a solitary figure standing in a vast desert landscape under a giant moon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmjeDKvmODhNQJ8mN9itIB-jo7flGNx2NxfO8pfy1MVkyOCk_iBp3ADa16v_RmUc8CotC9j575HRR31DgFafhX8LJGVIOE0KjnEs-plcEcyrZtCgye48KROsrzhQE9fJ4iJiw6OVGmjBcm6u4NIPEeIbiIBGTRpQWcggA5Q6HlOYw5EOlotouovIBL406BmYo6d7U49fmqljtZR5IzEEtPG9zrWZL_MxzcBlkNUoA8c51pMQbENgE6pBuqWAnVxPhpVNkc3IhX43I"/>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-headline font-bold text-sm text-on-surface truncate">Cyber City OEDO 808</h4>
+<p class="text-xs text-on-surface-variant mt-1 uppercase tracking-wider">OVA • 3 Episodes</p>
+</div>
+</div>
+<div class="flex items-center gap-4 p-3 rounded-xl hover:bg-surface-container-highest transition-all group cursor-pointer">
+<div class="w-14 h-20 rounded-lg overflow-hidden flex-shrink-0 opacity-60 group-hover:opacity-100 transition-opacity">
+<img class="w-full h-full object-cover" data-alt="Abstract vibrant geometric patterns with motion blur and neon light trails" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAt_KuLdH0T9tNGapBRl0Uy3YtVKXWO1LYd-TsPeYXpfyVG8FwEodz_0cO_ftDHyFx6ORUuUuPAbWfq8IfsAJtje_FaHXgv6MZCnydyvAGaLI29YM-kugOttDI-hwuc1p5dngaVI9ZV0kyMuziha6jADxT_vhAR26YYFzTTzCI3qDspLHq8_c07O_T02zKgTfuLJlI5LKSOH_jgU5ngsI2GZoVhdeLWeqjE86sRVZuedxu0iGSgZ0KpQWhG24GSO_A8G1NQYX8BgkU"/>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-headline font-bold text-sm text-on-surface truncate">Cybersix</h4>
+<p class="text-xs text-on-surface-variant mt-1 uppercase tracking-wider">TV • 13 Episodes</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Panel: Entry Details & Form -->
+<div class="flex-1 h-full overflow-y-auto bg-surface-container relative no-scrollbar">
+<!-- Hero Background (Blurry) -->
+<div class="absolute top-0 left-0 w-full h-64 opacity-20 pointer-events-none">
+<img class="w-full h-full object-cover blur-3xl" data-alt="Atmospheric neon city lighting with deep purple and cyan cinematic color grading" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbiUX6zjRpa_HlK0NWg9KB-xVwpx_bOBxbEKT9KSEpZ_FvJnfR0gFYA05b5V5hgis8wNtyajnvbyqQUuCXZAeqSfPlAqpfV1g2UDrzbo-rj36r8mlCuRSCOEBFLZP2-o2zabRDo1NZ5D66axg_0ChjotNz9k9uq-d9_5Imf2ezlt7VMtyOeKNU7KQjoYIpFrVp7BxapJjVGk-W2wsgwxkx4JyQSIfPNcCOEfnXZQmTivlkwDqhtQ8DPoJTF_083KBcR4LoZYFPCTk"/>
+</div>
+<div class="relative p-8 md:p-12">
+<div class="flex flex-col lg:flex-row gap-8 items-start">
+<!-- Preview Cover -->
+<div class="w-48 lg:w-56 aspect-[2/3] rounded-xl shadow-2xl overflow-hidden flex-shrink-0 bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="Stunning cinematic poster of a futuristic urban landscape at night with vibrant lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBodQH8o0vS1b7rtiUuaZNhqrKKjUlRKgn380zDaTTJyU1JNbbQ0okixP4j0rfW89H3tBTlYKlkuwuqj-9tyUu5DJnerhWxo04nVjOBmwjBHIzbaxhcb8rxsfJt78Jxw1M6AvICOtegfQd7p0L-fI7zzOQ3N1LqllISyziaQw-X2VkfPMRRR-pRe78ROOQwjPTzzwVtOpOrL140p4KVjBy4HAZoqAZElsLP7VFymbIuT8QSyIerLstT594wg9Tz2F22yzqgdD7NUG8"/>
+</div>
+<!-- Info & Form -->
+<div class="flex-1 w-full">
+<div class="mb-8">
+<div class="flex items-center gap-3 mb-2">
+<span class="bg-primary/20 text-primary text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-widest">Anime</span>
+<span class="text-on-surface-variant text-sm font-medium">Studio Trigger</span>
+</div>
+<h3 class="font-headline text-3xl md:text-4xl font-black tracking-tight leading-tight">Cyberpunk: Edgerunners</h3>
+<p class="text-on-surface-variant mt-4 text-sm leading-relaxed line-clamp-3">In a dystopia riddled with corruption and cybernetic implants, a talented but reckless street kid strives to become a mercenary outlaw known as an edgerunner.</p>
+</div>
+<form class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Status Select -->
+<div class="space-y-2">
+<label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant ml-1">Status</label>
+<select class="w-full bg-surface-container-highest border-none rounded-full py-3 px-5 text-sm focus:ring-2 focus:ring-primary/50 text-on-surface appearance-none cursor-pointer">
+<option>Watching</option>
+<option>Completed</option>
+<option>On-Hold</option>
+<option>Dropped</option>
+<option>Plan to Watch</option>
+</select>
+</div>
+<!-- Score Input -->
+<div class="space-y-2">
+<label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant ml-1">Score (1-10)</label>
+<div class="flex items-center gap-2">
+<div class="flex-1 flex items-center bg-surface-container-highest rounded-full px-5 py-3">
+<span class="material-symbols-outlined text-primary text-lg mr-2" style="font-variation-settings: 'FILL' 1;">star</span>
+<input class="w-full bg-transparent border-none p-0 focus:ring-0 text-sm font-bold text-on-surface" max="10" min="1" placeholder="0" type="number"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Progress Input -->
+<div class="space-y-2">
+<label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant ml-1">Episode Progress</label>
+<div class="flex items-center gap-4">
+<div class="flex-1 bg-surface-container-highest rounded-full px-5 py-3 flex items-center justify-between">
+<input class="w-12 bg-transparent border-none p-0 focus:ring-0 text-sm font-bold text-on-surface text-center" type="number" value="4"/>
+<span class="text-neutral-600 font-bold mx-2">/</span>
+<span class="text-sm font-bold text-on-surface-variant">10</span>
+</div>
+<button class="w-11 h-11 flex items-center justify-center rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-on-primary transition-all" type="button">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="pt-6 flex flex-col sm:flex-row gap-4">
+<button class="flex-1 h-14 rounded-full bg-gradient-to-r from-primary to-primary-dim text-on-primary font-bold text-sm uppercase tracking-widest shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all" type="button">
+                                        Add to List
+                                    </button>
+<button class="px-8 h-14 rounded-full bg-surface-container-highest text-on-surface font-bold text-sm uppercase tracking-widest hover:bg-surface-variant transition-colors" type="button">
+                                        Cancel
+                                    </button>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Navigation (Mobile Shell) -->
+<div class="md:hidden fixed bottom-0 left-0 w-full z-50">
+<div class="bg-neutral-950/80 backdrop-blur-xl flex justify-around items-center px-6 pb-8 pt-4 rounded-t-xl shadow-[0_-10px_40px_rgba(0,0,0,0.6)]">
+<div class="flex flex-col items-center justify-center text-neutral-500">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label text-[10px] uppercase tracking-widest mt-1">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-neutral-500">
+<span class="material-symbols-outlined">format_list_bulleted</span>
+<span class="font-label text-[10px] uppercase tracking-widest mt-1">List</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-violet-600/20 text-violet-400 rounded-full px-6 py-2">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="font-label text-[10px] uppercase tracking-widest mt-1">Add</span>
+</div>
+<div class="flex flex-col items-center justify-center text-neutral-500">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label text-[10px] uppercase tracking-widest mt-1">Profile</span>
+</div>
+</div>
+</div>
+</body></html>

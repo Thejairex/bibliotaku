@@ -1,0 +1,98 @@
+@import 'tailwindcss';
+@import '../../vendor/livewire/flux/dist/flux.css';
+
+@source '../views';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../vendor/livewire/flux-pro/stubs/**/*.blade.php';
+@source '../../vendor/livewire/flux/stubs/**/*.blade.php';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    /* Fonts from Specification */
+    --font-headline: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+    --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-label: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+    /* Colors from Specification (Obsidiana) */
+    --color-background: #0e0e0e;
+    --color-surface: #0e0e0e;
+    --color-surface-container: #1a1919;
+    --color-surface-container-low: #131313;
+    --color-surface-container-high: #201f1f;
+    --color-surface-container-highest: #262626;
+    --color-surface-variant: #262626;
+
+    /* Primary Accent (Electric Violets) */
+    --color-primary: #ba9eff;
+    --color-primary-dim: #8455ef;
+    --color-on-primary: #39008c;
+
+    /* Secondary (Success/Completed) */
+    --color-secondary: #9093ff;
+    --color-on-secondary: #080079;
+
+    /* Semantic Tones */
+    --color-error: #ff6e84;
+    --color-on-surface: #ffffff;
+    --color-on-surface-variant: #adaaaa;
+    --color-outline: #767575;
+    --color-outline-variant: #484847;
+
+    /* Custom Border Radii */
+    --radius-lg: 2rem;
+    --radius-xl: 3rem;
+    --radius-full: 9999px;
+
+    /* Ambient Shadows */
+    --shadow-premium: 0px 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+@layer base {
+    body {
+        @apply bg-background text-on-surface font-body;
+        background-color: #0e0e0e; /* Fallback */
+        color: #ffffff;
+    }
+
+    *, ::after, ::before {
+        border-color: rgba(72, 72, 71, 0.15); /* outline-variant at 15% */
+    }
+}
+
+@layer components {
+    .glass-header {
+        @apply bg-neutral-950/70 backdrop-blur-2xl;
+    }
+
+    .glass-panel {
+        background: rgba(26, 25, 25, 0.7);
+        backdrop-filter: blur(24px);
+    }
+
+    .gradient-cta, .hero-gradient {
+        background: linear-gradient(135deg, #ba9eff 0%, #8455ef 100%);
+    }
+
+    .tonal-shift {
+        background-color: rgba(26, 25, 25, 0.2);
+    }
+
+    .text-glow {
+        text-shadow: 0 0 20px rgba(186, 158, 255, 0.3);
+    }
+}
+
+[data-flux-field]:not(ui-radio, ui-checkbox) {
+    @apply grid gap-2;
+}
+
+[data-flux-label] {
+    @apply !mb-0 !leading-tight;
+}
+
+input:focus[data-flux-control],
+textarea:focus[data-flux-control],
+select:focus[data-flux-control] {
+    @apply outline-hidden ring-2 ring-primary ring-offset-2 ring-offset-background;
+}

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Archive - Solo Leveling</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface": "#ffffff",
+              "primary": "#ba9eff",
+              "error": "#ff6e84",
+              "tertiary": "#ff97b5",
+              "inverse-surface": "#fcf9f8",
+              "surface-container-high": "#201f1f",
+              "secondary-fixed-dim": "#bdbeff",
+              "on-error": "#490013",
+              "primary-fixed-dim": "#a27cff",
+              "surface-container-low": "#131313",
+              "primary-dim": "#8455ef",
+              "on-secondary-container": "#ccccff",
+              "primary-fixed": "#ae8dff",
+              "on-surface-variant": "#adaaaa",
+              "secondary": "#9093ff",
+              "surface-variant": "#262626",
+              "tertiary-fixed-dim": "#f67ca3",
+              "outline-variant": "#484847",
+              "surface-dim": "#0e0e0e",
+              "on-background": "#ffffff",
+              "surface-tint": "#ba9eff",
+              "surface-container-highest": "#262626",
+              "background": "#0e0e0e",
+              "inverse-on-surface": "#565555",
+              "secondary-container": "#2f2ebe",
+              "on-primary-fixed-variant": "#370086",
+              "on-tertiary-fixed-variant": "#701039",
+              "on-secondary-fixed-variant": "#3a3ac8",
+              "on-primary-container": "#2b006e",
+              "surface": "#0e0e0e",
+              "on-secondary-fixed": "#160bae",
+              "primary-container": "#ae8dff",
+              "on-primary-fixed": "#000000",
+              "inverse-primary": "#6e3bd7",
+              "secondary-fixed": "#cdcdff",
+              "on-secondary": "#080079",
+              "error-dim": "#d73357",
+              "surface-bright": "#2c2c2c",
+              "on-primary": "#39008c",
+              "secondary-dim": "#6063ee",
+              "error-container": "#a70138",
+              "on-tertiary-container": "#59002a",
+              "surface-container": "#1a1919",
+              "on-tertiary": "#6a0934",
+              "tertiary-fixed": "#ff8eb0",
+              "surface-container-lowest": "#000000",
+              "tertiary-dim": "#f0779d",
+              "tertiary-container": "#fd81a8",
+              "outline": "#767575",
+              "on-tertiary-fixed": "#380018",
+              "on-error-container": "#ffb2b9"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        .hero-gradient {
+            background: linear-gradient(to top, #0e0e0e 0%, rgba(14, 14, 14, 0.4) 50%, rgba(14, 14, 14, 0) 100%);
+        }
+        .lithic-button {
+            background: linear-gradient(135deg, #ba9eff 0%, #8455ef 100%);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary/30">
+<!-- Top Navigation -->
+<nav class="fixed top-0 w-full z-40 bg-neutral-950/70 backdrop-blur-2xl flex justify-between items-center px-8 h-20 w-full ml-auto">
+<div class="flex items-center gap-8">
+<span class="text-xl font-black text-violet-400 font-headline tracking-tighter">The Archive</span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-neutral-400 hover:text-violet-300 transition-colors font-label text-sm uppercase tracking-widest" href="#">Home</a>
+<a class="text-violet-400 font-label text-sm uppercase tracking-widest" href="#">My List</a>
+<a class="text-neutral-400 hover:text-violet-300 transition-colors font-label text-sm uppercase tracking-widest" href="#">Explore</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-neutral-400 hover:text-violet-300 focus-within:ring-2 focus-within:ring-violet-500/50 rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="Close-up portrait of a professional man with friendly expression in soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOdUTIjbBULihS70dAhA22f86UQnbkMiVesdYchASJgZ8bFN1mxGDtc7kyJ91kR9rsaS6elqH0Koa_8jHwWgTixWSvWY_hM0_8qXAQsyVEB2PjAGumuSHhYwIob0pQpQVNZnVz50w6OqaMEjm3a_FRQiBSTNVvR8LMjLCXXRe_vnHNJc4-U9Q1DvLHZA8-8bG_q1loye93976fAU-YpQ6xakE5RfBBzMz9n7GwZ5Ryjz_haq9yuNDFl6Dms_z5FtKpgAr8jbYWtiw"/>
+</div>
+</div>
+</nav>
+<!-- Side Navigation (Desktop) -->
+<aside class="hidden lg:flex flex-col h-full py-8 px-4 h-full w-64 fixed left-0 top-0 rounded-r-[3rem] bg-neutral-950/70 backdrop-blur-xl shadow-2xl shadow-black/40 z-50">
+<div class="mb-12 px-4">
+<h1 class="text-2xl font-black tracking-tighter text-violet-500 font-headline">The Archive</h1>
+<p class="text-[10px] text-neutral-500 font-label uppercase tracking-widest mt-1">Digital Curator</p>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-4 px-4 py-4 rounded-xl text-neutral-400 hover:text-neutral-100 transition-all duration-300 hover:bg-neutral-800/50 group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:text-violet-400" data-icon="home">home</span>
+<span class="font-headline font-bold text-sm tracking-wide">Home</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-4 rounded-xl text-violet-400 font-bold border-r-4 border-violet-500 bg-neutral-900/80 group" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="library_books">library_books</span>
+<span class="font-headline font-bold text-sm tracking-wide">My List</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-4 rounded-xl text-neutral-400 hover:text-neutral-100 transition-all duration-300 hover:bg-neutral-800/50 group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:text-violet-400" data-icon="search">search</span>
+<span class="font-headline font-bold text-sm tracking-wide">Search</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-4 rounded-xl text-neutral-400 hover:text-neutral-100 transition-all duration-300 hover:bg-neutral-800/50 group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:text-violet-400" data-icon="person">person</span>
+<span class="font-headline font-bold text-sm tracking-wide">Profile</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-4 rounded-xl text-neutral-400 hover:text-neutral-100 transition-all duration-300 hover:bg-neutral-800/50 group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:text-violet-400" data-icon="settings">settings</span>
+<span class="font-headline font-bold text-sm tracking-wide">Settings</span>
+</a>
+</nav>
+</aside>
+<main class="lg:ml-64 pt-20 pb-32">
+<!-- Hero Section -->
+<header class="relative w-full h-[614px] overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="Cinematic Background" class="w-full h-full object-cover opacity-40 scale-110 blur-[2px]" data-alt="Abstract cinematic composition with swirling deep purple and black smoke textures, dramatic atmospheric lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQDvvxbqXXYLwZmYnrqG5rmlzIEJdB_Vz5RBbMhAuBcHHH8-cxRQP5qa1iftPE5gIfh20OfXMUKyEGwmZbUiIKTzACjGSVHHemBKF0-zfjXiEC5zIaZIvcB4gh3q2lj4z8NuIC5EqXSla2B7h8h-k4TdG_bg5qNEbOSAoBGSKvtbpS2ZaRVvoyWgbakYFKAi2WSxbZQyjtgZkP10C_u0pLEXgZD5Py4v1vrdC8nL8GuqcTgbM1TyW9XVjgq5j1BVcbu8omoXKvJX0"/>
+<div class="absolute inset-0 hero-gradient"></div>
+</div>
+<div class="relative z-10 container mx-auto px-8 h-full flex flex-col justify-end pb-12 lg:pb-16">
+<div class="flex flex-col lg:flex-row items-end lg:items-center gap-8 lg:gap-12">
+<!-- Poster -->
+<div class="hidden lg:block w-72 aspect-[2/3] rounded-lg shadow-2xl shadow-black overflow-hidden transform -rotate-2 hover:rotate-0 transition-transform duration-700 bg-surface-container">
+<img alt="Series Poster" class="w-full h-full object-cover" data-alt="Stylized anime-style digital art of a lone warrior with glowing blue eyes standing in a dark cavernous dungeon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWEwvh5ntWtU6hQ4PutKBe3Z2hp0897mrDjMokIZXEVVUtgx8aYtRoQNCYyZw2BiR8o2mFt44QgV9ab6uCNTQm0p3tj4YRM5y5XN_n5tWLYvuQPqokvCAqxGot3YgiPG5a6qDiQv_OK1BWKZBZ-_fq2eE9MXL76wmaDJCwT8qyyjt7Egyp3EMgm8-z0PzPs0DOQmugS8uUppMOx3VJ0SUtFIXiHKCXjvtHXl6bDoshDUFuw-4Y6z4KcURZD7xyGUjn_rp4d6WPjIU"/>
+</div>
+<div class="flex-1 text-left lg:text-left">
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="bg-primary/20 text-primary-fixed-dim font-label font-bold text-[10px] px-3 py-1 rounded-full border border-primary/20 tracking-widest uppercase">Ongoing</span>
+<span class="bg-surface-container-highest text-on-surface-variant font-label font-bold text-[10px] px-3 py-1 rounded-full tracking-widest uppercase">Winter 2024</span>
+<span class="bg-surface-container-highest text-on-surface-variant font-label font-bold text-[10px] px-3 py-1 rounded-full tracking-widest uppercase">TV Series</span>
+</div>
+<h1 class="font-headline font-extrabold text-5xl lg:text-7xl text-on-surface tracking-tighter mb-2">Solo Leveling</h1>
+<h2 class="font-headline text-xl text-on-surface-variant tracking-normal">Na Honjaman Level Up</h2>
+</div>
+</div>
+</div>
+</header>
+<!-- Content Grid -->
+<section class="container mx-auto px-8 -mt-8 relative z-20">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column: Primary Info -->
+<div class="lg:col-span-8 space-y-10">
+<!-- Tracking Card (Bento Style) -->
+<div class="bg-surface-container-low rounded-xl p-8 lg:p-10 shadow-xl">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
+<div>
+<h3 class="font-headline font-bold text-2xl mb-1">Your Tracking</h3>
+<p class="text-on-surface-variant font-body text-sm">Last updated 2 days ago</p>
+</div>
+<div class="flex gap-3">
+<button class="lithic-button text-on-primary font-label font-bold text-sm px-8 py-3 rounded-full flex items-center gap-2 shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="edit">edit</span>
+                                    Edit Entry
+                                </button>
+<button class="bg-surface-container-highest hover:bg-surface-variant text-on-surface font-label font-bold text-sm px-6 py-3 rounded-full flex items-center gap-2 transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="share">share</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Status -->
+<div class="bg-surface-container rounded-lg p-6 flex flex-col gap-3">
+<span class="text-[10px] font-label font-bold text-on-surface-variant uppercase tracking-widest">Status</span>
+<div class="flex items-center gap-3">
+<div class="w-3 h-3 rounded-full bg-primary animate-pulse"></div>
+<span class="font-headline font-bold text-lg">Watching</span>
+</div>
+</div>
+<!-- Progress -->
+<div class="bg-surface-container rounded-lg p-6 flex flex-col gap-3">
+<span class="text-[10px] font-label font-bold text-on-surface-variant uppercase tracking-widest">Progress</span>
+<div class="flex items-end gap-1">
+<span class="font-headline font-bold text-2xl text-primary">55</span>
+<span class="text-on-surface-variant font-headline font-medium pb-0.5">/ 100 Ep</span>
+</div>
+</div>
+<!-- Score -->
+<div class="bg-surface-container rounded-lg p-6 flex flex-col gap-3">
+<span class="text-[10px] font-label font-bold text-on-surface-variant uppercase tracking-widest">Your Score</span>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-headline font-bold text-2xl">9.5</span>
+<span class="text-on-surface-variant font-headline font-medium text-sm">/ 10</span>
+</div>
+</div>
+</div>
+<div class="mt-8 bg-surface-container rounded-lg p-6">
+<span class="text-[10px] font-label font-bold text-on-surface-variant uppercase tracking-widest mb-3 block">Personal Notes</span>
+<p class="text-on-surface-variant font-body leading-relaxed italic">"The animation quality in the dungeon raid was incredible. Jin-Woo's growth is satisfyingly paced. Need to rewatch episode 12."</p>
+</div>
+</div>
+<!-- Synopsis -->
+<div class="space-y-6">
+<h3 class="font-headline font-bold text-3xl">Synopsis</h3>
+<div class="prose prose-invert max-w-none text-on-surface-variant font-body leading-loose text-lg space-y-4">
+<p>Ten years ago, "the Gate" appeared and connected the real world with the realm of magic and monsters. To combat these vile beasts, ordinary people received superhuman powers and became known as "Hunters."</p>
+<p>Sung Jin-Woo is an E-rank Hunter, known as the "World's Weakest." Despite his low rank, he continues to hunt to pay for his mother's medical bills. After a disastrous raid in a double dungeon, he finds himself in a hospital bed with a mysterious floating screen in front of him—a "Quest Log" that only he can see.</p>
+</div>
+</div>
+<!-- Media Carousel/Grid for other versions -->
+<div class="space-y-6">
+<div class="flex items-center justify-between">
+<h3 class="font-headline font-bold text-2xl">Recommended Similar</h3>
+<a class="text-primary font-label text-sm uppercase tracking-widest hover:underline" href="#">View All</a>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+<div class="group cursor-pointer">
+<div class="aspect-[2/3] rounded-lg overflow-hidden bg-surface-container-highest mb-3">
+<img alt="Recommendation 1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Digital illustration of a high-tech cityscape with neon lights and flying vehicles under a purple twilight sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAc_71jZylp762GDBGWGfgxO-ICoAqvt-RU0ILAA-WL-aPXq2iPZW7YzcySeXgV5sXHH-Z_vL8m2HEratqvCAxOIhYRboWD2gbveRnlXFTSm2KA7Fj0LAKRu3NX0k2QKLMoONWECPpZB9rl9PZGA7vKlIRZZT2m9zrl0ye_lzdfbAZZh63g1VVHKgt_J7N5NZxiznJxevKcyIm1YVzPoRR-i7rHrhQ3v4owC4_CiJtJ5L5ztTzn-O_VPPJ-KyT9X0raWb2RGejy3Fg"/>
+</div>
+<p class="font-headline font-bold text-sm truncate">The God of High School</p>
+<p class="text-on-surface-variant text-[10px] uppercase font-label">Action • Supernatural</p>
+</div>
+<div class="group cursor-pointer">
+<div class="aspect-[2/3] rounded-lg overflow-hidden bg-surface-container-highest mb-3">
+<img alt="Recommendation 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Intricate fantasy landscape with floating islands and waterfalls cascading into a sea of clouds at dawn" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGEPikBIkV8cOTt0sdh3KCHwWtkP_kY9RtTezVJJzAaYKJC24udUIsov9Kn36-GEmTFEJuFhLtDUexYQIuTDXc2_Jd3bB6VhbAPS-5ftE_YpbqADKXI-V-Dri67Z_BmbzjEunCYMzAjNAKoRJDbWSMN0gRjEWTcKZ18XItkSdQ-lZEipncXzxTVyvQebXDGliAnufC6cshy6-NmOjCNRwQv4134EQsO685xcyjLLlcXB6Z4egRZYRpiIln3M-wBNZUM4ybKMnFk24"/>
+</div>
+<p class="font-headline font-bold text-sm truncate">Tower of God</p>
+<p class="text-on-surface-variant text-[10px] uppercase font-label">Adventure • Fantasy</p>
+</div>
+<div class="group cursor-pointer">
+<div class="aspect-[2/3] rounded-lg overflow-hidden bg-surface-container-highest mb-3">
+<img alt="Recommendation 3" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Close up of a futuristic mechanical eye with intricate iris patterns and glowing internal circuits" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBg0nSNu97bHU_Gqv7kNPyv4rIZt1s0e9j3gsjF097KIubzRpTXa7yfePmlAzgZL0fxKP5iRB6a6JLNAZPec6ue4dnulv_mYkasrzieennTj0AFJnIWVTchjcvCc69udbXOBdKewRFvFEKSRY-NudSLCj3usU5Chv6JQYB7drZn_bMvxrP6Fs0-sb27c4fdCUg1yi4gw_Y0zN7iDwwe2bhxOQIfVMEA_X1GF3AfKsl4kQIYGB_0ZcX8PShDD-Zy_6HzM9wnMUYL4i0"/>
+</div>
+<p class="font-headline font-bold text-sm truncate">Cyberpunk: Edgerunners</p>
+<p class="text-on-surface-variant text-[10px] uppercase font-label">Sci-Fi • Gore</p>
+</div>
+<div class="group cursor-pointer">
+<div class="aspect-[2/3] rounded-lg overflow-hidden bg-surface-container-highest mb-3">
+<img alt="Recommendation 4" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Minimalist ink painting of a samurai warrior standing beneath a cherry blossom tree in a gentle breeze" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfwKhqxObu716L_osrmModDlKt_LyteAm8PPNDMZFh6MpqyXxcFVbvRdGEv7UFFpzQlAJPxzH0qNlJ-L2gnjjlJp47xldfixunddVy_5AfggetWW9frUuJkQOMRpxCn1lqpEquvM7UkGH8T5T2Lnj3b_sU8l3HOoPiEhzdtAmoYp6shQA1HawptYOd-O0acmQqkq-uKuF0oU-3voIEwVzXAUHGIfjR7BVvCgfJffBM2KgB1n0O375XjjPwtr0O_RptH8zJ3letiLw"/>
+</div>
+<p class="font-headline font-bold text-sm truncate">Hell's Paradise</p>
+<p class="text-on-surface-variant text-[10px] uppercase font-label">Action • Fantasy</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Metadata & External -->
+<aside class="lg:col-span-4 space-y-8">
+<!-- Metadata Bento -->
+<div class="bg-surface-container-highest/30 rounded-xl p-8 space-y-8 border border-outline-variant/10">
+<div>
+<h4 class="text-[10px] font-label font-black text-primary uppercase tracking-widest mb-4">Metadata</h4>
+<div class="space-y-6">
+<div class="flex justify-between items-start">
+<span class="text-on-surface-variant font-label text-sm">Genres</span>
+<div class="flex flex-wrap justify-end gap-2 max-w-[200px]">
+<span class="bg-surface-container-highest px-3 py-1 rounded-full text-[10px] font-label">Action</span>
+<span class="bg-surface-container-highest px-3 py-1 rounded-full text-[10px] font-label">Adventure</span>
+<span class="bg-surface-container-highest px-3 py-1 rounded-full text-[10px] font-label">Fantasy</span>
+</div>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant font-label text-sm">Studios</span>
+<span class="text-on-surface font-headline font-bold text-sm text-right">A-1 Pictures</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant font-label text-sm">Source</span>
+<span class="text-on-surface font-headline font-bold text-sm text-right">Web Novel</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant font-label text-sm">Aired</span>
+<span class="text-on-surface font-headline font-bold text-sm text-right">Jan 7, 2024 to ?</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant font-label text-sm">Authors</span>
+<span class="text-on-surface font-headline font-bold text-sm text-right">Chugong (Story)</span>
+</div>
+</div>
+</div>
+<div>
+<h4 class="text-[10px] font-label font-black text-primary uppercase tracking-widest mb-4">External Links</h4>
+<div class="flex flex-col gap-3">
+<a class="flex items-center justify-between p-4 rounded-lg bg-surface-container hover:bg-surface-container-high transition-all group" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-blue-400" data-icon="open_in_new">open_in_new</span>
+<span class="font-headline font-bold text-sm">MyAnimeList</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" data-icon="chevron_right">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-4 rounded-lg bg-surface-container hover:bg-surface-container-high transition-all group" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-emerald-400" data-icon="explore">explore</span>
+<span class="font-headline font-bold text-sm">AniList</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" data-icon="chevron_right">chevron_right</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Voice Actors Preview -->
+<div class="bg-surface-container-low rounded-xl p-6 space-y-4">
+<h4 class="text-[10px] font-label font-black text-on-surface-variant uppercase tracking-widest">Main Cast</h4>
+<div class="space-y-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container-highest">
+<img alt="Cast 1" class="w-full h-full object-cover" data-alt="Professional headshot of a young Japanese actor with soft lighting and a neutral expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCU1PRcROdyCahtz8WhxXO3f83C35hwdkYSDY276SCOjJdS1Rxqv0mQI_6o4YZMHlnX61S38sXXY7IDlJMMim8eBaAZCEOW0GPBGTO909AkrxbHD3nmiEDV1rLptY2egFhNkihlRw5IR1Y0QOZlRvPNEZfIG3YHmxVBm2Z1NIFJdTgaGsf9_nlejAKHsGdvJxvRmG0FuFes0JFfs0SwdwI0SiTL8fMdS-G_dUD_fzYu-hai6V6z5gOgWeGauja29bCL5e1PmyTJO0I"/>
+</div>
+<div>
+<p class="font-headline font-bold text-sm">Ban Taito</p>
+<p class="text-on-surface-variant text-[10px] font-label uppercase">Sung Jin-Woo</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container-highest">
+<img alt="Cast 2" class="w-full h-full object-cover" data-alt="Headshot of a smiling young Japanese actress with warm lighting and a soft bokeh background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYmBnnL5Sb6ZHmgUnwGZM8K-dokSV2yHJOI4QG4QUgpvsAnBDWpC2wCtoN9tvTqVCsvlvECUS_eSDylC-acuOOat0oU-Vcm5T9YtuwfimNt5srSYzl05XtSOPm2D5Bj-I7JYnZ01xsqbQYbQSqHSmiZ4_35WLN7bii33pOzUwmjQ__8JUYLdMC5qbSSZlTQuDNUJ72cRqlKupMgnZxadABeuNSFVbdjnR2Ve4O5t1JepMr4R3FEBT3vpg6Z2Usv3Ibicj762OKfag"/>
+</div>
+<div>
+<p class="font-headline font-bold text-sm">Ueda Reina</p>
+<p class="text-on-surface-variant text-[10px] font-label uppercase">Cha Hae-In</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-6 pb-8 pt-4 bg-neutral-950/80 backdrop-blur-xl rounded-t-[3rem] z-50 shadow-[0_-10px_40px_rgba(0,0,0,0.6)]">
+<a class="flex flex-col items-center justify-center text-neutral-500 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-violet-600/20 text-violet-400 rounded-full px-6 py-2 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="format_list_bulleted">format_list_bulleted</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest mt-1">List</span>
+</a>
+<a class="flex flex-col items-center justify-center text-neutral-500 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest mt-1">Add</span>
+</a>
+<a class="flex flex-col items-center justify-center text-neutral-500 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest mt-1">Profile</span>
+</a>
+</nav>
+</body></html>
