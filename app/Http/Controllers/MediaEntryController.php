@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\MediaEntry;
 use App\Http\Requests\StoreMediaEntryRequest;
 use App\Http\Requests\UpdateMediaEntryRequest;
@@ -11,17 +12,21 @@ class MediaEntryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-    }
+        $status = $request->query('status');
+        $type   = $request->query('type');
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $entries = auth()->user()->mediaEntries()
+            ->when($status, fn($q) => $q->where('status', $status))
+            ->when($type,   fn($q) => $q->where('type', $type))
+            ->orderBy('updated_at', 'desc')
+            ->paginate(20)
+            ->withQueryString();
+
+        $totalCount = auth()->user()->mediaEntries()->count();
+
+        return view('my-list', compact('entries', 'totalCount', 'status', 'type'));
     }
 
     /**
@@ -29,7 +34,9 @@ class MediaEntryController extends Controller
      */
     public function store(StoreMediaEntryRequest $request)
     {
-        //
+        auth()->user()->mediaEntries()->create($request->validated());
+
+        return redirect()->route('my-list.index')->with('success', __('Entry added to your archive!'));
     }
 
     /**
@@ -37,15 +44,22 @@ class MediaEntryController extends Controller
      */
     public function show(MediaEntry $mediaEntry)
     {
-        //
-    }
+        
+        if ($mediaEntry->user_id !== auth()->id()) {
+            abort(403);
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(MediaEntry $mediaEntry)
-    {
-        //
+        $malData = null;
+        if ($mediaEntry->mal_id) {
+            $jikan = app(\App\Services\JikanService::class);
+            if ($mediaEntry->isAnime()) {
+                $malData = $jikan->getAnime($mediaEntry->mal_id);
+            } else {
+                $malData = $jikan->getManga($mediaEntry->mal_id);
+            }
+        }
+
+        return view('media-details', compact('mediaEntry', 'malData'));
     }
 
     /**
@@ -53,7 +67,17 @@ class MediaEntryController extends Controller
      */
     public function update(UpdateMediaEntryRequest $request, MediaEntry $mediaEntry)
     {
-        //
+        $mediaEntry->update($request->validated());
+
+        if ($request->ajax() || $request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => __('Entry updated successfully!'),
+                'entry'   => $mediaEntry
+            ]);
+        }
+
+        return back()->with('success', __('Entry updated successfully!'));
     }
 
     /**
@@ -61,6 +85,12 @@ class MediaEntryController extends Controller
      */
     public function destroy(MediaEntry $mediaEntry)
     {
-        //
+        if ($mediaEntry->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $mediaEntry->delete();
+
+        return redirect()->route('my-list.index')->with('success', __('Entry removed from your archive.'));
     }
 }

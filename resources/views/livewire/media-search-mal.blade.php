@@ -218,14 +218,14 @@
 
                                     <div class="space-y-2">
                                         <label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant ml-1">
-                                            {{ __('Score') }} (1-10)
+                                            {{ __('Score') }} (1-5)
                                         </label>
                                         <div class="flex items-center bg-surface-container-highest rounded-full px-5 py-3 gap-2">
                                             <span class="material-symbols-outlined text-primary text-lg"
                                                   style="font-variation-settings: 'FILL' 1;">star</span>
                                             <input wire:model="rating"
-                                                class="w-full bg-transparent border-none p-0 focus:ring-0 text-sm font-bold text-on-surface outline-none"
-                                                max="10" min="1" placeholder="—" type="number" />
+                                                class="w-full bg-surface-container border-none rounded-xl py-3 px-4 text-on-surface focus:ring-2 focus:ring-primary/50 outline-none transition-all placeholder:text-on-surface-variant/40"
+                                                max="5" min="1" placeholder="Valora del 1 al 5..." type="number" />
                                         </div>
                                         @error('rating') <p class="text-error text-xs mt-1 px-1">{{ $message }}</p> @enderror
                                     </div>

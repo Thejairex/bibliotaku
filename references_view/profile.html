@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>The Archive | Profile</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-container-lowest": "#000000",
+            "on-primary-fixed": "#000000",
+            "tertiary-fixed-dim": "#f67ca3",
+            "on-surface-variant": "#adaaaa",
+            "surface-container-high": "#201f1f",
+            "surface-container-low": "#131313",
+            "surface-bright": "#2c2c2c",
+            "surface-container": "#1a1919",
+            "primary": "#ba9eff",
+            "secondary-container": "#2f2ebe",
+            "on-surface": "#ffffff",
+            "secondary": "#9093ff",
+            "primary-fixed": "#ae8dff",
+            "surface-tint": "#ba9eff",
+            "on-background": "#ffffff",
+            "background": "#0e0e0e",
+            "on-secondary": "#080079",
+            "on-primary-container": "#2b006e",
+            "on-error-container": "#ffb2b9",
+            "on-tertiary": "#6a0934",
+            "inverse-surface": "#fcf9f8",
+            "surface-variant": "#262626",
+            "on-primary-fixed-variant": "#370086",
+            "tertiary-container": "#fd81a8",
+            "tertiary-dim": "#f0779d",
+            "on-error": "#490013",
+            "surface": "#0e0e0e",
+            "on-tertiary-container": "#59002a",
+            "secondary-fixed": "#cdcdff",
+            "secondary-fixed-dim": "#bdbeff",
+            "inverse-primary": "#6e3bd7",
+            "surface-container-highest": "#262626",
+            "secondary-dim": "#6063ee",
+            "tertiary-fixed": "#ff8eb0",
+            "primary-dim": "#8455ef",
+            "on-tertiary-fixed": "#380018",
+            "surface-dim": "#0e0e0e",
+            "outline-variant": "#484847",
+            "primary-fixed-dim": "#a27cff",
+            "error-dim": "#d73357",
+            "on-secondary-fixed": "#160bae",
+            "inverse-on-surface": "#565555",
+            "tertiary": "#ff97b5",
+            "outline": "#767575",
+            "error-container": "#a70138",
+            "on-primary": "#39008c",
+            "on-tertiary-fixed-variant": "#701039",
+            "on-secondary-fixed-variant": "#3a3ac8",
+            "on-secondary-container": "#ccccff",
+            "primary-container": "#ae8dff",
+            "error": "#ff6e84"
+          },
+          fontFamily: {
+            "headline": ["Manrope"],
+            "body": ["Inter"],
+            "label": ["Inter"]
+          },
+          borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+        },
+      },
+    }
+  </script>
+  <style>
+    body {
+      background-color: #0e0e0e;
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .glass-header {
+      background: rgba(26, 25, 25, 0.7);
+      backdrop-filter: blur(24px);
+    }
+
+    .gradient-button {
+      background: linear-gradient(135deg, #ba9eff 0%, #8455ef 100%);
+    }
+
+    .hero-asymmetry {
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
+    }
+  </style>
+</head>
+
+<body class="flex min-h-screen">
+  <!-- SideNavBar (Shared Component) -->
+  <aside class="h-screen w-72 fixed left-0 top-0 hidden md:flex flex-col bg-[#0e0e0e] py-10 px-6 gap-8 z-50">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-full gradient-button flex items-center justify-center">
+        <span class="material-symbols-outlined text-on-primary"
+          style="font-variation-settings: 'FILL' 1;">auto_stories</span>
+      </div>
+      <span class="text-xl font-bold text-violet-400 font-headline">Archive Curator</span>
+    </div>
+    <nav class="flex flex-col gap-2 flex-grow mt-4">
+      <!-- Home -->
+      <a class="text-neutral-500 px-4 py-3 hover:bg-[#1a1919] rounded-full transition-all flex items-center gap-4 font-label"
+        href="#">
+        <span class="material-symbols-outlined">grid_view</span>
+        <span>Home</span>
+      </a>
+      <!-- My Library -->
+      <a class="text-neutral-500 px-4 py-3 hover:bg-[#1a1919] rounded-full transition-all flex items-center gap-4 font-label"
+        href="#">
+        <span class="material-symbols-outlined">auto_stories</span>
+        <span>My Library</span>
+      </a>
+      <!-- Discover -->
+      <a class="text-neutral-500 px-4 py-3 hover:bg-[#1a1919] rounded-full transition-all flex items-center gap-4 font-label"
+        href="#">
+        <span class="material-symbols-outlined">explore</span>
+        <span>Discover</span>
+      </a>
+      <!-- Social -->
+      <a class="text-neutral-500 px-4 py-3 hover:bg-[#1a1919] rounded-full transition-all flex items-center gap-4 font-label"
+        href="#">
+        <span class="material-symbols-outlined">group</span>
+        <span>Social</span>
+      </a>
+      <!-- Statistics (Active for Profile) -->
+      <a class="text-violet-400 font-bold bg-[#262626] rounded-full px-4 py-3 flex items-center gap-4 font-label active:scale-[0.98] duration-200"
+        href="#">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">analytics</span>
+        <span>Statistics</span>
+      </a>
+    </nav>
+    <div class="mt-auto flex flex-col gap-2">
+      <button
+        class="gradient-button text-on-primary font-bold rounded-full px-6 py-4 mb-6 hover:opacity-90 transition-opacity font-label shadow-xl">
+        Add New Media
+      </button>
+      <a class="text-neutral-500 px-4 py-3 hover:bg-[#1a1919] rounded-full transition-all flex items-center gap-4 font-label"
+        href="#">
+        <span class="material-symbols-outlined">help</span>
+        <span>Help</span>
+      </a>
+      <a class="text-neutral-500 px-4 py-3 hover:bg-[#1a1919] rounded-full transition-all flex items-center gap-4 font-label"
+        href="#">
+        <span class="material-symbols-outlined">logout</span>
+        <span>Logout</span>
+      </a>
+    </div>
+  </aside>
+  <!-- Main Content Canvas -->
+  <main class="flex-grow md:ml-72 bg-surface">
+    <!-- User Header Section (Asymmetric Editorial Style) -->
+    <section class="relative min-h-[500px] flex items-end px-12 pb-20">
+      <div class="absolute inset-0 z-0 overflow-hidden">
+        <div class="w-full h-full bg-gradient-to-t from-background via-background/40 to-transparent absolute z-10">
+        </div>
+        <img alt="Header Background" class="w-full h-full object-cover opacity-30 grayscale blur-sm"
+          data-alt="abstract flowing liquid metal texture with deep violet and black hues, cinematic lighting, high contrast, smooth curves"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpBhlrlnBXVt_socGhZ71JIGFW4gN435ttggxs8IMtbx1j9mNZIRY4TryFlC4S0Mz4Icm-8J-XHwJhWFsRart0rCm50_9U-M4ybFB5cYxtCzuN7G27e-oYjix2MC5-A45qvbyhleHDBhVIT2EW3TvfsweM5AeBWqw7bNk1Xnv4XJrcwETZkU_rTiV-4as1a-JImuQeN-ZLubFVY1jtMMEZdeGno5BZYSK_pn2loZnz9KQJJeE1Qz5IHrnpZkmAyLdhe8N3ijlU4fw" />
+      </div>
+      <div class="relative z-20 flex flex-col md:flex-row items-end gap-10 w-full">
+        <!-- Avatar -->
+        <div class="relative">
+          <div class="w-48 h-48 rounded-xl overflow-hidden border-4 border-surface-container shadow-2xl">
+            <img alt="Alex Chen Profile" class="w-full h-full object-cover"
+              data-alt="portrait of a stylish young asian man with short hair and modern glasses in a dimly lit cinematic setting with soft purple rim light"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAC1TbC9jq-T_S6Y95Xv0OoAg_Jwi0OXDOEfLCN0J3R8DCiwtB8VkXgSxQqAuVRuGpTKfClPAZmeAjKFY7BVriSucU-7gg45zV9qDLTdHxFssxMNVENLVB2RIMAOVNS3-68QYnpDjQ2Gb1BsDHZ3217G5jw1Fghg5klmJrcvfait61iIc_baOKzErsy6dITI98Zrf_fLanomBrm5CHtgCjbgPxCdWYkP_d4VP4Dc3wx1MK48ePLRP2MUNeKJKoL6_V_HvYjDoNffXY" />
+          </div>
+          <div
+            class="absolute -bottom-4 -right-4 bg-primary px-4 py-1 rounded-full text-on-primary text-xs font-bold uppercase tracking-widest font-label">
+            Procurator
+          </div>
+        </div>
+        <!-- Info -->
+        <div class="flex-grow pb-2">
+          <h1 class="text-6xl font-extrabold font-headline tracking-tighter mb-2">Alex Chen</h1>
+          <div class="flex items-center gap-4 text-on-surface-variant font-label mb-6">
+            <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">calendar_today</span>
+              Joined Sept 2021</span>
+            <span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span>
+            <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">location_on</span>
+              Neo-Tokyo</span>
+          </div>
+          <p class="max-w-2xl text-xl text-on-surface-variant font-body leading-relaxed italic">
+            "The world is a gallery, and we are but curators of the moments that move us."
+          </p>
+        </div>
+        <!-- Action -->
+        <div class="pb-2">
+          <button
+            class="px-8 py-3 rounded-full border border-outline-variant hover:bg-surface-container-highest transition-colors font-label flex items-center gap-2">
+            <span class="material-symbols-outlined">edit</span>
+            Edit Profile
+          </button>
+        </div>
+      </div>
+    </section>
+    <div class="px-12 space-y-20 pb-20">
+      <!-- Stats Overview (High Impact Cards) -->
+      <section>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div
+            class="bg-surface-container p-8 rounded-xl flex flex-col gap-2 hover:bg-surface-container-high transition-all">
+            <span class="text-on-surface-variant font-label text-sm uppercase tracking-widest">Total Media</span>
+            <span class="text-4xl font-extrabold font-headline text-primary">556</span>
+            <div class="h-1 w-12 bg-primary/20 rounded-full mt-2"></div>
+          </div>
+          <div
+            class="bg-surface-container p-8 rounded-xl flex flex-col gap-2 hover:bg-surface-container-high transition-all">
+            <span class="text-on-surface-variant font-label text-sm uppercase tracking-widest">Mean Score</span>
+            <span class="text-4xl font-extrabold font-headline text-secondary">8.2</span>
+            <div class="h-1 w-12 bg-secondary/20 rounded-full mt-2"></div>
+          </div>
+          <div
+            class="bg-surface-container p-8 rounded-xl flex flex-col gap-2 hover:bg-surface-container-high transition-all">
+            <span class="text-on-surface-variant font-label text-sm uppercase tracking-widest">Days Spent</span>
+            <span class="text-4xl font-extrabold font-headline text-tertiary">124.5</span>
+            <div class="h-1 w-12 bg-tertiary/20 rounded-full mt-2"></div>
+          </div>
+          <div
+            class="bg-surface-container p-8 rounded-xl flex flex-col gap-2 hover:bg-surface-container-high transition-all">
+            <span class="text-on-surface-variant font-label text-sm uppercase tracking-widest">Completed</span>
+            <span class="text-4xl font-extrabold font-headline text-on-surface">412</span>
+            <div class="h-1 w-12 bg-outline-variant rounded-full mt-2"></div>
+          </div>
+        </div>
+      </section>
+      <!-- Distribution & Recent Activity Bento Row -->
+      <section class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+        <!-- Collection Distribution -->
+        <div class="lg:col-span-1 bg-surface-container-low p-10 rounded-xl">
+          <h3 class="text-2xl font-bold font-headline mb-8">Collection Distribution</h3>
+          <div class="space-y-8">
+            <div>
+              <div class="flex justify-between font-label mb-2">
+                <span class="text-on-surface-variant">Anime</span>
+                <span class="text-primary">65%</span>
+              </div>
+              <div class="w-full h-3 bg-surface-container-highest rounded-full overflow-hidden">
+                <div class="h-full gradient-button w-[65%]"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between font-label mb-2">
+                <span class="text-on-surface-variant">Manga</span>
+                <span class="text-secondary">25%</span>
+              </div>
+              <div class="w-full h-3 bg-surface-container-highest rounded-full overflow-hidden">
+                <div class="h-full bg-secondary w-[25%]"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between font-label mb-2">
+                <span class="text-on-surface-variant">Light Novels</span>
+                <span class="text-tertiary">10%</span>
+              </div>
+              <div class="w-full h-3 bg-surface-container-highest rounded-full overflow-hidden">
+                <div class="h-full bg-tertiary w-[10%]"></div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="mt-12 flex items-center justify-center p-6 border border-dashed border-outline-variant rounded-lg text-on-surface-variant font-label text-sm text-center">
+            Active tracking since September 2021
+          </div>
+        </div>
+        <!-- Recent Activity Timeline -->
+        <div class="lg:col-span-2 space-y-6">
+          <h3 class="text-2xl font-bold font-headline">Recent Activity</h3>
+          <div class="space-y-4">
+            <div
+              class="bg-surface-container p-6 rounded-xl flex items-center gap-6 hover:translate-x-2 transition-transform cursor-pointer">
+              <div class="w-12 h-16 rounded overflow-hidden flex-shrink-0">
+                <img alt="Solo Leveling" class="w-full h-full object-cover"
+                  data-alt="intense anime style illustration of a warrior with blue glowing eyes in a dark cavernous setting"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlqkPEKo7YVKOXutDtRkU3PQg_j_68LFQvogWNU2p8lZmDz1fKmVqzvBvzmJ8B6MEcy_PKnM1JpJULPqvTALdA5Efd_44pXsXFbPORrFRBbR2Owp7LvMer4j8tv-4lL6eWbGvNhd1cpX7vWJDfEvR9Ie_Rcv71wT7p8hDqq9ycgHCTPkNB6glcqUNMbDcvepcBaTOEFq_tydjjmNoFTIES1_jplCl19Uh3iQMjx0x6DpkGnJD-knNjv-0aAcU3BORihDrAGqnUeEA" />
+              </div>
+              <div class="flex-grow">
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="material-symbols-outlined text-secondary text-sm"
+                    style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                  <p class="font-body text-on-surface-variant text-sm">Finished <span
+                      class="text-on-surface font-bold">Solo Leveling Ep. 12</span></p>
+                </div>
+                <span class="text-xs text-outline font-label">2 hours ago</span>
+              </div>
+            </div>
+            <div
+              class="bg-surface-container p-6 rounded-xl flex items-center gap-6 hover:translate-x-2 transition-transform cursor-pointer">
+              <div class="w-12 h-16 rounded overflow-hidden flex-shrink-0">
+                <img alt="Chainsaw Man" class="w-full h-full object-cover"
+                  data-alt="gritty stylized manga panel showing a character with a chainsaw head, high contrast ink style, orange and black colors"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMkTkp9CV4pgScmMWFwVQv3W7cB8t9zsgEw4ETECKU0tlaNyXPkPl41vaEvVZfq5_zpUH781CUYIPG3HteLA-G0Ul-111Z55gdL8ADN4ONcqV4gpt-oirw7OeldLQg7isW_jQQAq6dBLlzmRP4XIkgcKYBHFRLmf9wD7v_1M5fHcd0mQ0ZoxdrDTKEIBng2ieaP55BsSRSS6QqY5vFlKBHfJgvs2UA_lZcxx5NShN_Z8JvYlZ4f87eHF1urxvD7McvOnh0u1kqidc" />
+              </div>
+              <div class="flex-grow">
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="material-symbols-outlined text-primary text-sm">add_circle</span>
+                  <p class="font-body text-on-surface-variant text-sm">Added <span
+                      class="text-on-surface font-bold">Chainsaw Man</span> to My List</p>
+                </div>
+                <span class="text-xs text-outline font-label">Yesterday</span>
+              </div>
+            </div>
+            <div
+              class="bg-surface-container p-6 rounded-xl flex items-center gap-6 hover:translate-x-2 transition-transform cursor-pointer">
+              <div class="w-12 h-16 rounded overflow-hidden flex-shrink-0">
+                <img alt="Akira" class="w-full h-full object-cover"
+                  data-alt="futuristic cyberpunk cityscape at night with neon red lights and massive brutalist architecture silhouettes"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiDxvfv721HeNpyvdmDj_p62JJXQloYxhkft7l1-XSjTTGmeqbWCHtkuA8T7QmeMxgkks8xlpJHy0jWkEGcf1MndwnF6P7JhIHnQwkFR2_R4XbOVeYu11bJHbjg-sjOqZII275HvqNDoppX5JbYVIyWipesMuPyC41SsN0RGAFbU1FgXKkDM6WUDyrjUhtcHnmB_-kdMSI4K-swsVrtltFdDVvXlOEJjUzovgP2iklMRSUy1Nkkv7cXG5XAsCU--ubV6JFYqs-9y0" />
+              </div>
+              <div class="flex-grow">
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="material-symbols-outlined text-tertiary text-sm"
+                    style="font-variation-settings: 'FILL' 1;">star</span>
+                  <p class="font-body text-on-surface-variant text-sm">Rated <span
+                      class="text-on-surface font-bold">Akira</span> — 10/10</p>
+                </div>
+                <span class="text-xs text-outline font-label">3 days ago</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Showcase / Favorites (Horizontal Grid) -->
+      <section>
+        <div class="flex items-baseline justify-between mb-8">
+          <h3 class="text-3xl font-extrabold font-headline tracking-tight">Curation Hall</h3>
+          <a class="text-primary font-label hover:underline" href="#">View all favorites</a>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
+          <!-- Favorite Item 1 -->
+          <div class="group cursor-pointer">
+            <div class="aspect-[2/3] rounded-lg overflow-hidden mb-4 relative">
+              <img alt="Cyberpunk Edgerunners"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                data-alt="neon-lit futuristic cyberpunk character with glowing yellow jacket and blue highlights, digital art style, high energy"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5SeTjcOZseT6VJ2JacwhzdVLVHCc2q0veg0u5AeaNOGeCFzgJqO1Tfa6TbgwCvbgJjTBkYgy0_sf-7HIWT38JqQwbUYaShzt59vTddzoQcvPffog1rTC5XnQounFUVO4Rm1Jvgnn_dTewAuGKVVEWtlb2k1A8sCyMLDsI-l6WqXaw3Jg7b4y_l4P0QTmE2kdm9ZeY68mrPNjiMFh5rmIm1YT6LPZGw-LJq6_aXigCszcCz0G5kHE69lV6cRh2IJBZK7Gb6NSWzm0" />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                <span class="text-xs font-bold uppercase tracking-widest text-primary">Masterpiece</span>
+              </div>
+            </div>
+            <h4 class="font-bold font-headline text-lg leading-tight">Cyberpunk Edgerunners</h4>
+            <p class="text-on-surface-variant text-sm font-label mt-1">Studio Trigger</p>
+          </div>
+          <!-- Favorite Item 2 -->
+          <div class="group cursor-pointer">
+            <div class="aspect-[2/3] rounded-lg overflow-hidden mb-4 relative">
+              <img alt="Cowboy Bebop"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                data-alt="cool space western scene featuring a sleek blue spacecraft drifting through a colorful purple nebula with noir aesthetic"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyQZvXPe05uw0T6JIUPDE3Os5VBdGVVhsldn5xF5uVMcf--35xfqAFDLKO4PXTD8Vnc3TcyDScSHDu5aZ17Q_nHdcTiuT6zlKihj8vZIKpIuUGlwfiPuOrSCAxwM85JiL8o7Irj1_y5V7uWdUo1eflA9hE-K7rep85a6yhGf8kPphgiuPYh2b7eLQbKXvVVU-LFf8FFlvKzzfQxEAu9RKjiG1aPjOcW8PWCQXPz4CK5KxGbCI7AfDm6a8-LGWGh3HQBGjy34mxYgM" />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                <span class="text-xs font-bold uppercase tracking-widest text-primary">Classic</span>
+              </div>
+            </div>
+            <h4 class="font-bold font-headline text-lg leading-tight">Cowboy Bebop</h4>
+            <p class="text-on-surface-variant text-sm font-label mt-1">Sunrise Studio</p>
+          </div>
+          <!-- Favorite Item 3 -->
+          <div class="group cursor-pointer">
+            <div class="aspect-[2/3] rounded-lg overflow-hidden mb-4 relative">
+              <img alt="Akira"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                data-alt="iconic red futuristic motorcycle speeding through a rain-slicked neon street with motion blur and cinematic lighting"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaLbZTtI2CR-IqRvU_igsoUt2uD7WW6zb14SSQDkRN4lM1pQHxcn_L5NRA1RmkMeBaIjXHEknAcTDYPkCgfyVkGJI78AjgIFsl9iMZrBbiHDfp3Yb6JZUgNCYh6lTtw8O2JE_ST_-qJdjUy8Dl4wnJfN22ZPL8QV_uut9Z4qhU7FhZ594XJ881rtAaiaeRPL-64hnUf9MdH4VftLftwxUvKLj1Rtyi4KaMTgtRH_drrpBS21iB3Bf7jNGn3VRGoM2wxOhOk8GE0p0" />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                <span class="text-xs font-bold uppercase tracking-widest text-primary">Hall of Fame</span>
+              </div>
+            </div>
+            <h4 class="font-bold font-headline text-lg leading-tight">Akira</h4>
+            <p class="text-on-surface-variant text-sm font-label mt-1">Katsuhiro Otomo</p>
+          </div>
+          <!-- Favorite Item 4 -->
+          <div class="group cursor-pointer">
+            <div class="aspect-[2/3] rounded-lg overflow-hidden mb-4 relative">
+              <img alt="Princess Mononoke"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                data-alt="ethereal forest scene with ancient mossy trees and glowing spiritual forest sprites in a soft daylight misty atmosphere"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqpKLz2DO35skZjgATMTIwCdTgPMzo3r7Jb08zynlIvwuXmocT_Icc0hf5cAwO9Lr2i7kNmWveaGDJ1kUXtZuyFUFFhenqT-oB7yBi_L3y-k0HzZ_u2IMSZbab9eLsnKrWXAKqT8dRPK-Q8FMsvNfSPGuhZUj27re6sHsnLbntlQXVXchhgz7-JIN-rKVCR_NxKKUOwisWLb3fd5MFuScLVHgwzsjLPshE5JIWXtvnSSwfkvyQoDtjlhOXjnAOThwiZ7tRVmYSEss" />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                <span class="text-xs font-bold uppercase tracking-widest text-primary">Nature Focus</span>
+              </div>
+            </div>
+            <h4 class="font-bold font-headline text-lg leading-tight">Princess Mononoke</h4>
+            <p class="text-on-surface-variant text-sm font-label mt-1">Studio Ghibli</p>
+          </div>
+          <!-- Favorite Item 5 -->
+          <div class="group cursor-pointer hidden lg:block">
+            <div class="aspect-[2/3] rounded-lg overflow-hidden mb-4 relative">
+              <img alt="Berserk"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                data-alt="dark fantasy illustration of a massive black sword embedded in a desolate battlefield with a dark red eclipse in the sky"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDo5PviyiyjQsfuBnx9zPlhkfWXEV6t_IPji0PpbDXLA1AFOndFgspX92fAIXC5pFWOccvgHuFV1CT77UdxQRCL_rIHSK9K3F0SSaWU3B7-UzT0LStaZ_JAIzV_R5g_ABcuxEAspDq8-z3USuvOonczLwCvV05YSrxw0tjqJ8jzhFjh618yPwjItxyk21KsgGYo1oXN4FUnBAApieI0wnwJEXFoJbjminfGQmysRfLbfPnzRL3of3ybYif-pn2g5_TChiqdVbWpmIk" />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                <span class="text-xs font-bold uppercase tracking-widest text-primary">Dark Epic</span>
+              </div>
+            </div>
+            <h4 class="font-bold font-headline text-lg leading-tight">Berserk</h4>
+            <p class="text-on-surface-variant text-sm font-label mt-1">Kentaro Miura</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+
+</html>

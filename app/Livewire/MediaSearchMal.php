@@ -113,7 +113,7 @@ class MediaSearchMal extends Component
     {
         $this->validate([
             'status'          => 'required|in:watching,rewatching,reading,completed,on_hold,dropped,plan_to_watch',
-            'rating'          => 'nullable|integer|min:1|max:10',
+            'rating'          => 'nullable|integer|min:1|max:5',
             'currentProgress' => 'nullable|integer|min:0',
             'notes'           => 'nullable|string|max:2000',
         ]);
