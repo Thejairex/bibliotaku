@@ -18,8 +18,10 @@
             <span class="material-symbols-outlined" {{ request()->routeIs('my-list') ? 'style="font-variation-settings:\'FILL\' 1;"' : '' }}>library_books</span>
             {{ __('My List') }}
         </a>
-        <a class="flex items-center gap-4 px-4 py-3 rounded-full transition-all duration-300 font-headline font-bold text-sm tracking-wide text-on-surface-variant hover:text-on-surface hover:bg-neutral-800/50" href="#">
-            <span class="material-symbols-outlined">search</span>
+        <a class="flex items-center gap-4 px-4 py-3 rounded-full transition-all duration-300 font-headline font-bold text-sm tracking-wide 
+            {{ request()->routeIs('search') ? 'text-primary border-r-4 border-primary bg-neutral-900/80 shadow-lg shadow-black/20' : 'text-on-surface-variant hover:text-on-surface hover:bg-neutral-800/50' }}" 
+            href="{{ route('search') }}">
+            <span class="material-symbols-outlined" {{ request()->routeIs('search') ? 'style="font-variation-settings:\'FILL\' 1;"' : '' }}>search</span>
             {{ __('Search') }}
         </a>
         <a class="flex items-center gap-4 px-4 py-3 rounded-full transition-all duration-300 font-headline font-bold text-sm tracking-wide 

@@ -29,23 +29,38 @@ class MediaSearchMal extends Component
     // Modal visibility
     public bool   $open        = false;
 
+    // Success toast state (shown inline after saving)
+    public bool   $savedToast  = false;
+    public string $savedTitle  = '';
+
     // ----------------------------------------------------------------
     // Lifecycle
     // ----------------------------------------------------------------
 
     #[On('open-mal-search')]
-    public function openModal(): void
+    public function openModal(?string $query = null): void
     {
         $this->open = true;
-        $this->reset(['query', 'results', 'searched', 'selected', 'rating', 'notes', 'currentProgress']);
+        $this->reset(['query', 'results', 'searched', 'selected', 'rating', 'notes', 'currentProgress', 'savedToast', 'savedTitle']);
         $this->status = 'plan_to_watch';
         $this->type   = 'anime';
+
+        if ($query) {
+            $this->query = $query;
+            $this->performSearch();
+        }
     }
 
     public function closeModal(): void
     {
         $this->open = false;
-        $this->reset(['query', 'results', 'searched', 'selected', 'rating', 'notes', 'currentProgress']);
+        $this->reset(['query', 'results', 'searched', 'selected', 'rating', 'notes', 'currentProgress', 'savedToast', 'savedTitle']);
+    }
+
+    public function dismissToast(): void
+    {
+        $this->savedToast = false;
+        $this->savedTitle = '';
     }
 
     // ----------------------------------------------------------------
@@ -122,6 +137,12 @@ class MediaSearchMal extends Component
             return;
         }
 
+        // Duplicate protection: Check if this MAL ID is already in the user's archive
+        if ($this->selected['mal_id'] && Auth::user()->mediaEntries()->where('mal_id', $this->selected['mal_id'])->exists()) {
+            $this->addError('selected', __('This title is already in your archive!'));
+            return;
+        }
+
         $isAnime = $this->type === 'anime';
 
         Auth::user()->mediaEntries()->create([
@@ -142,9 +163,16 @@ class MediaSearchMal extends Component
 
         $savedTitle = $this->selected['title'] ?? __('Entry');
 
-        $this->closeModal();
+        // Stay open — only reset the selection + form, keep the search results
+        $this->reset(['selected', 'rating', 'notes', 'currentProgress']);
+        $this->status = 'plan_to_watch';
+
+        // Show inline toast
+        $this->savedTitle = $savedTitle;
+        $this->savedToast = true;
+
+        // Notify the page that the list changed
         $this->dispatch('entry-saved');
-        session()->flash('success', __('":title" added to your archive!', ['title' => $savedTitle]));
     }
 
     // ----------------------------------------------------------------

@@ -271,8 +271,8 @@
             }
         });
 
-        // Reload page when Livewire saves an entry
-        document.addEventListener('livewire:entry-saved', () => window.location.reload());
-        document.addEventListener('entry-saved', () => window.location.reload());
+        // Reload page when Livewire saves an entry (Removed to allow batch adding)
+        // document.addEventListener('livewire:entry-saved', () => window.location.reload());
+        // document.addEventListener('entry-saved', () => window.location.reload());
     })();
 </script>

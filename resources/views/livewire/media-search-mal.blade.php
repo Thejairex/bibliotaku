@@ -45,13 +45,27 @@
                 {{-- Search Input --}}
                 <div class="relative group">
                     <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">search</span>
+                    
+                    {{-- Input --}}
                     <input
-                        wire:model.live.debounce.500ms="query"
-                        class="w-full bg-surface-container-highest border-none rounded-full py-3.5 pl-12 pr-4 text-sm focus:ring-2 focus:ring-primary/50 transition-all font-body text-on-surface placeholder:text-on-surface-variant outline-none"
+                        wire:model.live.debounce.1000ms="query"
+                        class="w-full bg-surface-container-highest border-none rounded-full py-3.5 pl-12 pr-12 text-sm focus:ring-2 focus:ring-primary/50 transition-all font-body text-on-surface placeholder:text-on-surface-variant outline-none"
                         placeholder="{{ __('Search anime, manga...') }}"
                         type="text"
                         autofocus />
+
+                    {{-- Loading Spinner inside Search Bar --}}
+                    <div wire:loading wire:target="query" class="absolute right-4 top-1/2 -translate-y-1/2">
+                        <div class="w-5 h-5 border-2 border-primary/30 border-t-primary rounded-full animate-spin"></div>
+                    </div>
                 </div>
+
+                {{-- Character Limit HINT --}}
+                @if(strlen($query) > 0 && strlen($query) < 3)
+                    <p class="text-[10px] text-primary font-bold uppercase tracking-widest px-4 animate-pulse">
+                        {{ __('Type at least 3 characters...') }}
+                    </p>
+                @endif
             </div>
 
             {{-- Results List --}}
@@ -126,6 +140,22 @@
         {{-- RIGHT PANEL: Preview + Form                                   --}}
         {{-- ============================================================ --}}
         <div class="flex-1 h-full overflow-y-auto bg-surface-container relative no-scrollbar">
+
+            {{-- ── Success Toast (inline, after saving) ── --}}
+            @if ($savedToast)
+                <div class="sticky top-0 z-20 px-6 pt-4">
+                    <div class="flex items-center gap-3 px-5 py-4 bg-secondary/15 border border-secondary/25 rounded-2xl backdrop-blur-sm shadow-xl">
+                        <span class="material-symbols-outlined text-secondary text-[22px] shrink-0" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-bold text-on-surface truncate">"{{ $savedTitle }}" {{ __('added!') }}</p>
+                            <p class="text-[10px] text-on-surface-variant uppercase tracking-widest mt-0.5">{{ __('Select the next title to add') }}</p>
+                        </div>
+                        <button wire:click="dismissToast" class="shrink-0 w-7 h-7 flex items-center justify-center rounded-full hover:bg-secondary/20 text-on-surface-variant hover:text-on-surface transition-all">
+                            <span class="material-symbols-outlined text-[16px]">close</span>
+                        </button>
+                    </div>
+                </div>
+            @endif
 
             @if ($selected)
 
@@ -278,6 +308,9 @@
                                         {{ __('Back') }}
                                     </button>
                                 </div>
+                                <p class="text-center text-[10px] text-outline mt-2 uppercase tracking-widest">
+                                    {{ __('Modal stays open') }} · {{ __('Pick the next season from the list') }}
+                                </p>
                             </form>
                         </div>
                     </div>
@@ -296,9 +329,9 @@
                         </p>
                     </div>
                     @if ($searched && !empty($results))
-                        <div class="flex items-center gap-2 text-primary text-sm animate-pulse">
+                        <div class="flex items-center gap-2 text-primary text-sm {{ $savedToast ? '' : 'animate-pulse' }}">
                             <span class="material-symbols-outlined">arrow_back</span>
-                            {{ __('Choose from results') }}
+                            {{ $savedToast ? __('Pick the next title →') : __('Choose from results') }}
                         </div>
                     @endif
                 </div>

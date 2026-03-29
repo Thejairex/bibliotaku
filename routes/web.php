@@ -10,6 +10,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile');
     Route::patch('profile/update', [\App\Http\Controllers\UserProfileController::class, 'update'])->name('profile.update');
+    Route::get('search', [\App\Http\Controllers\SearchController::class, 'index'])->name('search');
 
     
     Route::resource('my-list', MediaEntryController::class)->names([

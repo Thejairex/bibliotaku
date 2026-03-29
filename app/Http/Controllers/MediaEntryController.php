@@ -12,21 +12,9 @@ class MediaEntryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
-        $status = $request->query('status');
-        $type   = $request->query('type');
-
-        $entries = auth()->user()->mediaEntries()
-            ->when($status, fn($q) => $q->where('status', $status))
-            ->when($type,   fn($q) => $q->where('type', $type))
-            ->orderBy('updated_at', 'desc')
-            ->paginate(20)
-            ->withQueryString();
-
-        $totalCount = auth()->user()->mediaEntries()->count();
-
-        return view('my-list', compact('entries', 'totalCount', 'status', 'type'));
+        return view('my-list');
     }
 
     /**
@@ -34,9 +22,13 @@ class MediaEntryController extends Controller
      */
     public function store(StoreMediaEntryRequest $request)
     {
+        if (MediaEntry::where('user_id', auth()->id())->where('mal_id', $request->mal_id)->exists()) {
+            return redirect()->route('my-list')->with('error', __('Entry already exists in your archive!'));
+        }
+
         auth()->user()->mediaEntries()->create($request->validated());
 
-        return redirect()->route('my-list.index')->with('success', __('Entry added to your archive!'));
+        return redirect()->route('my-list')->with('success', __('Entry added to your archive!'));
     }
 
     /**

@@ -122,7 +122,7 @@
                     </label>
                     <div class="relative">
                         <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
-                        <input id="edit_modal_rating" name="rating" type="number" min="1" max="5"
+                        <input id="edit_modal_rating" name="rating" type="decimal" min="1" max="5"
                             placeholder="—"
                             class="w-full bg-surface-container-low border-none rounded-xl py-3.5 pl-12 pr-4 text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary/50 outline-none transition-all" />
                     </div>
