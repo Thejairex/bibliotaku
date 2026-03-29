@@ -44,11 +44,12 @@ class JikanService
         $cacheKey = "jikan_{$endpoint}_" . md5($query . serialize($extra));
 
         return Cache::remember($cacheKey, $this->cacheTtl, function () use ($endpoint, $query, $limit, $extra) {
-            $response = Http::timeout(10)
+            $response = Http::timeout(45)
+                // ->retry(2, 1000)
                 ->get("{$this->baseUrl}/{$endpoint}", array_merge([
                     'q' => $query,
                     'limit' => $limit,
-                    'sfw' => false,
+                    'sfw' => 0,
                 ], $extra));
 
             if ($response->failed()) {
@@ -77,7 +78,8 @@ class JikanService
         $cacheKey = "jikan_{$endpoint}_{$malId}";
 
         return Cache::remember($cacheKey, 3600, function () use ($endpoint, $malId) {
-            $response = Http::timeout(10)
+            $response = Http::timeout(45)
+                // ->retry(2, 1000)
                 ->get("{$this->baseUrl}/{$endpoint}/{$malId}");
 
             if ($response->failed())
