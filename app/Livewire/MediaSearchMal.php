@@ -11,27 +11,28 @@ use Livewire\Component;
 class MediaSearchMal extends Component
 {
     // Search panel state
-    public string $query       = '';
-    public string $type        = 'anime';
-    public array  $results     = [];
-    public bool   $loading     = false;
-    public bool   $searched    = false;
+    public string  $query           = '';
+    public string  $type            = 'anime';
+    public array   $results         = [];
+    public bool    $loading         = false;
+    public bool    $searched        = false;
+    public ?string $error           = null;
 
     // Selected item state
-    public ?array $selected    = null;
+    public ?array $selected         = null;
 
     // User-input form fields
-    public string $status      = 'plan_to_watch';
-    public ?int   $rating      = null;
-    public ?int   $currentProgress = null;
-    public string $notes       = '';
+    public string $status           = 'plan_to_watch';
+    public ?int   $rating           = null;
+    public ?int   $currentProgress  = null;
+    public string $notes            = '';
 
     // Modal visibility
-    public bool   $open        = false;
+    public bool   $open             = false;
 
     // Success toast state (shown inline after saving)
-    public bool   $savedToast  = false;
-    public string $savedTitle  = '';
+    public bool   $savedToast       = false;
+    public string $savedTitle       = '';
 
     // ----------------------------------------------------------------
     // Lifecycle
@@ -41,7 +42,7 @@ class MediaSearchMal extends Component
     public function openModal(?string $query = null): void
     {
         $this->open = true;
-        $this->reset(['query', 'results', 'searched', 'selected', 'rating', 'notes', 'currentProgress', 'savedToast', 'savedTitle']);
+        $this->reset(['query', 'results', 'searched', 'selected', 'rating', 'notes', 'currentProgress', 'savedToast', 'savedTitle', 'error']);
         $this->status = 'plan_to_watch';
         $this->type   = 'anime';
 
@@ -54,7 +55,7 @@ class MediaSearchMal extends Component
     public function closeModal(): void
     {
         $this->open = false;
-        $this->reset(['query', 'results', 'searched', 'selected', 'rating', 'notes', 'currentProgress', 'savedToast', 'savedTitle']);
+        $this->reset(['query', 'results', 'searched', 'selected', 'rating', 'notes', 'currentProgress', 'savedToast', 'savedTitle', 'error']);
     }
 
     public function dismissToast(): void
@@ -72,6 +73,7 @@ class MediaSearchMal extends Component
         if (strlen($this->query) < 3) {
             $this->results  = [];
             $this->searched = false;
+            $this->error    = null;
             return;
         }
         $this->performSearch();
@@ -89,10 +91,16 @@ class MediaSearchMal extends Component
     {
         $this->loading  = true;
         $this->searched = false;
+        $this->error    = null;
 
-        /** @var JikanService $jikan */
-        $jikan = app(JikanService::class);
-        $this->results  = $jikan->searchByType($this->type, $this->query);
+        try {
+            /** @var JikanService $jikan */
+            $jikan         = app(JikanService::class);
+            $this->results = $jikan->searchByType($this->type, $this->query);
+        } catch (\Exception $e) {
+            $this->results = [];
+            $this->error   = __('No se pudo conectar con MyAnimeList. Intentá de nuevo en unos segundos.');
+        }
 
         $this->loading  = false;
         $this->searched = true;
@@ -133,11 +141,11 @@ class MediaSearchMal extends Component
             'notes'           => 'nullable|string|max:2000',
         ]);
 
-        if (!$this->selected) {
+        if (! $this->selected) {
             return;
         }
 
-        // Duplicate protection: Check if this MAL ID is already in the user's archive
+        // Duplicate protection
         if ($this->selected['mal_id'] && Auth::user()->mediaEntries()->where('mal_id', $this->selected['mal_id'])->exists()) {
             $this->addError('selected', __('This title is already in your archive!'));
             return;
@@ -154,16 +162,16 @@ class MediaSearchMal extends Component
             'status'          => $this->status,
             'current_episode' => $isAnime ? ($this->currentProgress ?? 0) : null,
             'total_episodes'  => $isAnime ? ($this->selected['total_episodes'] ?? null) : null,
-            'current_chapter' => !$isAnime ? ($this->currentProgress ?? 0) : null,
-            'total_chapters'  => !$isAnime ? ($this->selected['total_chapters'] ?? null) : null,
-            'total_volumes'   => !$isAnime ? ($this->selected['total_volumes'] ?? null) : null,
+            'current_chapter' => ! $isAnime ? ($this->currentProgress ?? 0) : null,
+            'total_chapters'  => ! $isAnime ? ($this->selected['total_chapters'] ?? null) : null,
+            'total_volumes'   => ! $isAnime ? ($this->selected['total_volumes'] ?? null) : null,
             'rating'          => $this->rating,
             'notes'           => $this->notes ?: null,
         ]);
 
         $savedTitle = $this->selected['title'] ?? __('Entry');
 
-        // Stay open — only reset the selection + form, keep the search results
+        // Stay open — reset selection + form only, keep search results
         $this->reset(['selected', 'rating', 'notes', 'currentProgress']);
         $this->status = 'plan_to_watch';
 
