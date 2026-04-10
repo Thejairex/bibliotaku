@@ -77,6 +77,24 @@
                         <p class="text-xs font-label uppercase tracking-widest">{{ __('Searching...') }}</p>
                     </div>
 
+                @elseif ($error)
+                    {{-- Connection / API error --}}
+                    <div class="flex flex-col items-center justify-center py-16 gap-4 px-4">
+                        <div class="w-14 h-14 rounded-full bg-error/10 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-3xl text-error">wifi_off</span>
+                        </div>
+                        <div class="text-center space-y-1">
+                            <p class="text-sm font-bold text-on-surface">{{ __('Connection error') }}</p>
+                            <p class="text-xs text-on-surface-variant leading-relaxed">{{ $error }}</p>
+                        </div>
+                        <button
+                            wire:click="performSearch"
+                            class="flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest hover:bg-primary hover:text-on-primary transition-all">
+                            <span class="material-symbols-outlined text-[16px]">refresh</span>
+                            {{ __('Retry') }}
+                        </button>
+                    </div>
+
                 @elseif (!$searched && !$query)
                     <div class="flex flex-col items-center justify-center py-16 gap-3 text-on-surface-variant/40">
                         <span class="material-symbols-outlined text-5xl">manage_search</span>
