@@ -18,7 +18,10 @@ class MediaEntryFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => \App\Models\User::factory(),
+            'title' => $this->faker->sentence(),
+            'type' => \App\Enums\MediaType::Anime,
+            'status' => \App\Enums\MediaStatus::PlanToWatch,
         ];
     }
 }

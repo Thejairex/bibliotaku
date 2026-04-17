@@ -24,7 +24,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->configurePassport();
         $this->configureDefaults();
+    }
+
+    /**
+     * Configure Laravel Passport
+     */
+    protected function configurePassport(): void
+    {
+        // Specifically enable the Password Grant
+        \Laravel\Passport\Passport::enablePasswordGrant();
     }
 
     /**
