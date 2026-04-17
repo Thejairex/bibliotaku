@@ -3,10 +3,10 @@
 namespace App\Livewire;
 
 use App\Services\JikanService;
+use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Livewire\Attributes\Url;
-use Illuminate\Support\Facades\Auth;
 
 class SearchPage extends Component
 {
@@ -16,14 +16,14 @@ class SearchPage extends Component
     public string $query = '';
 
     #[Url]
-    public string $mode = 'local'; // 'local' or 'mal'
+    public string $mode = 'local';
 
-    public function updatedQuery()
+    public function updatedQuery(): void
     {
         $this->resetPage();
     }
 
-    public function updatedMode()
+    public function updatedMode(): void
     {
         $this->resetPage();
     }
@@ -35,21 +35,17 @@ class SearchPage extends Component
         if (strlen($this->query) >= 2) {
             if ($this->mode === 'local') {
                 $results = Auth::user()->mediaEntries()
-                    ->where('title', 'like', '%' . $this->query . '%')
-                    ->orWhere('original_title', 'like', '%' . $this->query . '%')
-                    ->orderBy('updated_at', 'desc')
+                    ->search($this->query)          // usa el scope seguro
+                    ->orderByDesc('updated_at')
                     ->paginate(12);
             } else {
-                // MAL Search via API
                 $jikan = app(JikanService::class);
-                // Note: Jikan API search doesn't support standard Laravel pagination easily, 
-                // but we can fetch a set and display it. For now, simple results.
-                $results = $jikan->searchByType('anime', $this->query, 24); 
+                $results = $jikan->searchByType('anime', $this->query, 24);
             }
         }
 
         return view('livewire.search-page', [
-            'results' => $results
+            'results' => $results,
         ]);
     }
 }

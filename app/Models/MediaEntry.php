@@ -6,6 +6,7 @@ use App\Enums\MediaStatus;
 use App\Enums\MediaType;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -33,41 +34,60 @@ class MediaEntry extends Model
         ];
     }
 
-
-    // ------------------------------------------------------------------------
+    // -----------------------------------------------------------------------
     // Relationships
-    // ------------------------------------------------------------------------
+    // -----------------------------------------------------------------------
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    // ------------------------------------------------------------------------
+    // -----------------------------------------------------------------------
     // Scopes
-    // ------------------------------------------------------------------------
-    public function scopeForUser($query, $userId)
+    // -----------------------------------------------------------------------
+
+    public function scopeForUser(Builder $query, int $userId): Builder
     {
         return $query->where('user_id', $userId);
     }
 
-    public function scopeOfType($query, string $type)
+    public function scopeOfType(Builder $query, string $type): Builder
     {
         return $query->where('type', $type);
     }
 
-    public function scopeWithStatus($query, string $status)
+    public function scopeWithStatus(Builder $query, string $status): Builder
     {
         return $query->where('status', $status);
     }
 
-    public function scopeWithRating($query, int $rating)
+    public function scopeWithRating(Builder $query, int $rating): Builder
     {
         return $query->where('rating', $rating);
     }
 
-    // ------------------------------------------------------------------------
+    /**
+     * Búsqueda segura por título/título original, agrupada para evitar
+     * que orWhere escape fuera del contexto del usuario.
+     */
+    public function scopeSearch(Builder $query, ?string $term): Builder
+    {
+        $term = trim((string) $term);
+
+        if ($term === '') {
+            return $query;
+        }
+
+        return $query->where(function (Builder $q) use ($term) {
+            $q->where('title', 'like', "%{$term}%")
+                ->orWhere('original_title', 'like', "%{$term}%");
+        });
+    }
+
+    // -----------------------------------------------------------------------
     // Helpers
-    // ------------------------------------------------------------------------
+    // -----------------------------------------------------------------------
 
     public function isAnime(): bool
     {
@@ -89,8 +109,9 @@ class MediaEntry extends Model
 
     public function malUrl(): ?string
     {
-        if (!$this->mal_id)
+        if (!$this->mal_id) {
             return null;
+        }
 
         $path = $this->isAnime() ? 'anime' : 'manga';
         return "https://myanimelist.net/{$path}/{$this->mal_id}";
