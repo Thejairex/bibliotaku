@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -12,7 +10,7 @@ return new class extends Migration
     public function up(): void
     {
         DB::table('media_entries')->whereNotNull('rating')->update([
-            'rating' => DB::raw('CAST((rating + 1) / 2 AS INTEGER)')
+            'rating' => DB::raw('CAST((rating + 1) / 2 AS INTEGER)'),
         ]);
     }
 
@@ -23,7 +21,7 @@ return new class extends Migration
     {
         // To reverse, we multiply by 2 (approximate)
         DB::table('media_entries')->whereNotNull('rating')->update([
-            'rating' => DB::raw('rating * 2')
+            'rating' => DB::raw('rating * 2'),
         ]);
     }
 };

@@ -8,12 +8,14 @@ use Livewire\Component;
 class GlobalSearch extends Component
 {
     public string $query = '';
+
     public array $results = [];
 
     public function updatedQuery(): void
     {
         if (strlen($this->query) < 2) {
             $this->results = [];
+
             return;
         }
 
@@ -22,7 +24,7 @@ class GlobalSearch extends Component
             ->orderByDesc('updated_at')
             ->limit(5)
             ->get()
-            ->map(fn($entry) => [
+            ->map(fn ($entry) => [
                 'id' => $entry->id,
                 'title' => $entry->title,
                 'type' => $entry->type->label(),

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\MediaEntry;
 use App\Http\Requests\StoreMediaEntryRequest;
 use App\Http\Requests\UpdateMediaEntryRequest;
+use App\Models\MediaEntry;
+use App\Services\JikanService;
 
 class MediaEntryController extends Controller
 {
@@ -36,14 +36,14 @@ class MediaEntryController extends Controller
      */
     public function show(MediaEntry $mediaEntry)
     {
-        
+
         if ($mediaEntry->user_id !== auth()->id()) {
             abort(403);
         }
 
         $malData = null;
         if ($mediaEntry->mal_id) {
-            $jikan = app(\App\Services\JikanService::class);
+            $jikan = app(JikanService::class);
             if ($mediaEntry->isAnime()) {
                 $malData = $jikan->getAnime($mediaEntry->mal_id);
             } else {
@@ -65,7 +65,7 @@ class MediaEntryController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => __('Entry updated successfully!'),
-                'entry'   => $mediaEntry
+                'entry' => $mediaEntry,
             ]);
         }
 

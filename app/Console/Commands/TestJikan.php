@@ -1,8 +1,9 @@
 <?php
+
 // app/Console/Commands/TestJikan.php
+
 namespace App\Console\Commands;
 
-use App\Enums\MediaType;
 use App\Services\JikanService;
 use Illuminate\Console\Command;
 
@@ -28,12 +29,14 @@ class TestJikan extends Command
                 ? $jikan->getAnime((int) $malId)
                 : $jikan->getManga((int) $malId);
 
-            if (!$result) {
+            if (! $result) {
                 $this->error('No se encontró resultado.');
+
                 return self::FAILURE;
             }
 
             $this->renderSingle($result);
+
             return self::SUCCESS;
         }
 
@@ -47,6 +50,7 @@ class TestJikan extends Command
 
         if (empty($results)) {
             $this->warn('Sin resultados.');
+
             return self::SUCCESS;
         }
 
@@ -62,7 +66,7 @@ class TestJikan extends Command
 
     private function renderTable(array $results): void
     {
-        $rows = collect($results)->map(fn($r) => [
+        $rows = collect($results)->map(fn ($r) => [
             $r['mal_id'],
             str($r['title'])->limit(40),
             $r['type'] ?? '-',
@@ -80,23 +84,23 @@ class TestJikan extends Command
     private function renderSingle(array $r): void
     {
         $this->newLine();
-        $this->line("<fg=magenta>════════════════════════════════════════</>");
+        $this->line('<fg=magenta>════════════════════════════════════════</>');
         $this->line("<fg=white;options=bold> {$r['title']}</>");
-        $this->line("<fg=magenta>════════════════════════════════════════</>");
+        $this->line('<fg=magenta>════════════════════════════════════════</>');
         $this->line(" <fg=gray>MAL ID:</>       {$r['mal_id']}");
-        $this->line(" <fg=gray>Tipo:</>         " . ($r['type'] ?? '-'));
-        $this->line(" <fg=gray>Estado:</>       " . ($r['status'] ?? '-'));
-        $this->line(" <fg=gray>Score MAL:</>    " . ($r['score'] ?? '-'));
-        $this->line(" <fg=gray>Episodios:</>    " . ($r['total_episodes'] ?? '-'));
-        $this->line(" <fg=gray>Capítulos:</>    " . ($r['total_chapters'] ?? '-'));
-        $this->line(" <fg=gray>Volúmenes:</>    " . ($r['total_volumes'] ?? '-'));
-        $this->line(" <fg=gray>URL MAL:</>      " . ($r['mal_url'] ?? '-'));
-        $this->line(" <fg=gray>Cover:</>        " . ($r['cover_url'] ?? '-'));
+        $this->line(' <fg=gray>Tipo:</>         '.($r['type'] ?? '-'));
+        $this->line(' <fg=gray>Estado:</>       '.($r['status'] ?? '-'));
+        $this->line(' <fg=gray>Score MAL:</>    '.($r['score'] ?? '-'));
+        $this->line(' <fg=gray>Episodios:</>    '.($r['total_episodes'] ?? '-'));
+        $this->line(' <fg=gray>Capítulos:</>    '.($r['total_chapters'] ?? '-'));
+        $this->line(' <fg=gray>Volúmenes:</>    '.($r['total_volumes'] ?? '-'));
+        $this->line(' <fg=gray>URL MAL:</>      '.($r['mal_url'] ?? '-'));
+        $this->line(' <fg=gray>Cover:</>        '.($r['cover_url'] ?? '-'));
 
         if ($r['synopsis']) {
             $this->newLine();
-            $this->line(" <fg=gray>Sinopsis:</>");
-            $this->line(' ' . str($r['synopsis'])->limit(200));
+            $this->line(' <fg=gray>Sinopsis:</>');
+            $this->line(' '.str($r['synopsis'])->limit(200));
         }
 
         $this->newLine();

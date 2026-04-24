@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\V1\MediaEntryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\V1\MediaEntryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +17,7 @@ use App\Http\Controllers\Api\V1\MediaEntryController;
 
 Route::prefix('v1')->group(function () {
     // Public routes (if any)
-    
+
     // Protected routes
     Route::middleware('auth:api')->group(function () {
         Route::get('/user', function (Request $request) {

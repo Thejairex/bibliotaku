@@ -1,5 +1,7 @@
 <?php
+
 // app/Enums/MediaStatus.php
+
 namespace App\Enums;
 
 enum MediaStatus: string

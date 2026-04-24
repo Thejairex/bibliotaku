@@ -2,13 +2,13 @@
 
 namespace Tests\Feature;
 
-use App\Models\User;
-use App\Models\MediaEntry;
-use App\Enums\MediaType;
 use App\Enums\MediaStatus;
+use App\Enums\MediaType;
+use App\Models\MediaEntry;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use Laravel\Passport\Passport;
+use Tests\TestCase;
 
 class ApiTest extends TestCase
 {
@@ -23,7 +23,7 @@ class ApiTest extends TestCase
         $response = $this->getJson('/api/v1/user');
 
         $response->assertStatus(200)
-                 ->assertJson(['email' => $user->email]);
+            ->assertJson(['email' => $user->email]);
     }
 
     public function test_can_create_media_entry_via_api()
@@ -39,7 +39,7 @@ class ApiTest extends TestCase
         ]);
 
         $response->assertStatus(201)
-                 ->assertJsonPath('title', 'Test Anime');
+            ->assertJsonPath('title', 'Test Anime');
 
         $this->assertDatabaseHas('media_entries', [
             'title' => 'Test Anime',

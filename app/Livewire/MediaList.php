@@ -46,13 +46,13 @@ class MediaList extends Component
     {
         $entries = Auth::user()->mediaEntries()
             ->search($this->search)
-            ->when($this->status, fn($q) => $q->where('status', $this->status))
-            ->when($this->type,   fn($q) => $q->where('type', $this->type))
+            ->when($this->status, fn ($q) => $q->where('status', $this->status))
+            ->when($this->type, fn ($q) => $q->where('type', $this->type))
             ->orderByDesc('updated_at')
             ->paginate(20);
 
         return view('livewire.media-list', [
-            'entries'    => $entries,
+            'entries' => $entries,
             'totalCount' => $entries->total(), // ya viene del paginator, 0 queries extra
         ]);
     }

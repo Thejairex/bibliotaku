@@ -2,7 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Enums\MediaStatus;
+use App\Enums\MediaType;
 use App\Models\MediaEntry;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,10 +21,10 @@ class MediaEntryFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => \App\Models\User::factory(),
+            'user_id' => User::factory(),
             'title' => $this->faker->sentence(),
-            'type' => \App\Enums\MediaType::Anime,
-            'status' => \App\Enums\MediaStatus::PlanToWatch,
+            'type' => MediaType::Anime,
+            'status' => MediaStatus::PlanToWatch,
         ];
     }
 }

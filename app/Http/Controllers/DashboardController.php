@@ -33,18 +33,18 @@ class DashboardController extends Controller
 
         // Stats de status armados desde el mapa
         $stats = [
-            'watching'  => (int) ($statusCounts[MediaStatus::Watching->value]   ?? 0)
+            'watching' => (int) ($statusCounts[MediaStatus::Watching->value] ?? 0)
                          + (int) ($statusCounts[MediaStatus::Rewatching->value] ?? 0),
-            'reading'   => (int) ($statusCounts[MediaStatus::Reading->value]    ?? 0),
-            'completed' => (int) ($statusCounts[MediaStatus::Completed->value]  ?? 0),
-            'on_hold'   => (int) ($statusCounts[MediaStatus::OnHold->value]     ?? 0),
+            'reading' => (int) ($statusCounts[MediaStatus::Reading->value] ?? 0),
+            'completed' => (int) ($statusCounts[MediaStatus::Completed->value] ?? 0),
+            'on_hold' => (int) ($statusCounts[MediaStatus::OnHold->value] ?? 0),
         ];
 
         // Type breakdown
-        $animeCount = (int) ($typeCounts[MediaType::Anime->value]   ?? 0);
-        $mangaCount = (int) ($typeCounts[MediaType::Manga->value]   ?? 0)
-                    + (int) ($typeCounts[MediaType::Manhwa->value]  ?? 0)
-                    + (int) ($typeCounts[MediaType::Manhua->value]  ?? 0);
+        $animeCount = (int) ($typeCounts[MediaType::Anime->value] ?? 0);
+        $mangaCount = (int) ($typeCounts[MediaType::Manga->value] ?? 0)
+                    + (int) ($typeCounts[MediaType::Manhwa->value] ?? 0)
+                    + (int) ($typeCounts[MediaType::Manhua->value] ?? 0);
 
         $animePercent = $totalEntries > 0 ? round(($animeCount / $totalEntries) * 100) : 0;
         $mangaPercent = $totalEntries > 0 ? round(($mangaCount / $totalEntries) * 100) : 0;
@@ -70,7 +70,7 @@ class DashboardController extends Controller
             ])
             ->where(function ($q) {
                 $q->whereNotNull('total_episodes')
-                  ->orWhereNotNull('total_chapters');
+                    ->orWhereNotNull('total_chapters');
             })
             ->limit(3)
             ->get();

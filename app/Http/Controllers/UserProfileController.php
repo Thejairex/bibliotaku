@@ -19,16 +19,16 @@ class UserProfileController extends Controller
         $user = Auth::user();
 
         $rules = [
-            'name'  => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
-            'avatar'=> ['nullable', 'url', 'max:2048'],
+            'avatar' => ['nullable', 'url', 'max:2048'],
         ];
 
         $passwordProvided = filled($request->input('password'));
 
         if ($passwordProvided) {
-            $rules['current_password']      = ['required', 'string', 'current_password'];
-            $rules['password']              = ['required', Password::defaults(), 'confirmed'];
+            $rules['current_password'] = ['required', 'string', 'current_password'];
+            $rules['password'] = ['required', Password::defaults(), 'confirmed'];
             $rules['password_confirmation'] = ['required'];
         }
 
@@ -39,8 +39,8 @@ class UserProfileController extends Controller
             $user->email_verified_at = null;
         }
 
-        $user->name   = $validated['name'];
-        $user->email  = $validated['email'];
+        $user->name = $validated['name'];
+        $user->email = $validated['email'];
         $user->avatar = $validated['avatar'] ?? null;
 
         if ($passwordProvided) {

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Http;
 class JikanService
 {
     private string $baseUrl = 'https://api.jikan.moe/v4';
+
     private int $cacheTtl = 300;
 
     public function searchAnime(string $query, int $limit = 10): array
@@ -24,12 +25,12 @@ class JikanService
     public function searchByType(string $type, string $query, int $limit = 10): array
     {
         $malType = match ($type) {
-            'anime'  => null,
-            'manga'  => 'manga',
+            'anime' => null,
+            'manga' => 'manga',
             'manhwa' => 'manhwa',
             'manhua' => 'manhua',
-            'novel'  => 'novel',
-            default  => 'manga',
+            'novel' => 'novel',
+            default => 'manga',
         };
 
         if ($type === 'anime') {
@@ -41,16 +42,16 @@ class JikanService
 
     private function search(string $endpoint, string $query, int $limit, array $extra = []): array
     {
-        $cacheKey = "jikan_{$endpoint}_" . md5($query . serialize($extra));
+        $cacheKey = "jikan_{$endpoint}_".md5($query.serialize($extra));
 
         return Cache::remember($cacheKey, $this->cacheTtl, function () use ($endpoint, $query, $limit, $extra) {
             try {
                 $response = Http::timeout(8)
                     ->retry(2, 500, throw: false)
                     ->get("{$this->baseUrl}/{$endpoint}", array_merge([
-                        'q'     => $query,
+                        'q' => $query,
                         'limit' => $limit,
-                        'sfw'   => 0,
+                        'sfw' => 0,
                     ], $extra));
 
                 if ($response->failed()) {
@@ -58,7 +59,7 @@ class JikanService
                 }
 
                 return collect($response->json('data', []))
-                    ->map(fn($item) => $this->normalize($item, $endpoint))
+                    ->map(fn ($item) => $this->normalize($item, $endpoint))
                     ->values()
                     ->toArray();
 
@@ -109,18 +110,18 @@ class JikanService
         $isAnime = $endpoint === 'anime';
 
         return [
-            'mal_id'         => $item['mal_id'],
-            'title'          => $item['title'] ?? $item['title_english'] ?? '',
+            'mal_id' => $item['mal_id'],
+            'title' => $item['title'] ?? $item['title_english'] ?? '',
             'title_japanese' => $item['title_japanese'] ?? null,
-            'cover_url'      => $item['images']['jpg']['image_url'] ?? null,
-            'type'           => $item['type'] ?? null,
-            'status'         => $item['status'] ?? null,
+            'cover_url' => $item['images']['jpg']['image_url'] ?? null,
+            'type' => $item['type'] ?? null,
+            'status' => $item['status'] ?? null,
             'total_episodes' => $isAnime ? ($item['episodes'] ?? null) : null,
             'total_chapters' => ! $isAnime ? ($item['chapters'] ?? null) : null,
-            'total_volumes'  => ! $isAnime ? ($item['volumes'] ?? null) : null,
-            'score'          => $item['score'] ?? null,
-            'synopsis'       => $item['synopsis'] ?? null,
-            'mal_url'        => $item['url'] ?? null,
+            'total_volumes' => ! $isAnime ? ($item['volumes'] ?? null) : null,
+            'score' => $item['score'] ?? null,
+            'synopsis' => $item['synopsis'] ?? null,
+            'mal_url' => $item['url'] ?? null,
         ];
     }
 }

@@ -28,6 +28,5 @@ class MALResponseDTO
         public readonly string $related,
         public readonly string $opening_theme,
         public readonly string $ending_theme,
-    ) {
-    }
+    ) {}
 }

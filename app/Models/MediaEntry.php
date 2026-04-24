@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\MediaStatus;
 use App\Enums\MediaType;
+use Database\Factories\MediaEntryFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Builder;
@@ -15,7 +16,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 #[Hidden(['user_id', 'mal_id'])]
 class MediaEntry extends Model
 {
-    /** @use HasFactory<\Database\Factories\MediaEntryFactory> */
+    /** @use HasFactory<MediaEntryFactory> */
     use HasFactory;
 
     protected function casts(): array
@@ -99,21 +100,24 @@ class MediaEntry extends Model
         if ($this->isAnime()) {
             $current = $this->current_episode ?? 0;
             $total = $this->total_episodes ? "/{$this->total_episodes}" : '';
+
             return "Ep. {$current}{$total}";
         }
 
         $current = $this->current_chapter ?? 0;
         $total = $this->total_chapters ? "/{$this->total_chapters}" : '';
+
         return "Cap. {$current}{$total}";
     }
 
     public function malUrl(): ?string
     {
-        if (!$this->mal_id) {
+        if (! $this->mal_id) {
             return null;
         }
 
         $path = $this->isAnime() ? 'anime' : 'manga';
+
         return "https://myanimelist.net/{$path}/{$this->mal_id}";
     }
 }
