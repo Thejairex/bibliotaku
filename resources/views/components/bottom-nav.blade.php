@@ -13,12 +13,38 @@
         <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">add_circle</span>
         <span class="mt-1">{{ __('Add') }}</span>
     </button>
-    <a class="flex flex-col items-center justify-center transition-all duration-300 {{ request()->routeIs('profile.edit') ? 'bg-primary/20 text-primary rounded-full px-6 py-2' : 'text-on-surface-variant' }} active:scale-95"
-        href="{{ route('profile.edit') }}">
-        <span class="material-symbols-outlined" {{ request()->routeIs('profile.edit') ? 'style="font-variation-settings:\'FILL\' 1;"' : '' }}>person</span>
-        <span class="mt-1">{{ __('Profile') }}</span>
-    </a>
+    {{-- Profile + logout trigger --}}
+    <div class="relative flex flex-col items-center">
+        <button id="mobileProfileMenu"
+            class="flex flex-col items-center justify-center transition-all duration-300 {{ request()->routeIs('profile', 'profile.edit') ? 'bg-primary/20 text-primary rounded-full px-6 py-2' : 'text-on-surface-variant' }} active:scale-95">
+            <span class="material-symbols-outlined" {{ request()->routeIs('profile', 'profile.edit') ? 'style="font-variation-settings:\'FILL\' 1;"' : '' }}>person</span>
+            <span class="mt-1">{{ __('Profile') }}</span>
+        </button>
+    </div>
 </nav>
+
+{{-- Profile mini menu --}}
+<div id="mobileProfilePopup"
+    class="hidden fixed bottom-28 right-4 z-[150] flex flex-col gap-2 w-48 p-3 bg-surface-container rounded-xl shadow-2xl shadow-black/60">
+    <a href="{{ route('profile') }}"
+        class="flex items-center gap-3 px-4 py-3 rounded-xl bg-surface-container-high hover:bg-surface-variant transition-all text-sm font-bold text-on-surface">
+        <span class="material-symbols-outlined text-[20px] text-on-surface-variant">person</span>
+        {{ __('Profile') }}
+    </a>
+    <a href="{{ route('profile.edit') }}"
+        class="flex items-center gap-3 px-4 py-3 rounded-xl bg-surface-container-high hover:bg-surface-variant transition-all text-sm font-bold text-on-surface">
+        <span class="material-symbols-outlined text-[20px] text-on-surface-variant">settings</span>
+        {{ __('Settings') }}
+    </a>
+    <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <button type="submit"
+            class="flex items-center gap-3 w-full px-4 py-3 rounded-xl bg-surface-container-high hover:bg-error/10 transition-all text-sm font-bold text-error">
+            <span class="material-symbols-outlined text-[20px]">logout</span>
+            {{ __('Log out') }}
+        </button>
+    </form>
+</div>
 
 {{-- Mobile Add Picker --}}
 <div id="mobileAddPicker"
@@ -34,3 +60,20 @@
         {{ __('Search in MAL') }}
     </button>
 </div>
+
+@push('scripts')
+<script>
+    const profileBtn = document.getElementById('mobileProfileMenu');
+    const profilePopup = document.getElementById('mobileProfilePopup');
+
+    profileBtn?.addEventListener('click', () => {
+        profilePopup.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!profileBtn?.contains(e.target) && !profilePopup?.contains(e.target)) {
+            profilePopup?.classList.add('hidden');
+        }
+    });
+</script>
+@endpush
