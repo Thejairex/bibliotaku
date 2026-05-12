@@ -6,15 +6,30 @@ use App\Http\Requests\StoreMediaEntryRequest;
 use App\Http\Requests\UpdateMediaEntryRequest;
 use App\Models\MediaEntry;
 use App\Services\JikanService;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class MediaEntryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('my-list');
+        $filters = $request->only(['status', 'type', 'search']);
+
+        $entries = MediaEntry::forUser(auth()->id())
+            ->when($filters['status'] ?? null, fn ($q, $v) => $q->withStatus($v))
+            ->when($filters['type'] ?? null, fn ($q, $v) => $q->ofType($v))
+            ->when($filters['search'] ?? null, fn ($q, $v) => $q->search($v))
+            ->orderBy('updated_at', 'desc')
+            ->paginate(24)
+            ->withQueryString();
+
+        return Inertia::render('MyList/Index', [
+            'entries' => $entries,
+            'filters' => $filters,
+        ]);
     }
 
     /**
@@ -23,12 +38,12 @@ class MediaEntryController extends Controller
     public function store(StoreMediaEntryRequest $request)
     {
         if (MediaEntry::where('user_id', auth()->id())->where('mal_id', $request->mal_id)->exists()) {
-            return redirect()->route('my-list')->with('error', __('Entry already exists in your archive!'));
+            return back()->with('error', __('Entry already exists in your archive!'));
         }
 
-        auth()->user()->mediaEntries()->create($request->validated());
+        $entry = auth()->user()->mediaEntries()->create($request->validated());
 
-        return redirect()->route('my-list')->with('success', __('Entry added to your archive!'));
+        return back()->with('success', __('Entry added to your archive!'));
     }
 
     /**
@@ -36,7 +51,6 @@ class MediaEntryController extends Controller
      */
     public function show(MediaEntry $mediaEntry)
     {
-
         if ($mediaEntry->user_id !== auth()->id()) {
             abort(403);
         }
@@ -51,7 +65,10 @@ class MediaEntryController extends Controller
             }
         }
 
-        return view('media-details', compact('mediaEntry', 'malData'));
+        return Inertia::render('MyList/Show', [
+            'entry' => $mediaEntry,
+            'malData' => $malData,
+        ]);
     }
 
     /**
@@ -60,14 +77,6 @@ class MediaEntryController extends Controller
     public function update(UpdateMediaEntryRequest $request, MediaEntry $mediaEntry)
     {
         $mediaEntry->update($request->validated());
-
-        if ($request->ajax() || $request->wantsJson()) {
-            return response()->json([
-                'success' => true,
-                'message' => __('Entry updated successfully!'),
-                'entry' => $mediaEntry,
-            ]);
-        }
 
         return back()->with('success', __('Entry updated successfully!'));
     }
@@ -83,6 +92,6 @@ class MediaEntryController extends Controller
 
         $mediaEntry->delete();
 
-        return redirect()->route('my-list.index')->with('success', __('Entry removed from your archive.'));
+        return redirect()->route('my-list')->with('success', __('Entry removed from your archive.'));
     }
 }

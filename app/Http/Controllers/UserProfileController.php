@@ -7,49 +7,62 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
+use Inertia\Inertia;
 
 class UserProfileController extends Controller
 {
     /**
-     * Update the authenticated user's profile information (name, email, avatar).
-     * Optionally also changes the password if provided.
+     * Show the profile settings page.
+     */
+    public function edit()
+    {
+        return Inertia::render('Settings/Profile', [
+            'mustVerifyEmail' => session('status') === 'verification-link-sent',
+            'status' => session('status'),
+        ]);
+    }
+
+    /**
+     * Update the authenticated user's profile information.
      */
     public function update(Request $request)
     {
         $user = Auth::user();
 
-        $rules = [
+        $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'avatar' => ['nullable', 'url', 'max:2048'],
-        ];
+        ]);
 
-        $passwordProvided = filled($request->input('password'));
-
-        if ($passwordProvided) {
-            $rules['current_password'] = ['required', 'string', 'current_password'];
-            $rules['password'] = ['required', Password::defaults(), 'confirmed'];
-            $rules['password_confirmation'] = ['required'];
-        }
-
-        $validated = $request->validate($rules);
-
-        // Update email verification if email changed
         if ($user->email !== $validated['email']) {
             $user->email_verified_at = null;
         }
 
-        $user->name = $validated['name'];
-        $user->email = $validated['email'];
-        $user->avatar = $validated['avatar'] ?? null;
-
-        if ($passwordProvided) {
-            $user->password = Hash::make($validated['password']);
-        }
-
+        $user->fill($validated);
         $user->save();
 
-        return redirect()->route('profile')
-            ->with('success', __('Profile updated successfully!'));
+        return back()->with('success', __('Profile updated successfully!'));
+    }
+
+    /**
+     * Delete the user's account.
+     */
+    public function destroy(Request $request)
+    {
+        $request->validate([
+            'password' => ['required', 'current_password'],
+        ]);
+
+        $user = $request->user();
+
+        Auth::logout();
+
+        $user->delete();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->to('/');
     }
 }

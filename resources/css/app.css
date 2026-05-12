@@ -1,8 +1,7 @@
 @import 'tailwindcss';
-@import '../../vendor/livewire/flux/dist/flux.css';
 
 @source '../views/**/*.blade.php';
-@source '../../app/Livewire/**/*.php';
+@source '../js/**/*.{ts,tsx}';
 
 @custom-variant dark (&:where(.dark, .dark *));
 

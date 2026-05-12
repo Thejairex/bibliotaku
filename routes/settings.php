@@ -1,21 +1,21 @@
 <?php
 
-use App\Livewire\Settings\Appearance;
-use App\Livewire\Settings\Profile;
-use App\Livewire\Settings\Security;
+use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
 
-    Route::livewire('settings/profile', Profile::class)->name('profile.edit');
+    Route::get('settings/profile', [UserProfileController::class, 'edit'])->name('settings.profile');
+    Route::patch('settings/profile', [UserProfileController::class, 'update'])->name('settings.profile.update');
+    Route::delete('settings/profile', [UserProfileController::class, 'destroy'])->name('settings.profile.destroy');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::livewire('settings/appearance', Appearance::class)->name('appearance.edit');
-
-    Route::livewire('settings/security', Security::class)
+    Route::get('settings/appearance', [SettingsController::class, 'appearance'])->name('settings.appearance');
+    Route::get('settings/security', [SettingsController::class, 'security'])
         ->middleware(
             when(
                 Features::canManageTwoFactorAuthentication()
@@ -24,5 +24,5 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 [],
             ),
         )
-        ->name('security.edit');
+        ->name('settings.security');
 });

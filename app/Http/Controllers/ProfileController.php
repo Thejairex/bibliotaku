@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\MediaStatus;
 use App\Enums\MediaType;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class ProfileController extends Controller
 {
@@ -17,12 +18,10 @@ class ProfileController extends Controller
 
         // 1. Core Stats
         $totalMedia = $user->mediaEntries()->count();
-        $meanScore = $user->mediaEntries()->whereNotNull('rating')->avg('rating');
+        $meanScore = (float) $user->mediaEntries()->whereNotNull('rating')->avg('rating');
         $completed = $user->mediaEntries()->where('status', MediaStatus::Completed)->count();
 
         // 2. Days Spent Calculation (Estimated)
-        // Average anime episode: 24 minutes
-        // Average manga chapter: 10 minutes
         $animeMinutes = $user->mediaEntries()
             ->where('type', MediaType::Anime)
             ->sum('current_episode') * 24;
@@ -38,17 +37,17 @@ class ProfileController extends Controller
             'anime' => [
                 'count' => $user->mediaEntries()->where('type', MediaType::Anime)->count(),
                 'percent' => 0,
-                'color' => 'primary',
+                'color' => '#ba9eff', // primary
             ],
             'manga' => [
                 'count' => $user->mediaEntries()->whereIn('type', [MediaType::Manga, MediaType::Manhwa, MediaType::Manhua])->count(),
                 'percent' => 0,
-                'color' => 'secondary',
+                'color' => '#9093ff', // secondary
             ],
             'novel' => [
                 'count' => $user->mediaEntries()->where('type', MediaType::Novel)->count(),
                 'percent' => 0,
-                'color' => 'tertiary',
+                'color' => '#6063ff', // tertiary/variant
             ],
         ];
 
@@ -72,15 +71,25 @@ class ProfileController extends Controller
             ->limit(5)
             ->get();
 
-        return view('profile', compact(
-            'user',
-            'totalMedia',
-            'meanScore',
-            'daysSpent',
-            'completed',
-            'distribution',
-            'recentActivity',
-            'favorites'
-        ));
+        return Inertia::render('Profile/Show', [
+            'profileUser' => $user, // Avoid collision with shared auth.user
+            'stats' => [
+                'totalMedia' => $totalMedia,
+                'meanScore' => round($meanScore, 2),
+                'daysSpent' => $daysSpent,
+                'completed' => $completed,
+            ],
+            'distribution' => array_values($distribution),
+            'recentActivity' => $recentActivity,
+            'favorites' => $favorites
+        ]);
+    }
+
+    /**
+     * Show the profile edit page (Redirects to settings/profile).
+     */
+    public function edit()
+    {
+        return redirect()->route('settings.profile');
     }
 }

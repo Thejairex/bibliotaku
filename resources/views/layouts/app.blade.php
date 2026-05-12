@@ -1,64 +1,40 @@
 <!DOCTYPE html>
 <html class="dark" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
 <head>
     <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>@yield('title', config('app.name', 'Bibliotaku'))</title>
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-    <title>@yield('title', config('app.name', 'The Archive'))</title>
-
-    <!-- Fonts -->
+    <!-- Fonts and Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0&display=block" />
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @livewireStyles
-
+    @viteReactRefresh
+    @vite(['resources/css/app.css', 'resources/js/app.tsx'])
     <style>
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
-
-        .glass-header {
-            background: rgba(10, 10, 10, 0.6);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        .animate-fade-in {
+            animation: fadeIn 0.4s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
     @stack('styles')
 </head>
-
-<body class="bg-surface text-on-surface font-body selection:bg-primary/30 min-h-screen">
-
-    {{-- Sidebar (Desktop) --}}
-    <x-sidebar />
-
-    {{-- TopBar --}}
-    <x-topbar />
-
-    {{-- Main Content --}}
-    <main class="pt-24 pb-32 md:pb-12 px-6 md:pl-72 min-h-screen transition-all duration-300">
-        @yield('content')
-    </main>
-
-    {{-- BottomNav (Mobile) --}}
-    <x-bottom-nav />
-
-    {{-- Add Media Modal (Global) --}}
-    <x-add-entry-modal />
-    <x-edit-entry-modal />
-    @if(request()->routeIs('profile'))
-        <x-edit-profile-modal />
-    @endif
-
-    @livewireScripts
+<body class="bg-background text-on-surface font-body antialiased selection:bg-primary/30 min-h-screen">
+    @inertia
     @stack('scripts')
 </body>
 </html>
