@@ -13,6 +13,30 @@ function getProgress(entry: MediaEntry): number {
     return Math.round(((entry.current_chapter ?? 0) / entry.total_chapters) * 100);
 }
 
+function timeAgo(dateStr: string): string {
+    const diff = Math.floor((Date.now() - new Date(dateStr).getTime()) / 1000);
+    if (diff < 60) return 'hace un momento';
+    if (diff < 3600) { const m = Math.floor(diff / 60); return `hace ${m} ${m === 1 ? 'minuto' : 'minutos'}`; }
+    if (diff < 86400) { const h = Math.floor(diff / 3600); return `hace ${h} ${h === 1 ? 'hora' : 'horas'}`; }
+    if (diff < 604800) { const d = Math.floor(diff / 86400); return `hace ${d} ${d === 1 ? 'día' : 'días'}`; }
+    if (diff < 2592000) { const w = Math.floor(diff / 604800); return `hace ${w} ${w === 1 ? 'semana' : 'semanas'}`; }
+    if (diff < 31536000) { const mo = Math.floor(diff / 2592000); return `hace ${mo} ${mo === 1 ? 'mes' : 'meses'}`; }
+    const y = Math.floor(diff / 31536000); return `hace ${y} ${y === 1 ? 'año' : 'años'}`;
+}
+
+function getProgressData(entry: MediaEntry): { current: number; total: number | null; unit: string; percent: number } {
+    if (entry.type === 'anime') {
+        const current = entry.current_episode ?? 0;
+        const total = entry.total_episodes ?? null;
+        const percent = total ? Math.round((current / total) * 100) : 0;
+        return { current, total, unit: 'ep.', percent };
+    }
+    const current = entry.current_chapter ?? 0;
+    const total = entry.total_chapters ?? null;
+    const percent = total ? Math.round((current / total) * 100) : 0;
+    return { current, total, unit: 'cap.', percent };
+}
+
 const STATUS_LABEL: Record<string, { text: string; color: string }> = {
     watching:   { text: 'VIENDO',  color: 'text-blue-400' },
     rewatching: { text: 'VIENDO',  color: 'text-blue-400' },
@@ -83,40 +107,66 @@ export default function Dashboard({ auth, stats, recent_entries, in_progress_ent
                         <div className="bg-surface-container rounded-3xl border border-outline-variant/5 overflow-hidden">
                             {recent_entries.length > 0 ? (
                                 <div className="divide-y divide-outline-variant/5">
-                                    {recent_entries.map((entry) => (
-                                        <Link
-                                            key={entry.id}
-                                            href={`/my-list/${entry.id}`}
-                                            className="flex items-center gap-4 p-4 hover:bg-surface-container-high transition-all group"
-                                        >
-                                            <div className="size-14 rounded-xl overflow-hidden bg-background flex-shrink-0">
-                                                {entry.cover_url ? (
-                                                    <img src={entry.cover_url} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                                                ) : (
-                                                    <div className="w-full h-full flex items-center justify-center text-on-surface-variant/30">
-                                                        <span className="material-symbols-outlined">image</span>
-                                                    </div>
-                                                )}
-                                            </div>
-                                            <div className="flex-1 min-w-0">
-                                                <h5 className="font-bold text-on-surface truncate group-hover:text-primary transition-colors">
-                                                    {entry.title}
-                                                </h5>
-                                                <div className="flex items-center gap-2 mt-1">
-                                                    <span className="text-[10px] font-black uppercase tracking-tighter text-on-surface-variant">
-                                                        {entry.status.replace('_', ' ')}
-                                                    </span>
-                                                    <span className="size-1 rounded-full bg-outline-variant/30" />
-                                                    <span className="text-[10px] font-bold text-primary italic lowercase tracking-tight">
-                                                        updated {new Date(entry.updated_at).toLocaleDateString()}
-                                                    </span>
+                                    {recent_entries.map((entry) => {
+                                        const { current, total, unit, percent } = getProgressData(entry);
+                                        return (
+                                            <Link
+                                                key={entry.id}
+                                                href={`/my-list/${entry.id}`}
+                                                className="flex items-center gap-4 p-4 hover:bg-surface-container-high transition-all group"
+                                            >
+                                                <div className="size-14 rounded-xl overflow-hidden bg-background flex-shrink-0">
+                                                    {entry.cover_url ? (
+                                                        <img src={entry.cover_url} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                                    ) : (
+                                                        <div className="w-full h-full flex items-center justify-center text-on-surface-variant/30">
+                                                            <span className="material-symbols-outlined">image</span>
+                                                        </div>
+                                                    )}
                                                 </div>
-                                            </div>
-                                            <span className="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0">
-                                                chevron_right
-                                            </span>
-                                        </Link>
-                                    ))}
+                                                <div className="flex-1 min-w-0">
+                                                    <h5 className="font-bold text-on-surface truncate group-hover:text-primary transition-colors">
+                                                        {entry.title}
+                                                    </h5>
+                                                    <div className="flex items-center gap-2 mt-1">
+                                                        <span className="text-[10px] font-black uppercase tracking-tighter text-on-surface-variant">
+                                                            {entry.status.replace('_', ' ')}
+                                                        </span>
+                                                        <span className="size-1 rounded-full bg-outline-variant/30" />
+                                                        <span className="text-[10px] font-black uppercase tracking-tighter text-secondary">
+                                                            {entry.type}
+                                                        </span>
+                                                        <span className="size-1 rounded-full bg-outline-variant/30" />
+                                                        <span className="text-[10px] font-bold text-primary italic lowercase tracking-tight">
+                                                            {timeAgo(entry.updated_at)}
+                                                        </span>
+                                                    </div>
+                                                    {/* Progress bar + label */}
+                                                    <div className="mt-2 space-y-1">
+                                                        <div className="flex items-center justify-between">
+                                                            <span className="text-[10px] font-bold text-on-surface-variant">
+                                                                <span className="text-on-surface">{current}</span>
+                                                                {' / '}
+                                                                <span className="text-on-surface">{total ?? '?'}</span>
+                                                            </span>
+                                                            {total !== null && (
+                                                                <span className="text-[10px] font-black text-primary">{percent}%</span>
+                                                            )}
+                                                        </div>
+                                                        <div className="h-1 rounded-full bg-outline-variant/20 overflow-hidden">
+                                                            <div
+                                                                className="h-full rounded-full bg-gradient-to-r from-primary to-primary-dim transition-all duration-500"
+                                                                style={{ width: `${total !== null ? percent : 0}%` }}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <span className="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0">
+                                                    chevron_right
+                                                </span>
+                                            </Link>
+                                        );
+                                    })}
                                 </div>
                             ) : (
                                 <div className="p-12 text-center">

@@ -24,7 +24,6 @@ export function UserMenu({ className }: { className?: string }) {
                 </div>
                 <div className="hidden lg:flex flex-col text-left">
                     <span className="text-sm font-bold text-on-surface truncate max-w-[120px]">{user.name}</span>
-                    <span className="text-[10px] font-bold text-on-surface-variant uppercase tracking-tighter">Premium Member</span>
                 </div>
                 <span className="material-symbols-outlined text-on-surface-variant group-hover:text-on-surface transition-colors">
                     unfold_more
@@ -44,7 +43,7 @@ export function UserMenu({ className }: { className?: string }) {
                     <div className="px-3 py-2 mb-2">
                         <p className="text-[10px] font-black uppercase tracking-widest text-on-surface-variant/50">Account</p>
                     </div>
-                    
+
                     <Menu.Item>
                         {({ active }) => (
                             <Link

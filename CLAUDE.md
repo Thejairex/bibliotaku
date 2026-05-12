@@ -2,6 +2,10 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Idioma
+
+Responde siempre en español. Los términos técnicos, nombres de archivos e identificadores de código permanecen en su forma original.
+
 ## Stack
 
 - **Backend:** Laravel 13, PHP 8.3+, Laravel Fortify (auth), Laravel Passport (API OAuth)

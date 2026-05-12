@@ -12,7 +12,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     return (
         <div className="min-h-screen bg-background flex text-on-surface font-body selection:bg-primary/30 antialiased">
             {/* Desktop Sidebar */}
-            <Sidebar className="hidden lg:flex fixed inset-y-0 left-0 w-72" />
+            <Sidebar className="hidden lg:flex fixed inset-y-0 left-0 w-62" />
 
             {/* Mobile Drawer Overlay */}
             <MobileDrawer />
