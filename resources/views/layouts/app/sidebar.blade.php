@@ -21,7 +21,7 @@
             <flux:spacer />
 
             <flux:sidebar.nav>
-                <flux:sidebar.form method="post" action="{{ route('logout') }}" class="w-full">
+                <form method="post" action="{{ route('logout') }}" class="w-full">
                     @csrf
                     <flux:sidebar.item
                         as="button"
@@ -31,7 +31,7 @@
                     >
                         {{ __('Log out') }}
                     </flux:sidebar.item>
-                </flux:sidebar.form>
+                </form>
             </flux:sidebar.nav>
 
             <x-desktop-user-menu class="hidden lg:block" :name="auth()->user()->name" />
