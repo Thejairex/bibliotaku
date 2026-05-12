@@ -28,23 +28,35 @@
     {{-- Search Bar --}}
     <div class="max-w-3xl">
         <div class="relative group">
-            <span class="material-symbols-outlined absolute left-6 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-{{ $mode === 'local' ? 'primary' : 'secondary' }} text-2xl transition-colors">search</span>
+            <span @class([
+                'material-symbols-outlined absolute left-6 top-1/2 -translate-y-1/2 text-on-surface-variant transition-colors text-2xl z-10 pointer-events-none',
+                'group-focus-within:text-primary' => $mode === 'local',
+                'group-focus-within:text-secondary' => $mode === 'mal',
+            ])>search</span>
             
             <input
                 wire:model.live.debounce.500ms="query"
-                class="w-full bg-surface-container-high border-none rounded-2xl py-5 pl-16 pr-16 text-lg focus:ring-4 focus:ring-{{ $mode === 'local' ? 'primary' : 'secondary' }}/20 transition-all font-body text-on-surface placeholder:text-on-surface-variant outline-none shadow-xl"
+                @class([
+                    'w-full bg-surface-container-high border-none rounded-2xl py-5 pl-16 pr-16 text-lg transition-all font-body text-on-surface placeholder:text-on-surface-variant outline-none shadow-xl',
+                    'focus:ring-4 focus:ring-primary/20' => $mode === 'local',
+                    'focus:ring-4 focus:ring-secondary/20' => $mode === 'mal',
+                ])
                 placeholder="{{ $mode === 'local' ? __('Search titles in your collection...') : __('Discover new anime & manga on MAL...') }}"
                 type="text"
                 autofocus />
 
             {{-- Loading Spinner --}}
-            <div wire:loading wire:target="query, mode" class="absolute right-6 top-1/2 -translate-y-1/2">
-                <div class="w-6 h-6 border-2 border-{{ $mode === 'local' ? 'primary' : 'secondary' }}/30 border-t-{{ $mode === 'local' ? 'primary' : 'secondary' }} rounded-full animate-spin"></div>
+            <div wire:loading wire:target="query, mode" class="absolute right-6 top-1/2 -translate-y-1/2 z-10">
+                <div @class([
+                    'w-6 h-6 border-2 rounded-full animate-spin',
+                    'border-primary/30 border-t-primary' => $mode === 'local',
+                    'border-secondary/30 border-t-secondary' => $mode === 'mal',
+                ])></div>
             </div>
 
             {{-- Clear Button --}}
             @if($query)
-                <button wire:click="$set('query', '')" class="absolute right-6 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-on-surface transition-colors" wire:loading.remove wire:target="query">
+                <button wire:click="$set('query', '')" class="absolute right-6 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-on-surface transition-colors z-10" wire:loading.remove wire:target="query">
                     <span class="material-symbols-outlined">close</span>
                 </button>
             @endif
@@ -149,8 +161,16 @@
             @endforelse
         @else
             <div class="col-span-full py-32 text-center flex flex-col items-center gap-6">
-                <div class="w-24 h-24 rounded-full bg-{{ $mode === 'local' ? 'primary' : 'secondary' }}/10 flex items-center justify-center">
-                    <span class="material-symbols-outlined text-5xl text-{{ $mode === 'local' ? 'primary' : 'secondary' }}/40">
+                <div @class([
+                    'w-24 h-24 rounded-full flex items-center justify-center',
+                    'bg-primary/10' => $mode === 'local',
+                    'bg-secondary/10' => $mode === 'mal',
+                ])>
+                    <span @class([
+                        'material-symbols-outlined text-5xl',
+                        'text-primary/40' => $mode === 'local',
+                        'text-secondary/40' => $mode === 'mal',
+                    ])>
                         {{ $mode === 'local' ? 'travel_explore' : 'explore' }}
                     </span>
                 </div>
