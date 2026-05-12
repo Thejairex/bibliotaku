@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import '../../vendor/livewire/flux/dist/flux.css';
 
 @source '../views/**/*.blade.php';
 @source '../../app/Livewire/**/*.php';
@@ -78,7 +79,7 @@
     .text-glow {
         text-shadow: 0 0 20px rgba(186, 158, 255, 0.3);
     }
-    
+
     .custom-scrollbar::-webkit-scrollbar {
         width: 4px;
     }
