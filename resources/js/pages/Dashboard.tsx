@@ -1,9 +1,25 @@
 import AppLayout from '@/layouts/AppLayout';
 import { Head, Link } from '@inertiajs/react';
 import { DashboardPageProps } from '@/types/SharedProps';
+import { MediaEntry } from '@/types/MediaEntry';
 import { cn } from '@/lib/utils';
 
-export default function Dashboard({ auth, stats, recent_entries }: DashboardPageProps) {
+function getProgress(entry: MediaEntry): number {
+    if (entry.type === 'anime') {
+        if (!entry.total_episodes || entry.total_episodes === 0) return 0;
+        return Math.round(((entry.current_episode ?? 0) / entry.total_episodes) * 100);
+    }
+    if (!entry.total_chapters || entry.total_chapters === 0) return 0;
+    return Math.round(((entry.current_chapter ?? 0) / entry.total_chapters) * 100);
+}
+
+const STATUS_LABEL: Record<string, { text: string; color: string }> = {
+    watching:   { text: 'VIENDO',  color: 'text-blue-400' },
+    rewatching: { text: 'VIENDO',  color: 'text-blue-400' },
+    reading:    { text: 'LEYENDO', color: 'text-orange-400' },
+};
+
+export default function Dashboard({ auth, stats, recent_entries, in_progress_entries }: DashboardPageProps) {
     const statCards = [
         { label: 'Watching', value: stats.watching, icon: 'visibility', color: 'text-primary' },
         { label: 'Reading', value: stats.reading, icon: 'menu_book', color: 'text-secondary' },
@@ -111,31 +127,103 @@ export default function Dashboard({ auth, stats, recent_entries }: DashboardPage
                         </div>
                     </div>
 
-                    {/* Quick Stats / Achievements Placeholder */}
-                    <div className="space-y-6">
-                        <h3 className="text-xl font-headline font-bold px-2">Completion Rate</h3>
-                        <div className="bg-surface-container rounded-3xl border border-outline-variant/5 p-8 flex flex-col items-center justify-center text-center gap-4">
-                            <div className="relative size-32 flex items-center justify-center">
-                                <svg className="size-full -rotate-90">
-                                    <circle cx="64" cy="64" r="58" className="fill-none stroke-outline-variant/10" strokeWidth="12" />
-                                    <circle
-                                        cx="64"
-                                        cy="64"
-                                        r="58"
-                                        className="fill-none stroke-primary"
-                                        strokeWidth="12"
-                                        strokeDasharray="364.42"
-                                        strokeDashoffset={364.42 - (364.42 * (stats.completed / (stats.total_entries || 1)))}
-                                        strokeLinecap="round"
-                                    />
-                                </svg>
-                                <span className="absolute text-2xl font-black text-on-surface">
-                                    {stats.total_entries > 0 ? Math.round((stats.completed / stats.total_entries) * 100) : 0}%
-                                </span>
+                    {/* Right column */}
+                    <div className="space-y-8">
+                        {/* Completion Rate */}
+                        <div className="space-y-6">
+                            <h3 className="text-xl font-headline font-bold px-2">Completion Rate</h3>
+                            <div className="bg-surface-container rounded-3xl border border-outline-variant/5 p-8 flex flex-col items-center justify-center text-center gap-4">
+                                <div className="relative size-32 flex items-center justify-center">
+                                    <svg className="size-full -rotate-90">
+                                        <circle cx="64" cy="64" r="58" className="fill-none stroke-outline-variant/10" strokeWidth="12" />
+                                        <circle
+                                            cx="64"
+                                            cy="64"
+                                            r="58"
+                                            className="fill-none stroke-primary"
+                                            strokeWidth="12"
+                                            strokeDasharray="364.42"
+                                            strokeDashoffset={364.42 - (364.42 * (stats.completed / (stats.total_entries || 1)))}
+                                            strokeLinecap="round"
+                                        />
+                                    </svg>
+                                    <span className="absolute text-2xl font-black text-on-surface">
+                                        {stats.total_entries > 0 ? Math.round((stats.completed / stats.total_entries) * 100) : 0}%
+                                    </span>
+                                </div>
+                                <div>
+                                    <p className="font-bold text-on-surface italic uppercase tracking-tighter text-sm">Archival Master</p>
+                                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant mt-1">Consistency Level 4</p>
+                                </div>
                             </div>
-                            <div>
-                                <p className="font-bold text-on-surface italic uppercase tracking-tighter text-sm">Archival Master</p>
-                                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant mt-1">Consistency Level 4</p>
+                        </div>
+
+                        {/* In Progress */}
+                        <div className="space-y-6">
+                            <h3 className="text-xl font-headline font-bold px-2">In Progress</h3>
+                            <div className="bg-surface-container rounded-3xl border border-outline-variant/5 p-6 flex flex-col gap-5">
+                                {in_progress_entries.length > 0 ? (
+                                    <>
+                                        <div className="space-y-4">
+                                            {in_progress_entries.map((entry) => {
+                                                const progress = getProgress(entry);
+                                                const circumference = 2 * Math.PI * 20;
+                                                const offset = circumference - (circumference * progress) / 100;
+                                                const statusMeta = STATUS_LABEL[entry.status] ?? { text: entry.status.toUpperCase(), color: 'text-on-surface-variant' };
+
+                                                return (
+                                                    <Link
+                                                        key={entry.id}
+                                                        href={`/my-list/${entry.id}`}
+                                                        className="flex items-center gap-4 group"
+                                                    >
+                                                        {/* Progress ring */}
+                                                        <div className="relative size-12 flex-shrink-0 flex items-center justify-center">
+                                                            <svg className="size-full -rotate-90" viewBox="0 0 48 48">
+                                                                <circle cx="24" cy="24" r="20" className="fill-none stroke-outline-variant/20" strokeWidth="4" />
+                                                                <circle
+                                                                    cx="24"
+                                                                    cy="24"
+                                                                    r="20"
+                                                                    className="fill-none stroke-primary transition-all duration-500"
+                                                                    strokeWidth="4"
+                                                                    strokeDasharray={circumference}
+                                                                    strokeDashoffset={offset}
+                                                                    strokeLinecap="round"
+                                                                />
+                                                            </svg>
+                                                            <span className="absolute text-[10px] font-black text-on-surface">
+                                                                {progress}%
+                                                            </span>
+                                                        </div>
+
+                                                        {/* Info */}
+                                                        <div className="flex-1 min-w-0">
+                                                            <p className="font-bold text-on-surface text-sm truncate group-hover:text-primary transition-colors">
+                                                                {entry.title}
+                                                            </p>
+                                                            <p className={cn('text-[10px] font-black uppercase tracking-widest mt-0.5', statusMeta.color)}>
+                                                                {statusMeta.text}
+                                                            </p>
+                                                        </div>
+                                                    </Link>
+                                                );
+                                            })}
+                                        </div>
+
+                                        <Link
+                                            href="/my-list"
+                                            className="w-full py-3 rounded-full font-bold text-sm text-center text-on-primary bg-gradient-to-r from-primary to-primary-dim hover:opacity-90 transition-opacity shadow-lg shadow-primary/20"
+                                        >
+                                            View Collection
+                                        </Link>
+                                    </>
+                                ) : (
+                                    <div className="py-8 text-center">
+                                        <span className="material-symbols-outlined text-3xl text-on-surface-variant/20 mb-2">play_circle</span>
+                                        <p className="text-on-surface-variant text-xs font-medium">Nothing in progress yet.</p>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>

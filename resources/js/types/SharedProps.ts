@@ -24,6 +24,7 @@ export interface DashboardPageProps extends SharedPageProps {
         reading: number;
     };
     recent_entries: MediaEntry[];
+    in_progress_entries: MediaEntry[];
 }
 
 export interface SearchPageProps extends SharedPageProps {

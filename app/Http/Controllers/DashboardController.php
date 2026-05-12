@@ -37,9 +37,20 @@ class DashboardController extends Controller
             ->limit(5)
             ->get();
 
+        $inProgressEntries = $user->mediaEntries()
+            ->whereIn('status', [
+                MediaStatus::Watching->value,
+                MediaStatus::Rewatching->value,
+                MediaStatus::Reading->value,
+            ])
+            ->orderByDesc('updated_at')
+            ->limit(5)
+            ->get();
+
         return Inertia::render('Dashboard', [
             'stats' => $stats,
             'recent_entries' => $recentEntries,
+            'in_progress_entries' => $inProgressEntries,
         ]);
     }
 }
