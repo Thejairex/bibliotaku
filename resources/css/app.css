@@ -1,14 +1,7 @@
 @import 'tailwindcss';
-@import '../../vendor/livewire/flux/dist/flux.css';
 
-@source '../../app/Livewire/**/*.php';
 @source '../views/**/*.blade.php';
-@source '../../vendor/livewire/flux-pro/stubs/**/*.blade.php';
-@source '../../vendor/livewire/flux/stubs/**/*.blade.php';
-@import '../../vendor/livewire/flux/dist/flux.css';
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../vendor/livewire/flux-pro/stubs/**/*.blade.php';
-@source '../../vendor/livewire/flux/stubs/**/*.blade.php';
+@source '../../app/Livewire/**/*.php';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -55,12 +48,12 @@
 @layer base {
     body {
         @apply bg-background text-on-surface font-body;
-        background-color: #0e0e0e; /* Fallback */
+        background-color: #0e0e0e;
         color: #ffffff;
     }
 
     *, ::after, ::before {
-        border-color: rgba(72, 72, 71, 0.15); /* outline-variant at 15% */
+        border-color: rgba(72, 72, 71, 0.15);
     }
 }
 
@@ -85,18 +78,14 @@
     .text-glow {
         text-shadow: 0 0 20px rgba(186, 158, 255, 0.3);
     }
-}
-
-[data-flux-field]:not(ui-radio, ui-checkbox) {
-    @apply grid gap-2;
-}
-
-[data-flux-label] {
-    @apply !mb-0 !leading-tight;
-}
-
-input:focus[data-flux-control],
-textarea:focus[data-flux-control],
-select:focus[data-flux-control] {
-    @apply outline-hidden ring-2 ring-primary ring-offset-2 ring-offset-background;
+    
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        @apply bg-outline-variant/20 rounded-full;
+    }
 }

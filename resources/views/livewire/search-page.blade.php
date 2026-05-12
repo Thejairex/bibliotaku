@@ -1,6 +1,6 @@
 <div class="space-y-8 animate-fade-in">
     {{-- Header --}}
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-outline-variant/10">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-outline-variant/5">
         <div>
             <span class="text-primary font-bold text-sm tracking-[0.2em] uppercase mb-2 block">{{ __('Global Explorer') }}</span>
             <h2 class="text-4xl md:text-5xl font-headline font-extrabold tracking-tight">
@@ -74,7 +74,7 @@
             @forelse($results as $item)
                 @if($mode === 'local')
                     {{-- Local Result Card --}}
-                    <div class="group relative bg-surface-container rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-outline-variant/10">
+                    <div class="group relative bg-surface-container rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-outline-variant/5">
                         <a href="{{ route('my-list.show', $item->id) }}" class="block aspect-[2/3] overflow-hidden relative">
                             @if($item->cover_url)
                                 <img src="{{ $item->cover_url }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
@@ -107,7 +107,7 @@
                     </div>
                 @else
                     {{-- MAL Result Card --}}
-                    <div class="group relative bg-surface-container rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-outline-variant/10">
+                    <div class="group relative bg-surface-container rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-outline-variant/5">
                         <div class="aspect-[2/3] overflow-hidden relative">
                             @if($item['cover_url'])
                                 <img src="{{ $item['cover_url'] }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
