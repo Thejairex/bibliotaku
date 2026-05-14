@@ -8,10 +8,7 @@ export default defineConfig({
     plugins: [
         laravel({
             input: ['resources/css/app.css', 'resources/js/app.tsx'],
-            refresh: [
-                'resources/views/**/*.blade.php',
-                'app/Livewire/**/*.php',
-            ],
+            refresh: true,
         }),
         tailwindcss(),
         react(),
@@ -20,12 +17,6 @@ export default defineConfig({
         alias: {
             '@': path.resolve(__dirname, './resources/js'),
         },
-    },
-    css: {
-        external: [
-            /^https:\/\/fonts\.googleapis\.com/,
-            /^https:\/\/fonts\.gstatic\.com/,
-        ],
     },
     build: {
         reportCompressedSize: false,
