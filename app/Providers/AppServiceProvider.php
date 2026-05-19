@@ -4,8 +4,11 @@ namespace App\Providers;
 
 use App\Services\JikanService;
 use Carbon\CarbonImmutable;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
@@ -32,6 +35,7 @@ class AppServiceProvider extends ServiceProvider
 
         $this->configurePassport();
         $this->configureDefaults();
+        $this->configureRateLimiters();
     }
 
     /**
@@ -63,5 +67,16 @@ class AppServiceProvider extends ServiceProvider
                 ->uncompromised()
             : null,
         );
+    }
+
+    protected function configureRateLimiters(): void
+    {
+        RateLimiter::for('login', function (Request $request): Limit {
+            return Limit::perMinute(5)->by($request->input('email').'|'.$request->ip());
+        });
+
+        RateLimiter::for('two-factor', function (Request $request): Limit {
+            return Limit::perMinute(5)->by($request->session()->get('login.id'));
+        });
     }
 }

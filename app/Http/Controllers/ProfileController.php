@@ -81,7 +81,7 @@ class ProfileController extends Controller
             ],
             'distribution' => array_values($distribution),
             'recentActivity' => $recentActivity,
-            'favorites' => $favorites
+            'favorites' => $favorites,
         ]);
     }
 
