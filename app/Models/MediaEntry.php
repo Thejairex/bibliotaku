@@ -81,8 +81,8 @@ class MediaEntry extends Model
         }
 
         return $query->where(function (Builder $q) use ($term) {
-            $q->where('title', 'like', "%{$term}%")
-                ->orWhere('original_title', 'like', "%{$term}%");
+            $q->where('title', 'ilike', "%{$term}%")
+                ->orWhere('original_title', 'ilike', "%{$term}%");
         });
     }
 
