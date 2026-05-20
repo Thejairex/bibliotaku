@@ -45,7 +45,8 @@ class MediaImportService
         if ($userId !== null) {
             $existingTitles = MediaEntry::query()
                 ->forUser($userId)
-                ->pluck('current_chapter', DB::raw('LOWER(title)'))
+                ->selectRaw('LOWER(title) as title_key, current_chapter')
+                ->pluck('current_chapter', 'title_key')
                 ->all();
         }
 
