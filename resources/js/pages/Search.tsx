@@ -39,13 +39,13 @@ export default function Search({ query: initialQuery, mode: initialMode }: Searc
                 });
 
                 if (mode === 'local') {
-                    // Search via our Laravel Controller (which we'll update to return JSON or Inertia results)
-                    // For now, let's assume we'll use a fetch to an API route for live local search results
-                    // Or simple Inertia reloads if we want to keep it strictly Inertia
-                    // But for "live" feel, a fetch is better.
-                    const response = await fetch(`/api/v1/media-entries?search=${query}`);
+                    const response = await fetch(`/search/query?q=${encodeURIComponent(query)}&limit=24`, {
+                        headers: { Accept: 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
+                        credentials: 'same-origin',
+                        signal: controller.signal,
+                    });
                     const data = await response.json();
-                    setResults(data.data || []);
+                    setResults(data.results || []);
                 } else {
                     // Search via Jikan (MAL)
                     const response = await fetch(`https://api.jikan.moe/v4/anime?q=${query}&limit=24&sfw=true`);

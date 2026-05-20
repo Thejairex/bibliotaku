@@ -14,6 +14,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('profile', [ProfileController::class, 'show'])->name('profile');
     Route::patch('profile/update', [UserProfileController::class, 'update'])->name('profile.update');
     Route::get('search', [SearchController::class, 'index'])->name('search');
+    Route::get('search/query', [SearchController::class, 'search'])->name('search.query');
 
     Route::resource('my-list', MediaEntryController::class)->names([
         'index' => 'my-list',

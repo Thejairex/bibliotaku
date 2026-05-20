@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "skills": {
+    "laravel:e2e-playwright": {
+      "source": "jpcaparas/superpowers-laravel",
+      "sourceType": "github",
+      "skillPath": "skills/e2e-playwright/SKILL.md",
+      "computedHash": "4db3713e04329b371383b9bdc7c56c8c129338fb3282e74589c6e32e5acb605d"
+    },
+    "webapp-testing": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/webapp-testing/SKILL.md",
+      "computedHash": "3f14af7f5690695209c22fbf8c8d133769a86d64892602c09bb13f135e14e857"
+    }
+  }
+}
