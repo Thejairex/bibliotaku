@@ -162,13 +162,22 @@ export default function MyListIndex({ entries, filters }: MyListPageProps) {
                             {entries.total} {entries.total === 1 ? 'entry' : 'entries'} in your collection
                         </p>
                     </div>
-                    <Link
-                        href="/search"
-                        className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-on-primary rounded-xl font-bold text-sm hover:bg-primary/90 transition-colors"
-                    >
-                        <span className="material-symbols-outlined text-[18px]">add</span>
-                        Add Entry
-                    </Link>
+                    <div className="flex items-center gap-2">
+                        <Link
+                            href="/my-list/import"
+                            className="inline-flex items-center gap-2 px-5 py-2.5 bg-surface-container text-on-surface rounded-xl font-bold text-sm hover:bg-surface-container-highest transition-colors"
+                        >
+                            <span className="material-symbols-outlined text-[18px]">upload_file</span>
+                            Importar JSON
+                        </Link>
+                        <Link
+                            href="/search"
+                            className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-on-primary rounded-xl font-bold text-sm hover:bg-primary/90 transition-colors"
+                        >
+                            <span className="material-symbols-outlined text-[18px]">add</span>
+                            Add Entry
+                        </Link>
+                    </div>
                 </div>
 
                 {/* Filters Bar */}
