@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline": "#948e9c",
+                    "on-primary": "#391b77",
+                    "surface-bright": "#3a3939",
+                    "primary-fixed-dim": "#d0bcff",
+                    "primary": "#d3bfff",
+                    "on-background": "#e5e2e1",
+                    "error-container": "#93000a",
+                    "on-secondary": "#382759",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "background": "#131313",
+                    "tertiary-container": "#adaeae",
+                    "on-secondary-fixed": "#231043",
+                    "on-surface-variant": "#cbc4d3",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "on-error-container": "#ffdad6",
+                    "surface-tint": "#d0bcff",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "inverse-surface": "#e5e2e1",
+                    "tertiary-fixed": "#e2e2e2",
+                    "on-surface": "#e5e2e1",
+                    "surface-container-low": "#1c1b1b",
+                    "secondary": "#d3bcf9",
+                    "on-secondary-container": "#c1abe7",
+                    "surface-container-lowest": "#0e0e0e",
+                    "tertiary": "#c9c9c9",
+                    "secondary-fixed": "#ebdcff",
+                    "on-tertiary-container": "#404242",
+                    "on-primary-fixed-variant": "#50358f",
+                    "surface-container-highest": "#353534",
+                    "on-error": "#690005",
+                    "inverse-primary": "#684ea8",
+                    "surface": "#131313",
+                    "secondary-container": "#4f3d71",
+                    "on-secondary-container": "#c1abe7",
+                    "surface-container-lowest": "#0e0e0e",
+                    "tertiary": "#c9c9c9",
+                    "secondary-fixed": "#ebdcff",
+                    "on-tertiary-container": "#404242",
+                    "on-primary-fixed-variant": "#50358f",
+                    "surface-container-highest": "#353534",
+                    "on-error": "#690005",
+                    "inverse-primary": "#684ea8",
+                    "surface": "#131313",
+                    "secondary-container": "#4f3d71",
+                    "on-primary-container": "#4b2f89",
+                    "surface-dim": "#131313",
+                    "error": "#ffb4ab",
+                    "secondary-fixed-dim": "#d3bcf9",
+                    "inverse-on-surface": "#313030",
+                    "surface-variant": "#353534",
+                    "primary-container": "#ba9eff",
+                    "surface-container": "#201f1f",
+                    "on-secondary-fixed-variant": "#4f3d71",
+                    "on-primary-fixed": "#23005c",
+                    "surface-container-high": "#2a2a2a",
+                    "on-tertiary": "#2f3131",
+                    "outline-variant": "#494551",
+                    "primary-fixed": "#e9ddff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "1rem",
+                    "margin-mobile": "1rem",
+                    "max-width": "1200px",
+                    "xl": "2.5rem",
+                    "gutter": "1.5rem",
+                    "lg": "1.5rem",
+                    "xs": "0.25rem",
+                    "margin-desktop": "4rem",
+                    "sm": "0.5rem"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Manrope"],
+                    "body-lg": ["Inter"],
+                    "headline-lg": ["Manrope"],
+                    "display-lg": ["Manrope"],
+                    "body-md": ["Inter"],
+                    "label-md": ["Inter"],
+                    "title-md": ["Manrope"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "title-md": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0e0e0e;
+            color: #e5e2e1;
+            overflow-x: hidden;
+        }
+        .violet-gradient {
+            background: linear-gradient(135deg, #ba9eff 0%, #d3bfff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .violet-btn-gradient {
+            background: linear-gradient(135deg, #ba9eff 0%, #d3bfff 100%);
+        }
+        .radial-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(186, 158, 255, 0.1) 0%, rgba(186, 158, 255, 0) 70%);
+            filter: blur(80px);
+            z-index: -1;
+            pointer-events: none;
+        }
+        .card-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(-2deg); }
+            50% { transform: translateY(-20px) rotate(1deg); }
+        }
+        .card-float-delayed {
+            animation: float-delayed 8s ease-in-out infinite;
+        }
+        @keyframes float-delayed {
+            0%, 100% { transform: translateY(0px) rotate(3deg); }
+            50% { transform: translateY(-15px) rotate(-1deg); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+<!-- Ambient Atmosphere -->
+<div class="radial-glow top-[-200px] left-[-100px]"></div>
+<div class="radial-glow bottom-[-100px] right-[-100px]"></div>
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full bg-background/80 backdrop-blur-xl z-50 flex justify-between items-center px-margin-desktop py-md max-w-max-width mx-auto">
+<div class="font-display-lg text-display-lg font-extrabold text-primary">Bibliotaku</div>
+<nav class="hidden md:flex gap-xl items-center">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-title-md text-title-md transition-colors duration-300" href="#">Home</a>
+<a class="text-on-surface-variant font-medium font-title-md text-title-md hover:text-primary transition-colors duration-300" href="#">Features</a>
+</nav>
+<div class="flex items-center gap-lg">
+<button class="text-on-surface-variant font-medium font-body-md text-body-md opacity-80 hover:opacity-100 transition-opacity active:scale-95">Sign In</button>
+<button class="violet-btn-gradient text-on-primary font-bold px-lg py-sm rounded-full font-body-md text-body-md shadow-lg active:scale-95 transition-transform">Get Started</button>
+</div>
+</header>
+<!-- Hero Section -->
+<main class="relative pt-32 pb-xl px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto min-h-screen flex flex-col md:flex-row items-center gap-xl overflow-visible">
+<!-- Left Side: Content -->
+<div class="flex-1 space-y-lg z-10 text-center md:text-left">
+<div class="inline-block px-md py-xs rounded-full bg-secondary-container/30 border border-primary/20">
+<span class="font-label-md text-label-md text-primary tracking-widest uppercase">TU BITÁCORA OTAKU</span>
+</div>
+<h1 class="font-display-lg text-[64px] md:text-[96px] font-extrabold leading-[0.9] tracking-tighter text-on-surface">
+                EVERY STORY,<br/>
+<span class="violet-gradient uppercase">LOGGED.</span>
+</h1>
+<p class="font-body-lg text-body-lg text-tertiary-container max-w-xl">
+                Anime, manga, manhwa, manhua y novelas. Una sola bitácora que recuerda dónde quedaste — y todo lo que ya terminaste.
+            </p>
+<div class="flex flex-col sm:flex-row gap-md pt-md justify-center md:justify-start">
+<button class="violet-btn-gradient text-on-primary font-bold px-xl py-md rounded-full font-title-md text-title-md shadow-xl hover:brightness-110 active:scale-95 transition-all">
+                    Abrir mi bitácora
+                </button>
+<button class="bg-surface-container-high text-on-surface font-semibold px-xl py-md rounded-full font-title-md text-title-md hover:bg-surface-variant active:scale-95 transition-all">
+                    Iniciar sesión
+                </button>
+</div>
+</div>
+<!-- Right Side: Floating Visuals -->
+<div class="flex-1 relative w-full h-[500px] md:h-[600px] flex justify-center items-center">
+<!-- Card 1 (Bottom) -->
+<div class="card-float-delayed absolute left-[5%] top-[10%] w-[260px] bg-surface-container-lowest p-sm rounded-xl shadow-[0px_40px_80px_rgba(0,0,0,0.5)] z-0 rotate-[6deg]">
+<img alt="Manga cover placeholder" class="w-full h-48 object-cover rounded-lg mb-sm" data-alt="A cinematic, high-contrast close-up of a manga book cover featuring a dramatic character illustration. The artwork is stylized with deep purples and electric violet lighting, fitting a dark editorial diary aesthetic. The cover shows a lone figure under a digital moonlight, reflecting a premium and intimate reading experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6KtBfyQ6nRaIYAd7EWh15XzhmId_pqRbXIl9Z6nug4zLF-Oq81ExMDWsCQy9-67zethWnNEPeD_sfocXave8_qJmSdxMKxucwwGw8UsSsmAy_O8Nnaob2GjS9VU2pDMNtjKGIWFppJHwzmsiCwrd4M29s_Mgi-GoCg20co1u75nGvu5jTjIIaxUgeWVzy11LlrmcdlEwfAE7OgU93TPqX3Xhr14fCS2La3fhamrG0ImGxuFQkqz4ijtrkJhNyYWN6bMui5GAUsNQA"/>
+<div class="px-xs space-y-xs">
+<h4 class="font-title-md text-on-surface truncate">Solo Leveling</h4>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="h-full violet-btn-gradient w-[85%]"></div>
+</div>
+<p class="font-label-md text-on-surface-variant">Cap. 147 / 179</p>
+</div>
+</div>
+<!-- Card 2 (Middle) -->
+<div class="card-float absolute right-[10%] top-[25%] w-[280px] bg-surface-container-lowest p-sm rounded-xl shadow-[0px_60px_100px_rgba(0,0,0,0.7)] z-20 -rotate-[4deg]">
+<img alt="Novel cover placeholder" class="w-full h-56 object-cover rounded-lg mb-sm" data-alt="An atmospheric book cover for a dark fantasy light novel. The cover art displays an intricate celestial clockwork design against an obsidian night sky, illuminated by soft violet and silver glows. The photography style is editorial and sophisticated, evoking a sense of a private digital library collection." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtNj-RkbtPczDvilQtjoOpWCJXjItS5FnU0Jgi9ONEkdiBZHSS57P_Rxf0pKRiIRm8WgxmsFdwb5Al8mkU-xA3L-kE1lf3bfmUVzWMJiBzCKJpQkz3_tL_grcs2tQ4jutBI2WJf-uMva7xxjb6R1dSY5ohOIdbC9pSAMbjxI_GZwO7_roTLeHk5tpE7j1aTyJIumfv02aQ9OkQOV0upY95_2nW5cm1gLrlTbVxmSXOnOB6xZ0oCnpIP39C8fR5ooMdlPP0pJl8UTDO"/>
+<div class="px-xs space-y-xs">
+<h4 class="font-title-md text-on-surface truncate">The Beginning After The End</h4>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="h-full violet-btn-gradient w-[40%]"></div>
+</div>
+<p class="font-label-md text-on-surface-variant">Vol. 4 / 10</p>
+</div>
+</div>
+<!-- Card 3 (Top) -->
+<div class="card-float-delayed absolute left-[20%] bottom-[5%] w-[240px] bg-surface-container-lowest p-sm rounded-xl shadow-[0px_40px_90px_rgba(0,0,0,0.6)] z-30 rotate-[8deg]">
+<img alt="Anime series placeholder" class="w-full h-40 object-cover rounded-lg mb-sm" data-alt="A vibrant and cinematic anime key visual with high-end digital art style. The scene depicts a futuristic Tokyo cityscape drenched in violet neon lights and soft rain. The focus is on a single aesthetic detail that captures the mood of a late-night binge-watching session, keeping with the editorial diary theme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZavnhYrGS-USA8NeFik7SHXjHKAY9j1BCK1S64zRl3MqkNAzilgnopNyrwtXbXnROp7p6NOnyAZIW3vQXRaZnLFThE7_-ErAnQ1sIWqjx86LwS1AoqD8e_8aSV84r5vyVS9MMJr_FtXBpifJKoV4HftkUd5QN37jUL1sr8DSV6_eTuhXe2I9tWAaam99WGXb1qqBqmRV0T-Or-GHTG2DfpgKVnh17gKlGfz3hq7uccg0tA12zMgaypdKx4vX23QGoy1eL0NW_9NNm"/>
+<div class="px-xs space-y-xs">
+<h4 class="font-title-md text-on-surface truncate">Cyberpunk Edgerunners</h4>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="h-full violet-btn-gradient w-[100%]"></div>
+</div>
+<div class="flex justify-between items-center">
+<p class="font-label-md text-on-surface-variant">Ep. 10 / 10</p>
+<span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+</div>
+<!-- Atmospheric Halo -->
+<div class="absolute w-[120%] h-[120%] bg-primary/5 rounded-full blur-[120px] -z-10 animate-pulse"></div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-xl bg-surface-container-lowest mt-xl">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop w-full max-w-max-width mx-auto gap-md">
+<div class="text-center md:text-left">
+<div class="font-headline-lg text-headline-lg font-bold text-on-surface mb-2">Bibliotaku</div>
+<p class="font-body-md text-body-md text-on-surface-variant opacity-80">© 2024 Bibliotaku. A Cinematic Editorial Diary.</p>
+</div>
+<nav class="flex gap-lg">
+<a class="text-on-surface-variant hover:text-on-surface transition-opacity font-body-md text-body-md" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-opacity font-body-md text-body-md" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-opacity font-body-md text-body-md" href="#">Contact</a>
+</nav>
+</div>
+</footer>
+<script>
+        // Micro-interaction for cards on mouse move
+        document.addEventListener('mousemove', (e) => {
+            const cards = document.querySelectorAll('.card-float, .card-float-delayed');
+            const x = (window.innerWidth / 2 - e.pageX) / 50;
+            const y = (window.innerHeight / 2 - e.pageY) / 50;
+            
+            cards.forEach(card => {
+                card.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+    </script>
+</body></html>
