@@ -37,11 +37,15 @@ class MediaEntryController extends Controller
      */
     public function store(StoreMediaEntryRequest $request)
     {
-        if (MediaEntry::where('user_id', auth()->id())->where('mal_id', $request->mal_id)->exists()) {
-            return back()->with('error', __('Entry already exists in your archive!'));
+        if ($request->mal_id && MediaEntry::where('user_id', auth()->id())->where('mal_id', $request->mal_id)->exists()) {
+            return back()->withErrors(['mal_id' => __('Entry already exists in your archive!')]);
         }
 
-        $entry = auth()->user()->mediaEntries()->create($request->validated());
+        if ($request->nukan_slug && MediaEntry::where('user_id', auth()->id())->where('nukan_slug', $request->nukan_slug)->exists()) {
+            return back()->withErrors(['nukan_slug' => __('Entry already exists in your archive!')]);
+        }
+
+        auth()->user()->mediaEntries()->create($request->validated());
 
         return back()->with('success', __('Entry added to your archive!'));
     }

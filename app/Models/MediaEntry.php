@@ -12,8 +12,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-#[Fillable(['user_id', 'title', 'original_title', 'type', 'cover_url', 'mal_id', 'status', 'current_episode', 'total_episodes', 'current_chapter', 'total_chapters', 'current_volume', 'total_volumes', 'rating', 'notes'])]
-#[Hidden(['user_id', 'mal_id'])]
+#[Fillable(['user_id', 'title', 'original_title', 'type', 'cover_url', 'mal_id', 'nukan_slug', 'status', 'current_episode', 'total_episodes', 'current_chapter', 'total_chapters', 'current_volume', 'total_volumes', 'rating', 'notes'])]
+#[Hidden(['user_id', 'mal_id', 'nukan_slug'])]
 class MediaEntry extends Model
 {
     /** @use HasFactory<MediaEntryFactory> */

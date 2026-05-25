@@ -30,6 +30,18 @@ export function SearchModeToggle() {
                 <span className="material-symbols-outlined text-[16px]">public</span>
                 MyAnimeList
             </button>
+            <button
+                onClick={() => setMode('nukan')}
+                className={cn(
+                    "px-6 py-2.5 rounded-full text-[11px] font-black uppercase tracking-widest transition-all flex items-center gap-2",
+                    mode === 'nukan'
+                        ? "bg-[#4ade80] text-black shadow-lg shadow-[#4ade80]/20 scale-[1.02]"
+                        : "text-on-surface-variant hover:text-on-surface"
+                )}
+            >
+                <span className="material-symbols-outlined text-[16px]">auto_stories</span>
+                NovelUpdates
+            </button>
         </div>
     );
 }

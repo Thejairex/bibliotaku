@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-export type SearchMode = 'local' | 'mal';
+export type SearchMode = 'local' | 'mal' | 'nukan';
 
 interface SearchState {
     query: string;

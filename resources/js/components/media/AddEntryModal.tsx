@@ -6,11 +6,13 @@ import { cn } from '@/lib/utils';
 import { useToastStore } from '@/stores/useToastStore';
 
 export interface MALItem {
-    mal_id: number;
+    mal_id?: number;
+    nukan_slug?: string;
     title: string;
     cover_url?: string;
     type?: string;
     score?: number;
+    total_chapters?: number;
 }
 
 interface Props {
@@ -27,9 +29,10 @@ const STATUS_OPTIONS = [
     { value: MediaStatus.Dropped, label: 'Dropped' },
 ];
 
-function inferType(malType?: string): MediaType {
-    if (!malType) return MediaType.Anime;
-    const t = malType.toLowerCase();
+function inferType(item: MALItem): MediaType {
+    if (item.nukan_slug) return MediaType.Novel;
+    if (!item.type) return MediaType.Anime;
+    const t = item.type.toLowerCase();
     if (t === 'manga') return MediaType.Manga;
     if (t === 'manhwa') return MediaType.Manhwa;
     if (t === 'manhua') return MediaType.Manhua;
@@ -41,7 +44,7 @@ const inputClass = "w-full px-3 py-2.5 bg-surface-container-highest rounded-xl t
 
 export function AddEntryModal({ item, onClose }: Props) {
     const { addToast } = useToastStore();
-    const detectedType = inferType(item.type);
+    const detectedType = inferType(item);
     const usesEpisodes = detectedType === MediaType.Anime;
 
     const { data, setData, post, processing, errors } = useForm({
@@ -50,11 +53,12 @@ export function AddEntryModal({ item, onClose }: Props) {
         type: detectedType,
         status: MediaStatus.PlanToWatch,
         cover_url: item.cover_url ?? '',
-        mal_id: item.mal_id,
+        mal_id: item.mal_id ?? null,
+        nukan_slug: item.nukan_slug ?? '',
         current_episode: 0,
         total_episodes: 0,
         current_chapter: 0,
-        total_chapters: 0,
+        total_chapters: item.total_chapters ?? 0,
         current_volume: 0,
         total_volumes: 0,
         rating: '' as number | '',
@@ -70,7 +74,7 @@ export function AddEntryModal({ item, onClose }: Props) {
                 onClose();
             },
             onError: (errs) => {
-                if (errs.mal_id) {
+                if (errs.mal_id || errs.nukan_slug) {
                     addToast('error', 'This entry is already in your archive.');
                     onClose();
                 }

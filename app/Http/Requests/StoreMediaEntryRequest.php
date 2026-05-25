@@ -29,6 +29,7 @@ class StoreMediaEntryRequest extends FormRequest
             'status' => 'required|string|in:watching,rewatching,reading,completed,on_hold,dropped,plan_to_watch',
             'cover_url' => 'nullable|url|max:2048',
             'mal_id' => 'nullable|integer|min:1',
+            'nukan_slug' => 'nullable|string|max:255',
             'current_episode' => 'nullable|integer|min:0',
             'total_episodes' => 'nullable|integer|min:0',
             'current_chapter' => 'nullable|integer|min:0',

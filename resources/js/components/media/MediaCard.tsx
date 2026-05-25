@@ -11,17 +11,30 @@ interface MediaCardProps {
 
 export function MediaCard({ item, mode }: MediaCardProps) {
     const isLocal = mode === 'local';
+    const isNukan = mode === 'nukan';
     const [addingItem, setAddingItem] = useState<MALItem | null>(null);
 
     function handleAddClick() {
-        setAddingItem({
-            mal_id: item.mal_id,
-            title: item.title,
-            cover_url: item.cover_url,
-            type: item.type,
-            score: item.score,
-        });
+        if (isNukan) {
+            setAddingItem({
+                nukan_slug: item.slug,
+                title: item.title,
+                cover_url: item.cover_url,
+                type: 'novel',
+                total_chapters: item.chapter_count,
+            });
+        } else {
+            setAddingItem({
+                mal_id: item.mal_id,
+                title: item.title,
+                cover_url: item.cover_url,
+                type: item.type,
+                score: item.score,
+            });
+        }
     }
+
+    const externalScore = isNukan ? item.rating : item.score;
 
     return (
         <>
@@ -50,10 +63,13 @@ export function MediaCard({ item, mode }: MediaCardProps) {
                             <span className="bg-black/60 backdrop-blur-md text-[9px] font-black uppercase tracking-[0.2em] text-white px-2.5 py-1.5 rounded-lg border border-white/5">
                                 {item.status.replace('_', ' ')}
                             </span>
-                        ) : item.score && (
-                            <span className="bg-secondary/90 backdrop-blur-md text-[9px] font-black text-on-secondary px-2.5 py-1.5 rounded-lg flex items-center gap-1 shadow-lg">
+                        ) : externalScore && (
+                            <span className={cn(
+                                "backdrop-blur-md text-[9px] font-black px-2.5 py-1.5 rounded-lg flex items-center gap-1 shadow-lg",
+                                isNukan ? "bg-[#4ade80]/90 text-black" : "bg-secondary/90 text-on-secondary"
+                            )}>
                                 <span className="material-symbols-outlined text-[12px]" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                                {item.score}
+                                {externalScore}
                             </span>
                         )}
                     </div>
@@ -63,7 +79,10 @@ export function MediaCard({ item, mode }: MediaCardProps) {
                         <div className="absolute inset-x-4 bottom-4 translate-y-full group-hover:translate-y-0 transition-all duration-500 z-10">
                             <button
                                 onClick={handleAddClick}
-                                className="w-full py-3.5 bg-secondary text-on-secondary rounded-xl font-bold text-[10px] uppercase tracking-[0.2em] shadow-2xl flex items-center justify-center gap-2 hover:bg-white hover:text-black transition-all active:scale-95"
+                                className={cn(
+                                    "w-full py-3.5 rounded-xl font-bold text-[10px] uppercase tracking-[0.2em] shadow-2xl flex items-center justify-center gap-2 hover:bg-white hover:text-black transition-all active:scale-95",
+                                    isNukan ? "bg-[#4ade80] text-black" : "bg-secondary text-on-secondary"
+                                )}
                             >
                                 <span className="material-symbols-outlined text-[16px]">add_circle</span>
                                 Add to Archive
@@ -84,7 +103,7 @@ export function MediaCard({ item, mode }: MediaCardProps) {
 
                     <div className="flex items-center justify-between">
                         <span className="text-[10px] font-black text-on-surface-variant uppercase tracking-[0.15em]">
-                            {item.type}
+                            {isNukan ? `${item.origin ?? ''} Novel` : item.type}
                         </span>
 
                         {isLocal && item.rating && (
@@ -92,6 +111,12 @@ export function MediaCard({ item, mode }: MediaCardProps) {
                                 <span className="material-symbols-outlined text-[14px]" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
                                 <span className="text-[10px] font-black">{item.rating}</span>
                             </div>
+                        )}
+
+                        {isNukan && item.chapter_count && (
+                            <span className="text-[10px] font-black text-on-surface-variant">
+                                {item.chapter_count} ch
+                            </span>
                         )}
                     </div>
                 </div>

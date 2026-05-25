@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MediaEntry;
+use App\Services\NukanServices;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -40,5 +41,17 @@ class SearchController extends Controller
         return response()->json([
             'results' => $results,
         ]);
+    }
+
+    public function nukan(Request $request, NukanServices $nukan): JsonResponse
+    {
+        $validated = $request->validate([
+            'q' => ['required', 'string', 'min:2', 'max:255'],
+            'page' => ['nullable', 'integer', 'min:1'],
+        ]);
+
+        $data = $nukan->search($validated['q'], $validated['page'] ?? 1);
+
+        return response()->json($data);
     }
 }

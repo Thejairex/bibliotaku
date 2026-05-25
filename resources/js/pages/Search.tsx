@@ -25,17 +25,17 @@ export default function Search({ query: initialQuery, mode: initialMode }: Searc
         }
 
         const controller = new AbortController();
-        
+
         const performSearch = async () => {
             setLoading(true);
             setError(null);
 
             try {
                 // Update URL without reloading
-                router.get(window.location.pathname, { q: query, mode }, { 
-                    preserveState: true, 
+                router.get(window.location.pathname, { q: query, mode }, {
+                    preserveState: true,
                     preserveScroll: true,
-                    replace: true 
+                    replace: true
                 });
 
                 if (mode === 'local') {
@@ -46,6 +46,24 @@ export default function Search({ query: initialQuery, mode: initialMode }: Searc
                     });
                     const data = await response.json();
                     setResults(data.results || []);
+                } else if (mode === 'nukan') {
+                    const response = await fetch(`/search/nukan?q=${encodeURIComponent(query)}`, {
+                        headers: { Accept: 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
+                        credentials: 'same-origin',
+                        signal: controller.signal,
+                    });
+                    const data = await response.json();
+                    setResults((data.results ?? []).map((item: any) => ({
+                        slug: item.slug,
+                        title: item.title,
+                        cover_url: item.cover_url,
+                        type: 'novel',
+                        rating: item.rating,
+                        series_url: item.series_url,
+                        chapter_count: item.chapter_count,
+                        genres: item.genres,
+                        origin: item.origin,
+                    })));
                 } else {
                     // Search via Jikan (MAL)
                     const response = await fetch(`https://api.jikan.moe/v4/anime?q=${query}&limit=24&sfw=true`);
@@ -73,6 +91,12 @@ export default function Search({ query: initialQuery, mode: initialMode }: Searc
         };
     }, [query, mode]);
 
+    const heroDescription = () => {
+        if (mode === 'local') return 'Search through your curated digital archive. Instantly filter by title, status or rating.';
+        if (mode === 'nukan') return 'Discover light novels and web novels from NovelUpdates. Add them directly to your archive.';
+        return 'Dive into the MyAnimeList database. Discover over 20,000 anime and manga titles.';
+    };
+
     return (
         <AppLayout>
             <Head title="Search" />
@@ -90,9 +114,7 @@ export default function Search({ query: initialQuery, mode: initialMode }: Searc
                                 Find your next <span className="text-primary italic">obsession.</span>
                             </h1>
                             <p className="text-on-surface-variant text-base md:text-xl leading-relaxed mb-10 max-w-2xl font-medium">
-                                {mode === 'local'
-                                    ? 'Search through your curated digital archive. Instantly filter by title, status or rating.'
-                                    : 'Dive into the MyAnimeList database. Discover over 20,000 anime and manga titles.'}
+                                {heroDescription()}
                             </p>
 
                             <SearchBar />

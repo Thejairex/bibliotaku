@@ -16,6 +16,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('profile/update', [UserProfileController::class, 'update'])->name('profile.update');
     Route::get('search', [SearchController::class, 'index'])->name('search');
     Route::get('search/query', [SearchController::class, 'search'])->name('search.query');
+    Route::get('search/nukan', [SearchController::class, 'nukan'])->name('search.nukan');
 
     Route::get('my-list/import', [MediaImportController::class, 'create'])->name('my-list.import.create');
     Route::post('my-list/import/parse', [MediaImportController::class, 'parse'])->name('my-list.import.parse');
