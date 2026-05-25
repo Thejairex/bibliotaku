@@ -34,5 +34,8 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
+    'nukan' => [
+        'api_url' => env('NUKAN_API_URL'),
+    ],
 
 ];

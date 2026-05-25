@@ -1,0 +1,293 @@
+{
+    "info": {
+        "title": "Nukan API",
+        "version": "1.0.0",
+        "description": "API para búsqueda de novelas."
+    },
+    "paths": {
+        "/search": {
+            "get": {
+                "summary": "Buscar novelas",
+                "description": "Busca novelas según un texto de búsqueda.",
+                "parameters": [
+                    {
+                        "name": "query",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Texto de búsqueda."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Resultados encontrados.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/series/{slug}": {
+            "get": {
+                "summary": "Obtener detalles de una novela",
+                "description": "Obtiene toda la información detallada de una novela usando el slug retornado por el endpoint /search.",
+                "parameters": [
+                    {
+                        "name": "slug",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Slug único de la novela obtenido desde /search.",
+                        "example": "daughters-fool-was-the-concept-wasnt-it-duke"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detalles completos de la novela.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SeriesDetail"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Novela no encontrada."
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "SearchResponse": {
+                "type": "object",
+                "required": [
+                    "query",
+                    "results",
+                    "pagination"
+                ],
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "example": "sister"
+                    },
+                    "results": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/NovelSearchResult"
+                        }
+                    },
+                    "pagination": {
+                        "$ref": "#/components/schemas/Pagination"
+                    }
+                }
+            },
+            "NovelSearchResult": {
+                "type": "object",
+                "required": [
+                    "slug",
+                    "title",
+                    "series_id",
+                    "cover_url",
+                    "origin",
+                    "series_url",
+                    "genres",
+                    "chapter_count"
+                ],
+                "properties": {
+                    "slug": {
+                        "type": "string",
+                        "example": "daughters-fool-was-the-concept-wasnt-it-duke"
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Daughter’s Fool Was the Concept, Wasn’t It, Duke!"
+                    },
+                    "series_id": {
+                        "type": "integer",
+                        "example": 53215
+                    },
+                    "cover_url": {
+                        "type": "string",
+                        "format": "uri",
+                        "example": "https://cdn.novelupdates.com/imgmid/series_53215.jpg"
+                    },
+                    "origin": {
+                        "type": "string",
+                        "enum": [
+                            "JP",
+                            "KR",
+                            "CN"
+                        ],
+                        "example": "KR"
+                    },
+                    "rating": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "format": "float",
+                        "example": 3.8
+                    },
+                    "series_url": {
+                        "type": "string",
+                        "format": "uri",
+                        "example": "https://www.novelupdates.com/series/daughters-fool-was-the-concept-wasnt-it-duke/"
+                    },
+                    "genres": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "example": [
+                            "Fantasy",
+                            "Romance",
+                            "Shoujo"
+                        ]
+                    },
+                    "chapter_count": {
+                        "type": "integer",
+                        "example": 85
+                    }
+                }
+            },
+            "Pagination": {
+                "type": "object",
+                "required": [
+                    "page",
+                    "has_next"
+                ],
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "has_next": {
+                        "type": "boolean",
+                        "example": true
+                    }
+                }
+            },
+            "SeriesDetail": {
+                "type": "object",
+                "required": [
+                    "slug",
+                    "title",
+                    "cover_url",
+                    "series_type",
+                    "original_language",
+                    "status",
+                    "year",
+                    "description",
+                    "authors",
+                    "artists",
+                    "genres",
+                    "tags",
+                    "rating",
+                    "rating_votes",
+                    "chapter_count"
+                ],
+                "properties": {
+                    "slug": {
+                        "type": "string",
+                        "example": "daughters-fool-was-the-concept-wasnt-it-duke"
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Daughter’s Fool Was the Concept, Wasn’t It, Duke!"
+                    },
+                    "cover_url": {
+                        "type": "string",
+                        "format": "uri",
+                        "example": "https://cdn.novelupdates.com/images/2022/03/Daughters-Fool-Was-the-Concept-Wasnt-It-Duke.jpeg"
+                    },
+                    "series_type": {
+                        "type": "string",
+                        "example": "Web Novel"
+                    },
+                    "original_language": {
+                        "type": "string",
+                        "example": "Korean"
+                    },
+                    "status": {
+                        "type": "string",
+                        "example": "194 Chapters (Completed):- 169 Main Story- 25 Side Story"
+                    },
+                    "year": {
+                        "type": "integer",
+                        "example": 2022
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "authors": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "example": [
+                            "강력한도라지"
+                        ]
+                    },
+                    "artists": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "example": [
+                            "MAS"
+                        ]
+                    },
+                    "genres": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "example": [
+                            "Fantasy",
+                            "Romance",
+                            "Shoujo"
+                        ]
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "rating": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 3.8
+                    },
+                    "rating_votes": {
+                        "type": "integer",
+                        "example": 23
+                    },
+                    "chapter_count": {
+                        "type": "integer",
+                        "example": 90
+                    },
+                    "volume_count": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ],
+                        "example": null
+                    }
+                }
+            }
+        }
+    }
+}
