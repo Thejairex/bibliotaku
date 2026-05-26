@@ -22,14 +22,17 @@ export function MediaCard({ item, mode }: MediaCardProps) {
                 cover_url: item.cover_url,
                 type: 'novel',
                 total_chapters: item.chapter_count,
+                source_url: item.series_url,
             });
         } else {
+            const malPath = item.type?.toLowerCase() === 'anime' ? 'anime' : 'manga';
             setAddingItem({
                 mal_id: item.mal_id,
                 title: item.title,
                 cover_url: item.cover_url,
                 type: item.type,
                 score: item.score,
+                source_url: item.mal_id ? `https://myanimelist.net/${malPath}/${item.mal_id}` : undefined,
             });
         }
     }

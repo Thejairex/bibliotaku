@@ -13,6 +13,7 @@ export interface MALItem {
     type?: string;
     score?: number;
     total_chapters?: number;
+    source_url?: string;
 }
 
 interface Props {
@@ -103,7 +104,7 @@ export function AddEntryModal({ item, onClose }: Props) {
                             {/* Header with cover */}
                             <div className="relative">
                                 {item.cover_url && (
-                                    <div className="h-32 overflow-hidden">
+                                    <div className="relative h-32 overflow-hidden">
                                         <img src={item.cover_url} alt={item.title} className="w-full h-full object-cover object-top" />
                                         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#161616]" />
                                     </div>
@@ -118,9 +119,22 @@ export function AddEntryModal({ item, onClose }: Props) {
                                                 Add to Archive
                                             </p>
                                         </div>
-                                        <button onClick={onClose} className="shrink-0 p-2 rounded-xl hover:bg-surface-container text-on-surface-variant transition-colors">
-                                            <span className="material-symbols-outlined text-[20px]">close</span>
-                                        </button>
+                                        <div className="flex items-center gap-1">
+                                            {item.source_url && (
+                                                <a
+                                                    href={item.source_url}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="shrink-0 p-2 rounded-xl hover:bg-surface-container text-on-surface-variant transition-colors"
+                                                    title="View on source"
+                                                >
+                                                    <span className="material-symbols-outlined text-[20px]">open_in_new</span>
+                                                </a>
+                                            )}
+                                            <button onClick={onClose} className="shrink-0 p-2 rounded-xl hover:bg-surface-container text-on-surface-variant transition-colors">
+                                                <span className="material-symbols-outlined text-[20px]">close</span>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
