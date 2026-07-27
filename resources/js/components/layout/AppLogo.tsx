@@ -9,7 +9,7 @@ export function AppLogo({ href = '/', className }: { href?: string; className?: 
             </div>
             <div className="flex flex-col">
                 <span className="text-lg font-headline font-black leading-none tracking-tight text-on-surface">The Archive</span>
-                <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">Digital Curator</span>
+                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">Digital Curator</span>
             </div>
         </Link>
     );
