@@ -43,8 +43,8 @@ class AppServiceProvider extends ServiceProvider
      */
     protected function configurePassport(): void
     {
-        // Specifically enable the Password Grant
-        Passport::enablePasswordGrant();
+        Passport::tokensExpireIn(now()->addDays(15));
+        Passport::refreshTokensExpireIn(now()->addDays(30));
     }
 
     /**
