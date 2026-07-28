@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Laravel\Passport\Passport;
 
 class TokenController extends Controller
@@ -66,11 +67,20 @@ class TokenController extends Controller
 
         $tokenResult = $user->createToken($client->name);
 
+        $refreshTokenId = Str::random(80);
+
+        DB::table('oauth_refresh_tokens')->insert([
+            'id' => $refreshTokenId,
+            'access_token_id' => $tokenResult->accessTokenId,
+            'revoked' => false,
+            'expires_at' => now()->addDays(30),
+        ]);
+
         return response()->json([
             'token_type' => 'Bearer',
             'expires_in' => (int) ($tokenResult->expiresIn ?? 1296000),
             'access_token' => $tokenResult->accessToken,
-            'refresh_token' => null,
+            'refresh_token' => $refreshTokenId,
         ]);
     }
 
