@@ -71,6 +71,7 @@ RUN mkdir -p \
         /run/nginx \
     && chown -R www-data:www-data storage bootstrap/cache \
     && chmod -R 775 storage bootstrap/cache \
+    && (useradd --system --no-create-home --user-group nginx || true) \
     && chown -R nginx:nginx /var/log/nginx /run/nginx
 
 RUN { \
@@ -78,6 +79,8 @@ RUN { \
     echo 'post_max_size = 64M'; \
     echo 'memory_limit = 256M'; \
 } > /usr/local/etc/php/conf.d/uploads.ini
+
+RUN rm -f /etc/nginx/sites-enabled/default
 
 COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
 COPY docker/run.sh /usr/local/bin/start-container
